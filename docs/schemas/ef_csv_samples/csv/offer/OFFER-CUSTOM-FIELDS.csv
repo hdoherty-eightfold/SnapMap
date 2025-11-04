@@ -1,0 +1,7 @@
+EXTERNAL_ID,EFCUSTOM_INT_signing_bonus_months,EFCUSTOM_STR_bonus_structure,EFCUSTOM_FLOAT_commission_rate,EFCUSTOM_BOOL_car_allowance_eligible,EFCUSTOM_DATE_salary_review_date,EFCUSTOM_DATETIME_bonus_calculation_timestamp
+OFFER-001,6,tiered_performance,2.5,true,2026-01-01,2025-12-31T23:59:59
+OFFER-002,12,flat_quarterly,1.8,false,2026-02-01,2025-12-15T18:00:00
+OFFER-003,3,performance_based,3.2,true,2025-12-01,2025-11-30T17:30:00
+OFFER-004,,,1.5,false,2026-03-01,2025-10-15T12:00:00
+OFFER-005,9,hybrid_model,2.8,true,2026-01-15,2025-12-20T16:45:00
+OFFER-006,4,startup_equity,1.2,false,2026-04-01,2025-12-01T10:00:00

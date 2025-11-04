@@ -1,0 +1,17 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="ef_cand_common.xsd" />
+
+  <xs:element name="EF_Candidate_List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EF_Candidate" maxOccurs="unbounded" minOccurs="0" type="UpdateType">
+        </xs:element>
+      </xs:sequence>
+      <xs:anyAttribute processContents="skip"/>
+    </xs:complexType>
+    <xs:unique name="CandidateUniqueKey">
+      <xs:selector xpath="EF_Candidate" />
+      <xs:field xpath="candidate_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

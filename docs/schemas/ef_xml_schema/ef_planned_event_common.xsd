@@ -1,0 +1,171 @@
+<?xml version="1.1" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="ef_common_types.xsd" />
+
+    <xs:simpleType name="EventBucket">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="STANDARD" />
+            <xs:enumeration value="EVENT_GROUP" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EventLocationType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="in_person"/>
+            <xs:enumeration value="virtual_event"/>
+            <xs:enumeration value="virtual_and_in_person"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EventTeamMemberStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="pending"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EventTeamType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="hiring_team"/>
+            <xs:enumeration value="core_team"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="EventTeamMemberType">
+        <xs:all>
+            <xs:element name="email" type="NoSpaceString" />
+            <xs:element name="roles" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="role" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="status" type="EventTeamMemberStatusType" minOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="EventTeam">
+        <xs:all>
+            <xs:element name="team_id" type="NoSpaceString" minOccurs="1" />
+            <xs:element name="team_name" type="xs:string" />
+            <xs:element name="team_type" type="EventTeamType" minOccurs="0" />
+            <xs:element name="positions" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="position" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="members" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="member" type="EventTeamMemberType" minOccurs="1" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="IngestType">
+        <xs:all>
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="event_type" type="xs:string" />
+            <xs:element name="ext_event_id" type="NoSpaceString" />
+            <xs:element name="start_timestamp" type="xs:dateTime" />
+            <xs:element name="end_timestamp" type="xs:dateTime" />
+            <xs:element name="group_id" type="NoSpaceString" />
+            <xs:element name="description" type="xs:string" />
+            <xs:element name="selected_timezone" type="xs:string" />
+            <xs:element name="event_location_type" type="EventLocationType" />
+            <xs:element name="institution" type="xs:string" minOccurs="0" />
+            <xs:element name="venue" type="xs:string" minOccurs="0" />
+            <xs:element name="complete_venue" type="xs:string" minOccurs="0" />
+            <xs:element name="address" type="xs:string" minOccurs="0" />
+            <xs:element name="location" type="xs:string" minOccurs="0" />
+            <xs:element name="event_category" type="xs:string" minOccurs="0"/>
+            <xs:element name="parent_ext_event_id" type="NoSpaceString" minOccurs="0" />
+            <xs:element name="event_bucket" type="EventBucket" minOccurs="0" />
+            <xs:element name="event_team" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="email"  type="NoSpaceString" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="event_teams" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="team" type="EventTeam" minOccurs="1" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_info" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                    <xs:element name="custom_field" type="CustomFieldType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="operation" fixed="ingest"/>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateType">
+        <xs:all>
+            <xs:element name="ext_event_id" type="NoSpaceString" />
+            <xs:element name="group_id" type="NoSpaceString" />
+            <xs:element name="name" type="xs:string" minOccurs="0" />
+            <xs:element name="event_type" type="xs:string" minOccurs="0" />
+            <xs:element name="start_timestamp" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="end_timestamp" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="description" type="xs:string" minOccurs="0" />
+            <xs:element name="selected_timezone" type="xs:string" minOccurs="0" />
+            <xs:element name="event_location_type" type="EventLocationType" minOccurs="0" />
+            <xs:element name="institution" type="xs:string" minOccurs="0" />
+            <xs:element name="venue" type="xs:string" minOccurs="0" />
+            <xs:element name="complete_venue" type="xs:string" minOccurs="0" />
+            <xs:element name="address" type="xs:string" minOccurs="0" />
+            <xs:element name="location" type="xs:string" minOccurs="0" />
+            <xs:element name="event_category" type="xs:string" minOccurs="0"/>
+            <xs:element name="parent_ext_event_id" type="NoSpaceString" minOccurs="0" />
+            <xs:element name="event_bucket" type="EventBucket" minOccurs="0" />
+            <xs:element name="event_team" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="email"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="event_teams" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="team" type="EventTeam" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_info" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                    <xs:element name="custom_field" type="CustomFieldType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="operation">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="update"/>
+                    <xs:enumeration value="upsert"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="DeleteType">
+        <xs:all>
+            <xs:element name="ext_event_id" type="NoSpaceString" />
+        </xs:all>
+        <xs:attribute name="operation" fixed="delete"/>
+    </xs:complexType>
+
+</xs:schema>

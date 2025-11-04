@@ -1,0 +1,11 @@
+JOB_ID,PREFERRED_SKILLS,DATA_SOURCE,PROFICIENCY,SKILL_GROUP_LIST
+A1B2C3,Java,LinkedIn,Expert,Programming Languages
+A1B2C3,Spring Framework,Company Website,Intermediate,Frameworks
+D4E5F6,SEO,Job Board,Expert,Digital Marketing
+D4E5F6,Content Creation,Referrals,Advanced,Content Strategy
+G7H8I9,R,LinkedIn,Expert,Data Analysis Tools
+G7H8I9,SQL,Company Website,Advanced,Database Management
+J1K2L3,Agile Methodologies,Job Board,Expert,Project Management
+J1K2L3,Product Development,Referrals,Intermediate,Product Management
+M4N5O6,Adobe XD,LinkedIn,Expert,Design Tools
+M4N5O6,UI/UX Principles,Company Website,Advanced,Design Concepts

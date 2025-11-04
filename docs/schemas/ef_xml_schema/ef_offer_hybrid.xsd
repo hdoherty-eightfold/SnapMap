@@ -1,0 +1,18 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="ef_offer_common.xsd" />
+
+  <xs:element name="EF_Offer_List">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="EF_Offer_Ingest" type="IngestType" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="EF_Offer_Update" type="UpdateType" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="EF_Offer_Upsert" type="UpdateType" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="EF_Offer_Delete" type="DeleteType" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:all>
+    </xs:complexType>
+    <xs:unique name="OfferUniqueKey">
+      <xs:selector xpath="EF_Offer_Ingest|EF_Offer_Update|EF_Offer_Upsert|EF_Offer_Delete" />
+      <xs:field xpath="external_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema> 

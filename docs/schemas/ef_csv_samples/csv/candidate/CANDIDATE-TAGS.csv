@@ -1,0 +1,5 @@
+CANDIDATE_ID,TAG,TAG_TYPE,TAG_SUBTYPE,JOB_ID,CREATOR,CREATION_TS
+1,skill_tag,skill,programming,JOB001,john.doe@test.com,2022-11-11T22:22:22
+1,location_tag,location,remote,JOB002,jane.doe@test.com,2022-11-11T22:22:22
+2,skill_tag,skill,python,JOB003,james.w@test.com,2022-11-12T10:30:00
+2,experience_tag,experience,senior,JOB003,james.w@test.com,2022-11-12T10:30:00

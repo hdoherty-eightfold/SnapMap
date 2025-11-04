@@ -1,0 +1,93 @@
+<EF_Course_List>
+  <EF_Course>
+    <title>Managing Performance</title>
+
+    <lms_course_id>rAbbPZd</lms_course_id>
+
+    <description>Managing Performance Updated</description>
+
+    <course_type>Course</course_type>
+
+    <language>en</language>
+
+    <locations>
+      <location>hyderabad</location>
+    </locations>
+   
+    <fee>
+      <fee_value>0.0</fee_value>
+
+      <fee_currency>USD</fee_currency>
+    </fee>
+
+    <job_function_list>
+      <job_function>programming</job_function>
+      <job_function>software_design</job_function>
+    </job_function_list>
+
+    <business_unit_list>
+      <business_unit>software</business_unit>
+    </business_unit_list>
+
+    <job_code_list>
+      <job_code>SWE</job_code>
+    </job_code_list>
+
+    <seniority_list>
+      <seniority>cxo</seniority>
+    </seniority_list>
+
+    <skill_proficiency_list>
+
+      <skill_proficiency>
+        <skill>User Stories</skill>
+        <proficiency>3.2</proficiency>
+      </skill_proficiency>
+
+      <skill_proficiency>
+        <skill>Sales</skill>
+        <proficiency>4.5</proficiency>
+      </skill_proficiency>
+    </skill_proficiency_list>
+
+    <difficulty>Intermediate</difficulty>
+
+    <duration_hours>60</duration_hours>
+
+    <published_ts>2020-10-02T07:19:45</published_ts>
+
+    <course_url>https://course/manage.com</course_url>
+
+    <image_url>https://course/manage.com</image_url>
+
+    <status>A</status>
+
+    <category>Professional Development</category>
+
+    <provider>Degreed</provider>
+    <skills_list>
+        <skill>Theater</skill>
+        <skill>Serving</skill>
+    </skills_list>
+
+    <custom_info>
+        <custom_field>
+            <field_name>modes_of_operation</field_name>
+            <data_type>string</data_type>
+            <field_value>Some value1</field_value>
+        </custom_field>
+    </custom_info>
+
+    <custom_multi_value_list>
+        <custom_mv_field>
+            <field_name>course_genre</field_name>
+            <data_type>string</data_type>
+            <data_list>
+                <field_value>Some genre1</field_value>
+                <field_value>Some genre2</field_value>
+            </data_list>
+        </custom_mv_field>
+    </custom_multi_value_list>
+
+  </EF_Course>
+</EF_Course_List>

@@ -1,0 +1,15 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="ef_holiday_common.xsd" />
+
+  <xs:element name="EF_Holiday_List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EF_Holiday" type="DeleteType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="HolidayUniqueKey">
+      <xs:selector xpath="EF_Holiday" />
+      <xs:field xpath="holiday_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # SnapMap Full Stack Application
+  snapmap:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=info
+    volumes:
+      # Persist vector database
+      - vector-db-data:/app/vector_db
+      # Mount uploads directory
+      - uploads-data:/app/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - snapmap
+    restart: unless-stopped
+
+volumes:
+  vector-db-data:
+    driver: local
+  uploads-data:
+    driver: local

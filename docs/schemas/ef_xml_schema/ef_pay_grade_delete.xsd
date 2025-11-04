@@ -1,0 +1,16 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="ef_pay_grade_common.xsd" />
+
+  <xs:element name="EF_Pay_Grade_List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EF_Pay_Grade" maxOccurs="unbounded" minOccurs="0" type="DeleteType">
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="PayGradeUniqueKey">
+      <xs:selector xpath="EF_Pay_Grade" />
+      <xs:field xpath="name" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

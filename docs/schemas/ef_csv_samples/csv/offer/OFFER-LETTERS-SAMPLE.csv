@@ -1,0 +1,5 @@
+EXTERNAL_ID,FILE_NAME,LETTER_TYPE,BASE64_ENCODED_DATA,S3_FILE_PATH
+OFFER_001,offer_letter.pdf,unsigned,VGVzdCBvZmZlciBsZXR0ZXI=,
+OFFER_001,signed_contract.pdf,signed,VGVzdCBzaWduZWQgY29udHJhY3Q=,
+OFFER_002,contract_draft.pdf,unsigned,,s3://bucket/contracts/draft.pdf
+OFFER_002,final_signed.pdf,signed,,s3://bucket/contracts/signed.pdf

@@ -1,0 +1,176 @@
+<?xml version="1.1" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="ef_common_types.xsd" />
+
+    <xs:complexType name="IngestType">
+        <xs:all>
+            <xs:element name="external_id" type="NoSpaceString" />
+            <xs:element name="title" type="xs:string" />
+            <xs:element name="description" type="xs:string" />
+            <xs:element name="status" type="OrgUnitStatus" />
+            <xs:element name="type" type="OrgUnitType" />
+            <xs:element name="parent_ext_id" type="NoSpaceString" minOccurs="0" />
+            <xs:element name="system_id" type="NoSpaceString" minOccurs="0" />
+            <xs:element name="last_modified_ts" type="xs:dateTime" />
+            <xs:element name="start_date" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="end_date" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="parent_org_unit_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="parent_org_unit" type="ParentOrgUnitType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="user_group_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="user_group"  type="UserGroupType" minOccurs="1" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_info" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                    <xs:element name="custom_field" type="CustomFieldType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_multi_value_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                    <xs:element name="custom_mv_field" type="CustomFieldNativeListType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_objects_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="object_list" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="object" type="CustomFieldCompositeType" minOccurs="0" maxOccurs="unbounded" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="list_of_objects" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="object_list" type="CustomCompositeListType" minOccurs="0" maxOccurs="unbounded" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="object_array_list" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="object_list" type="CompositeObjectArrayType" minOccurs="0" maxOccurs="unbounded" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="entity_tags_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tag" type="EntityTagType" minOccurs="0" maxOccurs="20" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="operation" fixed="ingest"/>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateType">
+        <xs:all>
+            <xs:element name="external_id" type="NoSpaceString" />
+            <xs:element name="title" type="xs:string" minOccurs="0" />
+            <xs:element name="description" type="xs:string" minOccurs="0" />
+            <xs:element name="status" type="OrgUnitStatus" />
+            <xs:element name="type" type="OrgUnitType" />
+            <xs:element name="parent_ext_id" type="NoSpaceString" minOccurs="0" />
+            <xs:element name="system_id" type="NoSpaceString" minOccurs="0" />
+            <xs:element name="last_modified_ts" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="start_date" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="end_date" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="parent_org_unit_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="parent_org_unit" type="ParentOrgUnitType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="user_group_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="user_group"  type="UserGroupType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_info" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                    <xs:element name="custom_field" type="CustomFieldType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_multi_value_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                    <xs:element name="custom_mv_field" type="CustomFieldNativeListType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_objects_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="object_list" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="object" type="CustomFieldCompositeType" minOccurs="0" maxOccurs="unbounded" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="list_of_objects" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="object_list" type="CustomCompositeListType" minOccurs="0" maxOccurs="unbounded" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="object_array_list" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="object_list" type="CompositeObjectArrayType" minOccurs="0" maxOccurs="unbounded" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="entity_tags_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tag" type="EntityTagType" minOccurs="0" maxOccurs="20" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="operation">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="update"/>
+                    <xs:enumeration value="upsert"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="DeleteType">
+        <xs:all>
+            <xs:element name="external_id" type="NoSpaceString" />
+            <xs:element name="type" type="OrgUnitType" />
+        </xs:all>
+        <xs:attribute name="operation" fixed="delete"/>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,263 @@
+<?xml version="1.1" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="ef_common_types.xsd" />
+    
+    <!-- Offer Schema Definition -->
+    <xs:complexType name="IngestType">
+        <xs:all>
+            <!-- Required fields for offer creation -->
+            <xs:element name="external_id" type="NoSpaceString" minOccurs="1"/>
+            <xs:element name="external_candidate_id" type="NoSpaceString" minOccurs="1"/>
+            <xs:element name="ats_job_id" type="NoSpaceString" minOccurs="1"/>
+            
+            <!-- Optional internal IDs for testing (takes precedence over external lookup) -->
+            <xs:element name="internal_candidate_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="internal_position_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="status" type="xs:string" minOccurs="0"/>
+            
+            <!-- Optional fields -->
+            <xs:element name="application_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="created_by" type="xs:string" minOccurs="0"/>
+            <xs:element name="updated_by" type="xs:string" minOccurs="0"/>
+            <xs:element name="created_at" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="version" type="xs:string" minOccurs="0"/>
+            <xs:element name="expires_at" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="system_id" type="xs:string" minOccurs="0"/>
+            
+
+            
+            <!-- Compensation fields -->
+            <xs:element name="currency" type="xs:string" minOccurs="0"/>
+            <xs:element name="country_code" type="xs:string" minOccurs="0"/>
+            <xs:element name="total_compensation" type="xs:float" minOccurs="0"/>
+            <xs:element name="base_pay_salary_amount" type="xs:float" minOccurs="0"/>
+            <xs:element name="base_pay_frequency" type="xs:string" minOccurs="0"/>
+            <xs:element name="base_pay_currency" type="xs:string" minOccurs="0"/>
+            <xs:element name="bonus_pay_variable_bonus" type="xs:float" minOccurs="0"/>
+            <xs:element name="bonus_pay_joining_bonus" type="xs:float" minOccurs="0"/>
+            <xs:element name="bonus_pay_frequency" type="xs:string" minOccurs="0"/>
+            <xs:element name="bonus_pay_currency" type="xs:string" minOccurs="0"/>
+            <xs:element name="stock_options_type" type="xs:string" minOccurs="0"/>
+            <xs:element name="stock_options_amount" type="xs:float" minOccurs="0"/>
+            <xs:element name="stock_options_total_vesting_years" type="xs:int" minOccurs="0"/>
+            <xs:element name="stock_options_description" type="xs:string" minOccurs="0"/>
+            <xs:element name="stock_options_vesting_start_date" type="xs:date" minOccurs="0"/>
+            <xs:element name="stock_options_vesting_frequency" type="xs:string" minOccurs="0"/>
+            <xs:element name="relocation_bonus" type="xs:float" minOccurs="0"/>
+            <xs:element name="shift_allowance" type="xs:float" minOccurs="0"/>
+            
+            <!-- Detail fields -->
+            <!-- Candidate info -->
+            <xs:element name="candidate_address" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_full_name" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_first_name" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_last_name" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_email" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_phone" type="xs:string" minOccurs="0"/>
+            
+            <!-- Job info -->
+            <xs:element name="pay_grade" type="xs:int" minOccurs="0"/>
+            <xs:element name="joining_date" type="xs:date" minOccurs="0"/>
+            <xs:element name="job_title" type="xs:string" minOccurs="0"/>
+            <xs:element name="location" type="xs:string" minOccurs="0"/>
+            <xs:element name="note" type="xs:string" minOccurs="0"/>
+            <xs:element name="visa_type" type="xs:string" minOccurs="0"/>
+            
+            <!-- Work settings -->
+            <xs:element name="workplace_type" type="xs:string" minOccurs="0"/>
+            <xs:element name="offer_signature_type" type="xs:string" minOccurs="0"/>
+            
+            <!-- Boolean flags -->
+            <xs:element name="is_people_manager_role" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="is_rehire" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="sent_to_payroll" type="xs:boolean" minOccurs="0"/>
+            
+            <!-- Template fields -->
+            <xs:element name="template_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="template_name" type="xs:string" minOccurs="0"/>
+            
+            <!-- Users fields -->
+            <xs:element name="user_watchers" type="xs:string" minOccurs="0"/>
+            <xs:element name="user_single_api_call_for_watchers" type="xs:boolean" minOccurs="0"/>
+            
+            <!-- Secured JSON primitive fields -->
+            <xs:element name="offer_letter_doc_s3_path" type="xs:string" minOccurs="0"/>
+            <xs:element name="offer_letter_url" type="xs:string" minOccurs="0"/>
+            <xs:element name="signed_offer_letter_url" type="xs:string" minOccurs="0"/>
+            <xs:element name="compa_ratio" type="xs:float" minOccurs="0"/>
+            
+
+            <xs:element name="offer_custom_fields" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="custom_field" type="CustomFieldType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="offer_custom_multi_value_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="custom_mv_field" type="CustomFieldNativeListType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <!-- Offer attachments (using custom OfferAttachmentType) -->
+            <xs:element name="offer_attachments" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="attachment" type="OfferAttachmentType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <!-- Offer letters (using custom OfferLetterType) -->
+            <xs:element name="offer_letters" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="letter" type="OfferLetterType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateType">
+        <xs:all>
+            <!-- Only external_id required for updates -->
+            <xs:element name="external_id" type="NoSpaceString" minOccurs="1"/>
+            <xs:element name="external_candidate_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="ats_job_id" type="NoSpaceString" minOccurs="0"/>
+            
+            <!-- Optional internal IDs for testing (takes precedence over external lookup) -->
+            <xs:element name="internal_candidate_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="internal_position_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="status" type="xs:string" minOccurs="0"/>
+            <xs:element name="application_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="created_by" type="xs:string" minOccurs="0"/>
+            <xs:element name="created_at" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="version" type="xs:string" minOccurs="0"/>
+            <xs:element name="expires_at" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="system_id" type="xs:string" minOccurs="0"/>
+            
+            <!-- Compensation fields -->
+            <xs:element name="currency" type="xs:string" minOccurs="0"/>
+            <xs:element name="country_code" type="xs:string" minOccurs="0"/>
+            <xs:element name="total_compensation" type="xs:float" minOccurs="0"/>
+            <xs:element name="base_pay_salary_amount" type="xs:float" minOccurs="0"/>
+            <xs:element name="base_pay_frequency" type="xs:string" minOccurs="0"/>
+            <xs:element name="base_pay_currency" type="xs:string" minOccurs="0"/>
+            <xs:element name="bonus_pay_variable_bonus" type="xs:float" minOccurs="0"/>
+            <xs:element name="bonus_pay_joining_bonus" type="xs:float" minOccurs="0"/>
+            <xs:element name="bonus_pay_frequency" type="xs:string" minOccurs="0"/>
+            <xs:element name="bonus_pay_currency" type="xs:string" minOccurs="0"/>
+            <xs:element name="stock_options_type" type="xs:string" minOccurs="0"/>
+            <xs:element name="stock_options_amount" type="xs:float" minOccurs="0"/>
+            <xs:element name="stock_options_total_vesting_years" type="xs:int" minOccurs="0"/>
+            <xs:element name="stock_options_description" type="xs:string" minOccurs="0"/>
+            <xs:element name="stock_options_vesting_start_date" type="xs:date" minOccurs="0"/>
+            <xs:element name="stock_options_vesting_frequency" type="xs:string" minOccurs="0"/>
+            <xs:element name="relocation_bonus" type="xs:float" minOccurs="0"/>
+            <xs:element name="shift_allowance" type="xs:float" minOccurs="0"/>
+            
+            <!-- Detail fields -->
+            <!-- Candidate info -->
+            <xs:element name="candidate_address" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_full_name" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_first_name" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_last_name" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_email" type="xs:string" minOccurs="0"/>
+            <xs:element name="candidate_phone" type="xs:string" minOccurs="0"/>
+            
+            <!-- Job info -->
+            <xs:element name="pay_grade" type="xs:int" minOccurs="0"/>
+            <xs:element name="joining_date" type="xs:date" minOccurs="0"/>
+            <xs:element name="job_title" type="xs:string" minOccurs="0"/>
+            <xs:element name="location" type="xs:string" minOccurs="0"/>
+            <xs:element name="note" type="xs:string" minOccurs="0"/>
+            <xs:element name="visa_type" type="xs:string" minOccurs="0"/>
+            
+            <!-- Work settings -->
+            <xs:element name="workplace_type" type="xs:string" minOccurs="0"/>
+            <xs:element name="offer_signature_type" type="xs:string" minOccurs="0"/>
+            
+            <!-- Boolean flags -->
+            <xs:element name="is_people_manager_role" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="is_rehire" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="sent_to_payroll" type="xs:boolean" minOccurs="0"/>
+            
+            <!-- Template fields -->
+            <xs:element name="template_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="template_name" type="xs:string" minOccurs="0"/>
+            
+            <!-- Users fields -->
+            <xs:element name="user_watchers" type="xs:string" minOccurs="0"/>
+            <xs:element name="user_single_api_call_for_watchers" type="xs:boolean" minOccurs="0"/>
+            
+            <!-- Secured JSON primitive fields -->
+            <xs:element name="offer_letter_doc_s3_path" type="xs:string" minOccurs="0"/>
+            <xs:element name="offer_letter_url" type="xs:string" minOccurs="0"/>
+            <xs:element name="signed_offer_letter_url" type="xs:string" minOccurs="0"/>
+            <xs:element name="compa_ratio" type="xs:float" minOccurs="0"/>
+            
+            <!-- Unified custom fields (single file with automatic routing) -->
+            <xs:element name="offer_custom_fields" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="custom_field" type="CustomFieldType" minOccurs="0" maxOccurs="unbounded" />
+                        <xs:element name="custom_mv_field" type="CustomFieldNativeListType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <!-- Offer attachments (using custom OfferAttachmentType) -->
+            <xs:element name="offer_attachments" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="attachment" type="OfferAttachmentType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <!-- Offer letters (using custom OfferLetterType) -->
+            <xs:element name="offer_letters" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="letter" type="OfferLetterType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="DeleteType">
+        <xs:all>
+            <xs:element name="external_id" type="NoSpaceString" minOccurs="1" />
+            <xs:element name="ats_job_id" type="NoSpaceString" minOccurs="1" />
+            <xs:element name="external_candidate_id" type="NoSpaceString" minOccurs="1" />
+        </xs:all>
+        <xs:attribute name="operation" fixed="delete"/>
+    </xs:complexType>
+
+    <!-- Custom offer attachment type with file_name and variable_name -->
+    <xs:complexType name="OfferAttachmentType">
+        <xs:all>
+            <xs:element name="external_id" type="NoSpaceString" minOccurs="0" />
+            <xs:element name="content" type="xs:string" minOccurs="0" />
+            <xs:element name="s3_filepath" type="xs:string" minOccurs="0" />
+            <xs:element name="file_name" type="xs:string" minOccurs="0" />
+            <xs:element name="variable_name" type="xs:string" minOccurs="0" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="OfferLetterType">
+        <xs:all>
+            <xs:element name="external_id" type="NoSpaceString"/>
+            <xs:element name="content" type="xs:string" minOccurs="0"/>
+            <xs:element name="s3_filepath" type="xs:string" minOccurs="0"/>
+            <xs:element name="file_name" type="xs:string"/>
+            <xs:element name="letter_type" type="xs:string"/>
+        </xs:all>
+    </xs:complexType>
+    
+</xs:schema>

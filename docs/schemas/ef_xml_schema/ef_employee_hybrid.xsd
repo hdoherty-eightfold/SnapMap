@@ -1,0 +1,23 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="ef_employee_common.xsd" />
+
+  <xs:element name="EF_Employee_List">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="EF_Employee_Ingest" type="IngestType" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="EF_Employee_Update" type="UpdateType" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="EF_Employee_Upsert" type="UpdateType" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="EF_Employee_Delete" type="DeleteType" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:all>
+      <xs:anyAttribute processContents="skip"/>
+    </xs:complexType>
+    <xs:unique name="EmployeeUniqueKey">
+      <xs:selector xpath="EF_Employee_Ingest|EF_Employee_Update|EF_Employee_Upsert|EF_Employee_Delete" />
+      <xs:field xpath="employee_id" />
+    </xs:unique>
+      <xs:unique name="EmailUniqueKey">
+        <xs:selector xpath="EF_Employee_Ingest/email_list/email|EF_Employee_Update/email_list/email|EF_Employee_Upsert/email_list/email|EF_Employee_Delete/email_list/email" />
+        <xs:field xpath="." />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

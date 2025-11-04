@@ -1,0 +1,16 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="ef_succession_plan_common.xsd" />
+
+    <xs:element name="EF_Succession_Plan_List">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="EF_Succession_Plan" maxOccurs="unbounded" minOccurs="0" type="IngestType">
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="SuccessionPlanUniqueKey">
+            <xs:selector xpath="EF_Succession_Plan" />
+            <xs:field xpath="plan_id" />
+        </xs:unique>
+    </xs:element>
+</xs:schema>

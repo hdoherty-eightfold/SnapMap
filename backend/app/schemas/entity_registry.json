@@ -1,0 +1,100 @@
+{
+  "entities": [
+    {
+      "id": "employee",
+      "name": "Employee",
+      "description": "Employee master data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "user",
+      "name": "User",
+      "description": "User account data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "position",
+      "name": "Position",
+      "description": "Job position/requisition data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "candidate",
+      "name": "Candidate",
+      "description": "Candidate application data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "course",
+      "name": "Course",
+      "description": "Training course data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "role",
+      "name": "Role",
+      "description": "Role/permission data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "demand",
+      "name": "Demand",
+      "description": "Workforce demand planning data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "holiday",
+      "name": "Holiday",
+      "description": "Holiday calendar data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "org_unit",
+      "name": "Organizational Unit",
+      "description": "Organizational structure data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "foundation_data",
+      "name": "Foundation Data",
+      "description": "Foundation object data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "pay_grade",
+      "name": "Pay Grade",
+      "description": "Compensation pay grade data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "project",
+      "name": "Project",
+      "description": "Project tracking data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "succession_plan",
+      "name": "Succession Plan",
+      "description": "Succession planning data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "planned_event",
+      "name": "Planned Event",
+      "description": "Event planning data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "certificate",
+      "name": "Certificate",
+      "description": "Certificate/certification data",
+      "operations": ["add", "update", "delete"]
+    },
+    {
+      "id": "offer",
+      "name": "Offer",
+      "description": "Job offer data",
+      "operations": ["add", "update", "delete"]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+CANDIDATE_ID,SKILL,PROFICIENCY,DATA_SOURCE,SKILL_GROUPS
+1,skill1,proficiency1,linkedin,"sg1,sg2"
+1,skill2,proficiency2,linkedin,"sg3,sg4"
+2,python,expert,medium,"sg1,sg5"

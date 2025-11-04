@@ -1,0 +1,97 @@
+{
+  "entity_name": "user",
+  "display_name": "User",
+  "description": "User data for Eightfold integration",
+  "fields": [
+    {
+      "name": "USER_ID",
+      "display_name": "User ID",
+      "type": "string",
+      "required": true,
+      "max_length": 50,
+      "example": "U001",
+      "description": "Unique user identifier"
+    },
+    {
+      "name": "USERNAME",
+      "display_name": "Username",
+      "type": "string",
+      "required": true,
+      "max_length": 100,
+      "example": "jdoe",
+      "description": "User's login username"
+    },
+    {
+      "name": "EMAIL",
+      "display_name": "Email Address",
+      "type": "email",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "example": "john@company.com",
+      "description": "User's email address"
+    },
+    {
+      "name": "FIRST_NAME",
+      "display_name": "First Name",
+      "type": "string",
+      "required": true,
+      "max_length": 100,
+      "example": "John",
+      "description": "User's first name"
+    },
+    {
+      "name": "LAST_NAME",
+      "display_name": "Last Name",
+      "type": "string",
+      "required": true,
+      "max_length": 100,
+      "example": "Doe",
+      "description": "User's last name"
+    },
+    {
+      "name": "STATUS",
+      "display_name": "User Status",
+      "type": "string",
+      "required": false,
+      "max_length": 20,
+      "example": "active",
+      "description": "User account status (active, inactive, suspended)"
+    },
+    {
+      "name": "ROLE",
+      "display_name": "User Role",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "employee",
+      "description": "User's role in the system"
+    },
+    {
+      "name": "CREATED_DATE",
+      "display_name": "Created Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2020-01-15",
+      "description": "Date user account was created"
+    },
+    {
+      "name": "LAST_LOGIN",
+      "display_name": "Last Login",
+      "type": "datetime",
+      "required": false,
+      "format": "YYYY-MM-DDTHH:MM:SS",
+      "example": "2025-11-02T09:30:00",
+      "description": "Last login timestamp"
+    },
+    {
+      "name": "LAST_ACTIVITY_TS",
+      "display_name": "Last Activity Timestamp",
+      "type": "datetime",
+      "required": true,
+      "format": "YYYY-MM-DDTHH:MM:SS",
+      "example": "2025-11-02T14:30:00",
+      "description": "Timestamp of last data update (auto-generated)"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+EXTERNAL_ID,ATTRIBUTE_ID,VALUE
+common,city,New York
+common,attribute1,value1
+finance,city,Bangalore
+finance,attribute2,value2

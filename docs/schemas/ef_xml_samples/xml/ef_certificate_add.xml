@@ -1,0 +1,8 @@
+<EF_Certificate_List>
+  <EF_Certificate>
+    <external_id>CERT1</external_id>
+    <title>Test Cert Ingest 1</title>
+    <status>active</status>
+    <provider>8fold</provider>
+  </EF_Certificate>
+</EF_Certificate_List>

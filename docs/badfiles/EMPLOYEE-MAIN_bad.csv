@@ -1,0 +1,6 @@
+EMPLOYEE_IDD,FIRST_NAME,LAST_NAME,EMAIL,HIRING_DATE,TITLE,BUSINESS_UNIT,PHONEE,LOCATION,MANAGER,LAST_ACTIVITY_TS
+SF001,Michael,Anderson,michael.anderson@company.com,2020-04-10,Software Architect,Engineering,+1-555-0200,Boston,SF010,2025-11-04T11:49:22
+SF002,Jennifer,Thomas,jennifer.thomas@company.com,2019-01-25,Product Owner,Product,+1-555-0201,Denver,SF011,2025-11-04T11:49:22
+SF003,Christopher,Jackson,christopher.jackson@company.com,2021-11-05,DevOps Engineer,Engineering,+1-555-0202,Portland,SF001,2025-11-04T11:49:22
+SF004,Jessica,White,jessica.white@company.com,2020-08-14,Marketing Manager,Marketing,+1-555-0203,Miami,SF012,2025-11-04T11:49:22
+SF005,Daniel,Harris,daniel.harris@company.com,2018-03-22,VP Engineering,Engineering,+1-555-0204,San Francisco,CEO,2025-11-04T11:49:22

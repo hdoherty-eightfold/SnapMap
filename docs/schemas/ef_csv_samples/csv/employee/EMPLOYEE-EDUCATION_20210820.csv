@@ -1,0 +1,8 @@
+EMPLOYEE_ID,SCHOOL,SCHOOL_EXTERNAL_ID,DEGREE,DEGREE_EXTERNAL_ID,MAJOR,MAJOR_EXTERNAL_ID,DESCRIPTION,LOCATION,START_DATE,END_DATE,IS_CURRENT,IS_GRADUATED,NAME_ALIAS,VERIFICATION_STATUS,VERIFICATION_BY,VERIFICATION_TS
+W00001,Florida University,FLU001,Master's Degree/MBA,MBA001,Management,MGT001,specialized in management,India,1985-01-05,1989-01-05,TRUE,true,John Doe,verified,recruiter1@email.com,2023-01-15T10:30:00
+W00002,UNF,UNF001,Bachelor's Degree,BS001,Biological Science,,specialized in biological research,Åland Islands,1986-01-05,1990-01-05,FALSE,true,Jane Smith,verified,recruiter1@email.com,2023-02-20T14:45:00
+W00003,KNF,,Bachelor's Degree,BS002,Computer Engineering,CE001,specialized in software development,United States,1995-10-05,1999-01-05,FALSE,true,Bob Johnson,rejected,,2023-03-10T09:15:00
+W00003,Chicago University,CU001,Master's Degree/MBA,,Management,MGT002,specialized in business administration,United States,2005-10-05,2008-01-05,FALSE,true,Alice Brown,,,2023-04-05T16:20:00
+W00004,MSRIT,MSRIT001,Master's Degree/MBA,MBA003,Accounting,ACC001,specialized in management,India,2015-01-05,2019-01-05,FALSE,false,Charlie Wilson,,,
+W00004,MSRIT,MSRIT002,Bachelor's Degree,BS003,Accounting,ACC002,specialized in management,India,2015-01-05,2019-01-05,FALSE,false,David Lee,,,2023-06-18T13:45:00
+W00005,PSGCT,PSGCT001,Doctorate Degree,PHD001,Anthropology,ANT001,specialized in cultural anthropology,United States,2015-01-05,2019-01-05,FALSE,,,,,2023-07-25T15:10:00

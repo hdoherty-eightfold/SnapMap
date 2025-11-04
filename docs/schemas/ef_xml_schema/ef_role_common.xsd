@@ -1,0 +1,329 @@
+<?xml version="1.1" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="ef_common_types.xsd" />
+
+      <xs:complexType name="PreferenceValueType">
+        <xs:sequence>
+          <xs:element name="preference_type" minOccurs="0" maxOccurs="unbounded">
+          <xs:simpleType>
+             <xs:restriction base="xs:string"><xs:pattern value="Preferred|Required|Excluded"/>
+             </xs:restriction>
+          </xs:simpleType>
+          </xs:element>
+          <xs:element name="value"  type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="RoleExperienceType">
+        <xs:all>
+          <xs:element name="job_titles" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="preference_value_type" type="PreferenceValueType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="companies" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="preference_value_type" type="PreferenceValueType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="preferred_years_of_experience" minOccurs="0">
+            <xs:complexType>
+              <xs:all>
+                <xs:element name="type_of_experience" minOccurs="0" maxOccurs="1" >
+                  <xs:simpleType>
+                     <xs:restriction base="xs:string"><xs:pattern value="total|relevant"/>
+                     </xs:restriction>
+                   </xs:simpleType>
+                 </xs:element>
+                <xs:element name="min_experience"  type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1" />
+                <xs:element name="max_experience"  type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1" />
+              </xs:all>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="seniorities_list" minOccurs="0">
+              <xs:complexType>
+                  <xs:sequence>
+                      <xs:element name="seniority" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+              </xs:complexType>
+          </xs:element>
+        </xs:all>
+      </xs:complexType>
+
+      <xs:complexType name="RoleEducationType">
+        <xs:all>
+          <xs:element name="schools" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="preference_value_type" type="PreferenceValueType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="graduation_year" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:all>
+                <xs:element name="graduation_start_year"  type="xs:gYear" minOccurs="0" maxOccurs="1" />
+                <xs:element name="graduation_end_year"  type="xs:gYear" minOccurs="0" maxOccurs="1" />
+              </xs:all>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="degrees_list" minOccurs="0">
+              <xs:complexType>
+                  <xs:sequence>
+                      <xs:element name="degree" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+              </xs:complexType>
+          </xs:element>
+          <xs:element name="certifications_list" minOccurs="0">
+              <xs:complexType>
+                  <xs:sequence>
+                      <xs:element name="certification_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+              </xs:complexType>
+          </xs:element>
+          <xs:element name="degree_majors_list" minOccurs="0">
+              <xs:complexType>
+                  <xs:sequence>
+                      <xs:element name="degree_major" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+              </xs:complexType>
+          </xs:element>
+        </xs:all>
+      </xs:complexType>
+
+      <xs:complexType name="RoleTagType">
+          <xs:sequence>
+              <xs:element name="tag_name" type="xs:string" />
+              <xs:element name="tag_values" minOccurs="0">
+                  <xs:complexType>
+                      <xs:sequence>
+                          <xs:element name="tag_value" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                      </xs:sequence>
+                  </xs:complexType>
+              </xs:element>
+              <xs:element name="is_custom" type="xs:boolean" />
+          </xs:sequence>
+      </xs:complexType>
+
+
+    <xs:complexType name="IngestType">
+        <xs:all>
+            <xs:element name="external_id" type="NoSpaceString" />
+            <xs:element name="title" type="xs:string" />
+            <xs:element name="parent_role_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="approval_status" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"><xs:pattern value="unapproved|approved"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="role_description" type="xs:string" minOccurs="0"/>
+            <xs:element name="ideal_candidates_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ideal_candidate" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ideal_candidates_urls_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ideal_candidate_url" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ideal_candidates_external_id_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ideal_candidate_external_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="associated_tags" minOccurs="1">
+                <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="tag" type="RoleTagType" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+                </xs:complexType>
+                <xs:unique name="uniqueAssociatedTag">
+                    <xs:selector xpath="tag"/>
+                    <xs:field xpath="tag_name"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="display_tags" minOccurs="0">
+                <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="tag" type="RoleTagType" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+                </xs:complexType>
+                <xs:unique  name="uniqueDisplayTag">
+                    <xs:selector xpath="tag"/>
+                    <xs:field xpath="tag_name"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="next_roles_list" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="next_role_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="excluded_next_roles_list" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="excluded_next_role_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="next_roles_external_id_list" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="next_role_external_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="excluded_next_roles_external_id_list" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="excluded_next_role_external_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="locations_list" minOccurs="0">
+                <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="location" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="experience"  type="RoleExperienceType" minOccurs="0" />
+            <xs:element name="education" type="RoleEducationType" minOccurs="0" />
+            <xs:element name="calibration_notes" type="xs:string" minOccurs="0"/>
+            <xs:element name="skills_list" type="SkillListType" minOccurs="0" />
+            <xs:element name="rm_user_group_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="user_group" type="RmUserGroupType" minOccurs="1" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="operation" fixed="ingest"/>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateType">
+        <xs:all>
+            <xs:element name="external_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="title" type="xs:string" minOccurs="0"/>
+            <xs:element name="parent_role_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="approval_status" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"><xs:pattern value="unapproved|approved"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="role_description" type="xs:string" minOccurs="0"/>
+            <xs:element name="ideal_candidates_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ideal_candidate" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ideal_candidates_urls_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ideal_candidate_url" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ideal_candidates_external_id_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ideal_candidate_external_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="associated_tags" minOccurs="1">
+                <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="tag" type="RoleTagType" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="display_tags" minOccurs="0">
+                <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="tag" type="RoleTagType" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="next_roles_list" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="next_role_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="excluded_next_roles_list" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="excluded_next_role_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="next_roles_external_id_list" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="next_role_external_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="excluded_next_roles_external_id_list" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="excluded_next_role_external_id" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="locations_list" minOccurs="0">
+                <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="location" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="experience"  type="RoleExperienceType" minOccurs="0" />
+            <xs:element name="education" type="RoleEducationType" minOccurs="0" />
+            <xs:element name="calibration_notes" type="xs:string" minOccurs="0"/>
+            <xs:element name="skills_list" type="SkillListType" minOccurs="0" />
+            <xs:element name="rm_user_group_list" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="user_group" type="RmUserGroupType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="operation">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="update"/>
+                    <xs:enumeration value="upsert"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="DeleteType">
+        <xs:all>
+            <xs:element name="external_id" type="NoSpaceString" />
+        </xs:all>
+        <xs:attribute name="operation" fixed="delete"/>
+    </xs:complexType>
+
+</xs:schema>

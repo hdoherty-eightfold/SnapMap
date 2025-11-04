@@ -1,0 +1,16 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="ef_project_common.xsd" />
+
+    <xs:element name="EF_Project_List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EF_Project" maxOccurs="unbounded" minOccurs="0" type="IngestType">
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="ProjectUniqueKey">
+      <xs:selector xpath="EF_Project" />
+      <xs:field xpath="job_id" />
+    </xs:unique>
+    </xs:element>
+</xs:schema>

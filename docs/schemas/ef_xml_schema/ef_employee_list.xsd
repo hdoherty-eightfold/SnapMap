@@ -1,0 +1,21 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="ef_employee_common.xsd" />
+
+  <xs:element name="EF_Employee_List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EF_Employee" maxOccurs="unbounded" minOccurs="0" type="IngestType">
+        </xs:element>
+      </xs:sequence>
+      <xs:anyAttribute processContents="skip"/>
+    </xs:complexType>
+    <xs:unique name="EmployeeUniqueKey">
+      <xs:selector xpath="EF_Employee" />
+      <xs:field xpath="employee_id" />
+    </xs:unique>
+      <xs:unique name="EmailUniqueKey">
+        <xs:selector xpath="EF_Employee/email_list/email" />
+        <xs:field xpath="." />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EF_Pay_Grade_List>
+  <EF_Pay_Grade>
+    <external_id>GRADE_1</external_id>
+  </EF_Pay_Grade>
+  <EF_Pay_Grade>
+    <external_id>INDIA_GRADE_1</external_id>
+  </EF_Pay_Grade>
+</EF_Pay_Grade_List>

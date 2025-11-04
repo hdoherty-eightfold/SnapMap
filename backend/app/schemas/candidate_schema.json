@@ -1,0 +1,106 @@
+{
+  "entity_name": "candidate",
+  "display_name": "Candidate",
+  "description": "Candidate data for Eightfold integration",
+  "fields": [
+    {
+      "name": "CANDIDATE_ID",
+      "display_name": "Candidate ID",
+      "type": "string",
+      "required": true,
+      "max_length": 50,
+      "example": "CAND-001",
+      "description": "Unique candidate identifier"
+    },
+    {
+      "name": "FIRST_NAME",
+      "display_name": "First Name",
+      "type": "string",
+      "required": true,
+      "max_length": 100,
+      "example": "Jane",
+      "description": "Candidate's first name"
+    },
+    {
+      "name": "LAST_NAME",
+      "display_name": "Last Name",
+      "type": "string",
+      "required": true,
+      "max_length": 100,
+      "example": "Smith",
+      "description": "Candidate's last name"
+    },
+    {
+      "name": "EMAIL",
+      "display_name": "Email Address",
+      "type": "email",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "example": "jane.smith@email.com",
+      "description": "Candidate's email address"
+    },
+    {
+      "name": "PHONE",
+      "display_name": "Phone Number",
+      "type": "string",
+      "required": false,
+      "pattern": "^\\+?[0-9\\-\\s()]+$",
+      "example": "+1-555-0200",
+      "description": "Candidate's phone number"
+    },
+    {
+      "name": "APPLICATION_DATE",
+      "display_name": "Application Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2025-10-15",
+      "description": "Date candidate applied"
+    },
+    {
+      "name": "POSITION_APPLIED",
+      "display_name": "Position Applied",
+      "type": "string",
+      "required": false,
+      "max_length": 200,
+      "example": "Software Engineer",
+      "description": "Position candidate applied for"
+    },
+    {
+      "name": "STATUS",
+      "display_name": "Application Status",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "interviewing",
+      "description": "Current application status"
+    },
+    {
+      "name": "SOURCE",
+      "display_name": "Source",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "LinkedIn",
+      "description": "Source of candidate application"
+    },
+    {
+      "name": "RESUME_URL",
+      "display_name": "Resume URL",
+      "type": "string",
+      "required": false,
+      "max_length": 500,
+      "example": "https://storage.example.com/resumes/candidate_001.pdf",
+      "description": "URL to candidate's resume"
+    },
+    {
+      "name": "LAST_ACTIVITY_TS",
+      "display_name": "Last Activity Timestamp",
+      "type": "datetime",
+      "required": true,
+      "format": "YYYY-MM-DDTHH:MM:SS",
+      "example": "2025-11-02T14:30:00",
+      "description": "Timestamp of last data update (auto-generated)"
+    }
+  ]
+}

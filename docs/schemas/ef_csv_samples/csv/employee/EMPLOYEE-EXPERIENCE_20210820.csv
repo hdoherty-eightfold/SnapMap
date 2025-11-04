@@ -1,0 +1,9 @@
+EMPLOYEE_ID,COMPANY,TITLE,DETAILED_TITLE,DESCRIPTION,LOCATION,IS_CURRENT,START_DATE,END_DATE,IS_INTERNAL,DEPARTMENT,INDUSTRY,EXPERIENCE_KEY
+W00001,Eightfold,CP test,CP test2,EP test1,Iceland,TRUE,2007-04-26,,,Engineering,Technology,1
+W00002,Eightfold 2,Senior Tester,Senior Tester 1,Senior Tester,Bahamas,TRUE,2013-10-01,,,Engineering,Technology,2
+W00002,Eightfold, Tester,,Tester,Bahamas,FALSE,2000-01-01,2013-10-01,,Engineering,Technology,3
+W00003,Eightfold2,Manager,,CP TEst,Armenia,TRUE,2013-09-04,,,Engineering,Technology,4
+W00003,Eightfold,Manager,,CP TEst,Armenia,FALSE,2011-10-01,2013-09-04,,Engineering,Technology,5
+W00004,Eightfold,Project Manager,Project Manager II,Project Manager II,United States,TRUE,2013-10-17,,,Engineering,Technology,6
+W00004,Eightfold,Project Manager,,Project Manager,United States,FALSE,2010-11-15,2013-10-17,,Engineering,Technology,7
+W00005,Eightfold,Anayst,Analyst II,Anayst II,India,TRUE,,,,Engineering,Technology,8

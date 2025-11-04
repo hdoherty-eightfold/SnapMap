@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python extract_docs.py:*)",
+      "Bash(tree:*)",
+      "Bash(python -m uvicorn:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(node --version:*)",
+      "Bash(if [ -d \"node_modules\" ])",
+      "Bash(then echo \"node_modules exists\")",
+      "Bash(else echo \"node_modules missing\")",
+      "Bash(fi)",
+      "Bash(timeout /t 5 /nobreak)",
+      "Bash(ping:*)",
+      "Bash(nul)",
+      "Bash(python test_upload.py:*)",
+      "Bash(python test_upload_simple.py:*)",
+      "Bash(python:*)",
+      "Bash(timeout:*)",
+      "Bash(dir \"C:\\Users\\Asus\\AppData\\Local\\Temp\\snapmap_sftp\" 2)",
+      "Bash(if [ -d \".claude\" ])",
+      "Bash(then echo \"exists\")",
+      "Bash(else mkdir -p .claude/agents)",
+      "Bash(git config:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh --version:*)",
+      "Bash(gh auth login:*)",
+      "Bash(gh auth status:*)",
+      "Bash(git rm:*)",
+      "Bash(.gitignore)",
+      "Bash(git rebase:*)",
+      "Bash(git log:*)",
+      "Bash(git checkout:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

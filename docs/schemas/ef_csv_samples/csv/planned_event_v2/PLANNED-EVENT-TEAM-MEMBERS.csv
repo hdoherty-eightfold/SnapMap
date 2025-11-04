@@ -1,0 +1,4 @@
+ext_event_id,team_id,email,role,status
+123,hire1,demo@eightfolddemo-ritik-kumar.com,hiring_manager,pending
+123,hire1,recruiter@eightfolddemo-ritik-kumar.com,hiring_manager,pending
+123,hire1,recruiter2@eightfolddemo-ritik-kumar.com,hiring_manager,pending 

@@ -1,0 +1,106 @@
+{
+  "entity_name": "course",
+  "display_name": "Course",
+  "description": "Training course data for Eightfold integration",
+  "fields": [
+    {
+      "name": "COURSE_ID",
+      "display_name": "Course ID",
+      "type": "string",
+      "required": true,
+      "max_length": 50,
+      "example": "CRS-001",
+      "description": "Unique course identifier"
+    },
+    {
+      "name": "COURSE_TITLE",
+      "display_name": "Course Title",
+      "type": "string",
+      "required": true,
+      "max_length": 200,
+      "example": "Advanced Python Programming",
+      "description": "Course title"
+    },
+    {
+      "name": "COURSE_DESCRIPTION",
+      "display_name": "Course Description",
+      "type": "string",
+      "required": false,
+      "max_length": 1000,
+      "example": "Learn advanced Python concepts including decorators, generators, and async programming",
+      "description": "Detailed course description"
+    },
+    {
+      "name": "INSTRUCTOR",
+      "display_name": "Instructor",
+      "type": "string",
+      "required": false,
+      "max_length": 200,
+      "example": "Dr. Jane Smith",
+      "description": "Course instructor name"
+    },
+    {
+      "name": "DURATION_HOURS",
+      "display_name": "Duration (Hours)",
+      "type": "string",
+      "required": false,
+      "max_length": 10,
+      "example": "40",
+      "description": "Course duration in hours"
+    },
+    {
+      "name": "START_DATE",
+      "display_name": "Start Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2025-11-15",
+      "description": "Course start date"
+    },
+    {
+      "name": "END_DATE",
+      "display_name": "End Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2025-12-15",
+      "description": "Course end date"
+    },
+    {
+      "name": "CATEGORY",
+      "display_name": "Category",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "Technology",
+      "description": "Course category"
+    },
+    {
+      "name": "STATUS",
+      "display_name": "Course Status",
+      "type": "string",
+      "required": false,
+      "max_length": 20,
+      "example": "active",
+      "description": "Course status (active, inactive, completed)"
+    },
+    {
+      "name": "CAPACITY",
+      "display_name": "Capacity",
+      "type": "string",
+      "required": false,
+      "max_length": 10,
+      "example": "25",
+      "description": "Maximum number of participants"
+    },
+    {
+      "name": "LAST_ACTIVITY_TS",
+      "display_name": "Last Activity Timestamp",
+      "type": "datetime",
+      "required": true,
+      "format": "YYYY-MM-DDTHH:MM:SS",
+      "example": "2025-11-02T14:30:00",
+      "description": "Timestamp of last data update (auto-generated)"
+    }
+  ]
+}

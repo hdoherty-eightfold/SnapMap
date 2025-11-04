@@ -1,0 +1,79 @@
+{
+  "entity_name": "role",
+  "display_name": "Role",
+  "description": "Role/permission data for Eightfold integration",
+  "fields": [
+    {
+      "name": "ROLE_ID",
+      "display_name": "Role ID",
+      "type": "string",
+      "required": true,
+      "max_length": 50,
+      "example": "ROLE-001",
+      "description": "Unique role identifier"
+    },
+    {
+      "name": "ROLE_NAME",
+      "display_name": "Role Name",
+      "type": "string",
+      "required": true,
+      "max_length": 100,
+      "example": "HR Manager",
+      "description": "Role name"
+    },
+    {
+      "name": "ROLE_DESCRIPTION",
+      "display_name": "Role Description",
+      "type": "string",
+      "required": false,
+      "max_length": 500,
+      "example": "Manages HR operations and employee relations",
+      "description": "Detailed role description"
+    },
+    {
+      "name": "PERMISSIONS",
+      "display_name": "Permissions",
+      "type": "string",
+      "required": false,
+      "max_length": 1000,
+      "example": "view_employees,edit_employees,approve_leave",
+      "description": "Comma-separated list of permissions"
+    },
+    {
+      "name": "DEPARTMENT",
+      "display_name": "Department",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "Human Resources",
+      "description": "Department this role belongs to"
+    },
+    {
+      "name": "STATUS",
+      "display_name": "Role Status",
+      "type": "string",
+      "required": false,
+      "max_length": 20,
+      "example": "active",
+      "description": "Role status (active, inactive)"
+    },
+    {
+      "name": "CREATED_DATE",
+      "display_name": "Created Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2020-05-01",
+      "description": "Date role was created"
+    },
+    {
+      "name": "LAST_ACTIVITY_TS",
+      "display_name": "Last Activity Timestamp",
+      "type": "datetime",
+      "required": true,
+      "format": "YYYY-MM-DDTHH:MM:SS",
+      "example": "2025-11-02T14:30:00",
+      "description": "Timestamp of last data update (auto-generated)"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "EMPLOYEE_ID": [
+    "EmpID", "EmployeeID", "EmpNo", "EmployeeNumber", "EE_ID", "ID",
+    "WorkerID", "Worker_ID", "PersonID", "StaffID", "Staff_ID",
+    "EmployeeNo", "Employee_No", "EmpNum", "userId", "user_id", "UserID"
+  ],
+  "FIRST_NAME": [
+    "FirstName", "FName", "GivenName", "First", "Firstname", "First_Name",
+    "Name", "ForeName", "Legal_First_Name", "LegalFirstName", "firstName",
+    "first_name", "Given_Name", "ChristianName"
+  ],
+  "LAST_NAME": [
+    "LastName", "LName", "Surname", "Last", "FamilyName", "Lastname",
+    "Last_Name", "SecondName", "Legal_Last_Name", "LegalLastName",
+    "lastName", "last_name", "Family_Name", "Sur_Name"
+  ],
+  "EMAIL": [
+    "Email", "EmailAddress", "E-mail", "WorkEmail", "Mail", "EmailAddr",
+    "E-Mail", "email", "Email_Address", "Work_Email", "BusinessEmail",
+    "email_address", "EmailId", "Email_ID", "MailAddress"
+  ],
+  "HIRING_DATE": [
+    "HireDate", "DateHired", "StartDate", "JoinDate", "EmploymentDate",
+    "Hire_Date", "Date_Hired", "Start_Date", "Join_Date", "hireDate",
+    "hire_date", "CommencementDate", "OnboardDate", "Onboard_Date",
+    "EmploymentStartDate", "DateOfHire", "HiringDate"
+  ],
+  "TITLE": [
+    "JobTitle", "Position", "Role", "Designation", "Job", "Title",
+    "Job_Title", "JobRole", "PositionTitle", "title", "job_title",
+    "Position_Title", "Job_Profile", "JobProfile", "Designation_Title",
+    "RoleTitle", "WorkTitle"
+  ],
+  "BUSINESS_UNIT": [
+    "Department", "Dept", "Division", "Unit", "BU", "Team",
+    "Business_Unit", "Org", "Organization", "Dept_Name", "DeptName",
+    "division", "department", "Org_Unit", "OrgUnit", "Cost_Center",
+    "CostCenter", "BusinessUnit", "Organizational_Unit"
+  ],
+  "PHONE": [
+    "PhoneNumber", "Phone", "Tel", "Telephone", "Mobile", "Contact",
+    "Phone_Number", "ContactNumber", "WorkPhone", "Work_Phone",
+    "BusinessPhone", "phone", "phone_number", "TelephoneNumber",
+    "Tel_Number", "PhoneNo", "ContactNo", "MobileNumber"
+  ],
+  "LOCATION": [
+    "Office", "Site", "WorkLocation", "Branch", "City", "OfficeLocation",
+    "Work_Location", "WorkSite", "Work_Site", "location", "work_location",
+    "Office_Location", "PrimaryLocation", "HomeOffice", "BaseLocation",
+    "Workplace", "WorkPlace"
+  ],
+  "MANAGER": [
+    "ManagerName", "Manager", "Supervisor", "ReportsTo", "Boss",
+    "Manager_Name", "ManagerID", "Manager_ID", "SupervisorName",
+    "Supervisor_Name", "ReportsToName", "DirectManager", "LineManager",
+    "manager", "supervisor", "reports_to", "reportsTo"
+  ]
+}

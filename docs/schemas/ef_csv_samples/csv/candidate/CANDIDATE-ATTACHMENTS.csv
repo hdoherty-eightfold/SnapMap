@@ -1,0 +1,4 @@
+CANDIDATE_ID,ATTACHMENT_TYPE,CONTENT,CONTENT_IS_BASE64_ENCODED,FILEPATH,S3_FILE_PATH,URL,ATTACHMENT_ID,LAST_MODIFIED_TS,APPLICATION_METADATA_APPLICATION_ID,APPLICATION_METADATA_JOB_ID,APPLICATION_METADATA_JOB_TITLE
+1,resume,example.pdf,true,,s3://ef-sftp/test/test_resume.txt,https://example.com,1,2022-11-11T22:22:22,,,
+2,resume,jane_smith_resume.pdf,true,,s3://ef-sftp/test/jane_smith_resume.txt,https://example.com,2,2022-11-12T10:30:00,"appl-1756461258","A1B2C3","Software Engineer - A1B2C3"
+2,photo,jane_smith_resume.pdf,true,,s3://ef-sftp/test/jane_smith_resume.txt,https://example.com,2,2022-11-12T10:30:00,"appl-1756461258","A1B2C3","Software Engineer - A1B2C3"

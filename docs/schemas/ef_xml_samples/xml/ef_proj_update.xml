@@ -1,0 +1,185 @@
+<EF_Project_List>
+
+  <EF_Project>
+    <job_id>JD10005</job_id>
+    <title>File Ingest Test Project</title>
+    <project_description>File Ingest Test Project Description</project_description>
+    <company>Eightfold Unittest Company</company>
+    <status>closed_no_longer_valid</status>
+    <is_open>0</is_open>
+    <posted_for>external</posted_for>
+    <creation_ts>2020-08-19T08:41:30-04:00</creation_ts>
+    <last_modified_ts>2020-10-08T13:04:04-04:00</last_modified_ts>
+
+    <job_function>File Job Testing</job_function>
+
+    <business_unit>Global File Job Testing Unit</business_unit>
+
+    <posting_title>Senior Associate Testing Team</posting_title>
+
+    <location_list>
+      <location>New Jersey, United States</location>
+      <location>New York, US</location>
+    </location_list>
+
+    <location_city>New York City</location_city>
+
+    <location_state>New York</location_state>
+
+    <location_country>US</location_country>
+
+    <address_details>
+
+      <address1>1900, queen Street</address1>
+
+      <address2>high market</address2>
+
+      <city>New York City</city>
+
+      <state>New York</state>
+
+      <country>US</country>
+
+      <postal_code>98200</postal_code>
+    </address_details>
+
+    <project_manager>
+
+      <name>PM Test</name>
+
+      <email>pmtest@eightfolddemo-unittest.com</email>
+    </project_manager>
+
+    <company_description>Eightfold Demo Unittest</company_description>
+
+    <is_posted>false</is_posted>
+
+    <is_evergreen>true</is_evergreen>
+
+    <restrict_access>false</restrict_access>
+
+    <custom_info>
+      <custom_field>
+        <field_name>JOB_REQUIREMENT</field_name>
+        <data_type>string</data_type>
+        <field_value>Analyze problems, propose and implement their solutions. Handle the optimal level of communication with the client.</field_value>
+      </custom_field>
+      <custom_field>
+        <field_name>PROJECT_DESCRIPTION</field_name>
+        <data_type>string</data_type>
+        <field_value>The client is a German global IT service and consulting company. Our team is working on a project of Internet of Things type, which is an online platform providing communication, data exchange solution between various car connected devices and modules. </field_value>
+      </custom_field>
+    </custom_info>
+
+    <custom_multi_value_list>
+
+      <custom_mv_field>
+        <field_name>location</field_name>
+        <data_type>string</data_type>
+        <data_list>
+          <field_value>Mountain View, USA</field_value>
+          <field_value>Noida, India</field_value>
+        </data_list>
+      </custom_mv_field>
+      <custom_mv_field>
+        <field_name>Preferred location</field_name>
+        <data_type>string</data_type>
+        <data_list>
+          <field_value>New york, USA</field_value>
+          <field_value>Mumbai, India</field_value>
+        </data_list>
+      </custom_mv_field>
+    </custom_multi_value_list>
+
+    <custom_objects_list>
+    <object_list>
+      <object>
+        <object_name>assignee</object_name>
+        <native_field_list>
+          <native_field>
+            <field_name>name</field_name>
+            <data_type>string</data_type>
+            <field_value>John Dale</field_value>
+          </native_field>
+          <native_field>
+            <field_name>email</field_name>
+            <data_type>string</data_type>
+            <field_value>john.dale@gmail.com</field_value>
+          </native_field>
+        </native_field_list>
+        <multi_value_field_list>
+          <field_value_list>
+            <field_name>locations</field_name>
+            <data_type>string</data_type>
+            <data_list>
+              <field_value>Mountain View, USA</field_value>
+              <field_value>Mumbai, India</field_value>
+            </data_list>
+          </field_value_list>
+        </multi_value_field_list>
+      </object>
+    </object_list>
+    <list_of_objects>
+      <object_list>
+        <object_list_name>approver_list</object_list_name>
+        <data_list>
+          <composite_object>
+            <object_name>approver</object_name>
+            <native_field_list>
+              <native_field>
+                <field_name>name</field_name>
+                <data_type>string</data_type>
+                <field_value>file test</field_value>
+              </native_field>
+              <native_field>
+                <field_name>email</field_name>
+                <data_type>string</data_type>
+                <field_value>filetest@eightfolddemo-unittest.com</field_value>
+              </native_field>
+            </native_field_list>
+          </composite_object>
+        </data_list>
+      </object_list>
+    </list_of_objects>
+  </custom_objects_list>
+
+    <skills_list>
+
+      <skill>Sales</skill>
+      <skill>Testing</skill>
+      <skill>Management</skill>
+      <skill_detail>
+        <skill>Marketing</skill>
+        <data_source>internal</data_source>
+        <proficiency>5.0</proficiency>
+      </skill_detail>
+      <skill_detail>
+        <skill>Marketing</skill>
+        <data_source>external</data_source>
+        <proficiency>5.0</proficiency>
+      </skill_detail>
+      <skill_detail>
+        <skill>Management</skill>
+        <skill_group_list>
+          <skill_group>
+            <skill_group_name>Leadership</skill_group_name>
+            <proficiency>4.1</proficiency>
+          </skill_group>
+          <skill_group>
+            <skill_group_name>Coaching</skill_group_name>
+            <proficiency>4.3</proficiency>
+          </skill_group>
+        </skill_group_list>
+      </skill_detail>
+    </skills_list>
+
+    <required_skills_list>
+
+      <skill>Testing</skill>
+      <skill>Influencing</skill>
+      <skill>User Story</skill>
+    </required_skills_list>
+
+    <project_type>profile_project</project_type>
+  </EF_Project>
+</EF_Project_List>

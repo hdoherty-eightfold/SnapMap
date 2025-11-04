@@ -1,0 +1,8 @@
+EMPLOYEE_ID,SKILLS,DATA_SOURCE,PROFICIENCY,SKILL_GROUP_NAME
+W00001,Auditing,linkedin,medium,technical_skills
+W00002,Architecture Design,linkedin,high,business_skills
+W00002,Integration,linkedin,medium,business_skills
+W00002,Integration and Interoperability,linkedin,medium,business_skills
+W00003,Compliance and Data Privacy,linkedin,high,business_skills
+W00003,Cost-Benefit Analysis,linkedin,high,business_skills
+W00003,Cost-Benefit Analysis2,linkedin,high,business_skills

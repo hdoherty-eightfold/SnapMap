@@ -1,0 +1,197 @@
+<EF_User_List>
+  <EF_User>
+    <email>emp.user@eightfolddemo-unittest.com</email>
+    <first_name>File Ingest</first_name>
+    <last_name>Test User</last_name>
+    <external_unique_id>1</external_unique_id>
+    <role>employee</role>
+    <company>Test Company</company>
+    <language>en</language>
+    <user_group_list>
+      <user_group>
+        <user_group_id>IMM</user_group_id>
+      </user_group>
+    </user_group_list>
+    <rm_user_group_list>
+      <user_group>
+        <user_group_id>RM_UG</user_group_id>
+      </user_group>
+    </rm_user_group_list>
+    <ef_user_group_list>
+      <ef_user_group>
+        <user_group_name>EF_Main</user_group_name>
+      </ef_user_group>
+    </ef_user_group_list>
+    <hrbp_data>
+        <business_unit_list>
+            <business_unit>FIS (I)</business_unit>
+            <business_unit>FAS (S)</business_unit>
+        </business_unit_list>
+        <location_list>
+            <location>Brazil</location>
+            <location>VOUZELA</location>
+        </location_list>
+        <business_function_list>
+            <business_function>FCm Div Europe (Eeur)</business_function>
+        </business_function_list>
+        <job_level_floor>9</job_level_floor>
+        <job_level_ceiling>15</job_level_ceiling>
+        <custom_info>
+          <custom_field>
+            <field_name>other_field</field_name>
+            <data_type>string</data_type>
+            <field_value>other_value</field_value>
+          </custom_field>
+        </custom_info>
+        <custom_multi_value_list>
+          <custom_mv_field>
+            <field_name>pay_scale_grade</field_name>
+            <data_type>string</data_type>
+            <data_list>
+              <field_value>Level 1</field_value>
+              <field_value>Level 3</field_value>
+              <field_value>Level 5</field_value>
+            </data_list>  
+          </custom_mv_field>
+          <custom_mv_field>
+            <field_name>secondary_location</field_name>
+            <data_type>string</data_type>
+            <data_list>
+              <field_value>Mountain View, USA</field_value>
+              <field_value>Noida, India</field_value>
+            </data_list>  
+          </custom_mv_field>
+        </custom_multi_value_list>
+    </hrbp_data>
+    <interviewer_tag_list>
+      <interviewer_tag>
+        <name>Bar Raiser</name>
+      </interviewer_tag>
+    </interviewer_tag_list>
+  </EF_User>
+  <EF_User>
+    <email>admin.user@eightfolddemo-unittest.com</email>
+    <first_name>File Ingest</first_name>
+    <last_name>Test Admin User</last_name>
+    <external_unique_id>2</external_unique_id>
+    <role>Admin</role>
+    <user_group_list>
+      <user_group>
+        <user_group_id>Main</user_group_id>
+      </user_group>
+    </user_group_list>
+    <rm_user_group_list>
+      <user_group>
+        <user_group_id>RM_Main</user_group_id>
+      </user_group>
+    </rm_user_group_list>
+    <ef_user_group_list>
+      <ef_user_group>
+        <user_group_name>EF_Main</user_group_name>
+      </ef_user_group>
+    </ef_user_group_list>
+    <hrbp_data>
+        <business_unit_list>
+        </business_unit_list>
+        <location_list>
+            <location>Brazil</location>
+        </location_list>
+        <job_level_floor>9</job_level_floor>
+        <job_level_ceiling>15</job_level_ceiling>
+    </hrbp_data>
+    <interviewer_tag_list>
+      <interviewer_tag>
+        <name>Bar Raiser</name>
+      </interviewer_tag>
+    </interviewer_tag_list>
+  </EF_User>
+  <EF_User>
+    <email>emp.user2@eightfolddemo-unittest.com</email>
+    <first_name>File Ingest2</first_name>
+    <last_name>Test User2</last_name>
+    <external_unique_id>3</external_unique_id>
+    <role>employee</role>
+    <roles_list>
+      <role>Interviewer</role>
+    </roles_list>
+    <user_group_list>
+      <user_group>
+        <user_group_id>IMM</user_group_id>
+      </user_group>
+    </user_group_list>
+    <rm_user_group_list>
+      <user_group>
+        <user_group_id>RM_UG</user_group_id>
+      </user_group>
+    </rm_user_group_list>
+    <ef_user_group_list>
+      <ef_user_group>
+        <user_group_name>EF_Main</user_group_name>
+      </ef_user_group>
+    </ef_user_group_list>
+    <hrbp_data>
+        <business_unit_list>
+            <business_unit>FIS (I)</business_unit>
+            <business_unit>FAS (S)</business_unit>
+            <business_unit>FAS (S)</business_unit>
+        </business_unit_list>
+        <location_list>
+        </location_list>
+        <job_level_floor>15</job_level_floor>
+        <job_level_ceiling>15</job_level_ceiling>
+    </hrbp_data>
+    <interviewer_tag_list>
+      <interviewer_tag>
+        <name>Bar Raiser</name>
+      </interviewer_tag>
+    </interviewer_tag_list>
+  </EF_User>
+  <EF_User>
+    <email>admin.user2@eightfolddemo-unittest.com</email>
+    <first_name>File Ingest2</first_name>
+    <last_name>Test Admin User2</last_name>
+    <external_unique_id>4</external_unique_id>
+    <default_access_mode>recruiter</default_access_mode>
+    <roles_list>
+      <role>Interviewer</role>
+      <role>Admin</role>
+    </roles_list>
+    <user_group_list>
+      <user_group>
+        <user_group_id>Main</user_group_id>
+      </user_group>
+    </user_group_list>
+    <rm_user_group_list>
+      <user_group>
+        <user_group_id>RM_Main</user_group_id>
+      </user_group>
+    </rm_user_group_list>
+    <ef_user_group_list>
+      <ef_user_group>
+        <user_group_name>EF_Main</user_group_name>
+      </ef_user_group>
+    </ef_user_group_list>
+    <hrbp_data>
+    </hrbp_data>
+    <interviewer_tag_list>
+      <interviewer_tag>
+        <name>Bar Raiser</name>
+      </interviewer_tag>
+      <interviewer_tag>
+        <name>Level 3</name>
+      </interviewer_tag>
+    </interviewer_tag_list>
+  </EF_User>
+  <EF_User>
+    <email>can.user@eightfolddemo-unittest.com</email>
+    <first_name>File Ingest3</first_name>
+    <last_name>Test Candidate User1</last_name>
+    <external_unique_id>5</external_unique_id>
+    <default_access_mode>candidate</default_access_mode>
+    <user_group_list>
+      <user_group>
+        <user_group_id>Main</user_group_id>
+      </user_group>
+    </user_group_list>
+  </EF_User>
+</EF_User_List>

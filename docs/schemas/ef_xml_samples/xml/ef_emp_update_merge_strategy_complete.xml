@@ -1,0 +1,944 @@
+<EF_Employee_List badge_merge_strategy='latest' project_merge_strategy = 'complete' experience_merge_strategy = 'complete' education_merge_strategy = 'latest' certification_merge_strategy = 'complete'>
+
+    <EF_Employee>
+  
+      <employee_id>EM00033</employee_id>
+      <user_id>US00033</user_id>
+      <first_name>File </first_name>
+      <last_name>Test Employee1</last_name>
+      <last_activity_ts>2020-10-01T07:19:45</last_activity_ts>
+      <email_list>
+        <email>fileingesttest@eightfolddemo-unittest.com</email>
+      </email_list>
+  
+      <phone_list>
+        <phone>9800765000</phone>
+        <phone>9800765411</phone>
+      </phone_list>
+  
+      <title>Senior File Testing Manager</title>
+      <detailed_title>Senior File Testing Manager II</detailed_title>
+  
+      <role>File Testing</role>
+  
+      <company_name>Eightfold Unittest Company</company_name>
+  
+      <level>12T</level>
+  
+      <location>Stony Brook,NY,US</location>
+      <location_country>US</location_country>
+  
+      <hiring_date>2019-10-19</hiring_date>
+  
+      <role_change_date>2020-10-28</role_change_date>
+  
+      <manager_userid>US00000</manager_userid>
+  
+      <manager_email>managertest1@eightfolddemo-unittest.com</manager_email>
+  
+      <manager_fullname>Manager Test1</manager_fullname>
+  
+      <business_unit>PLIM</business_unit>
+  
+      <division>Test File</division>
+  
+      <termination_date>2020-05-16</termination_date>
+  
+      <badge_list>
+  
+        <badge>
+          <user_id>US00033</user_id>
+          <badge_id>003</badge_id>
+          <creator>Eightfold Unittest Company</creator>
+          <title>Testing File Ambassador</title>
+          <comment>Testing</comment>
+          <last_modified_ts>2020-04-17T00:00:00</last_modified_ts>
+          <photo_url>https://static.vscdn.net/images/careers/demo/Prudential/Badge_0002_Ambassador.png</photo_url>
+        </badge>
+        <badge>
+          <user_id>US00033</user_id>
+          <badge_id>004</badge_id>
+          <creator>Eightfold Unittest Company</creator>
+          <title>Making Time to Learn</title>
+           <comment>Testing</comment>
+          <last_modified_ts>2020-08-28T00:00:00</last_modified_ts>
+          <photo_url>https://static.vscdn.net/images/careers/demo/Prudential/Badge_0000_makingTime.png</photo_url>
+  
+        </badge>
+      </badge_list>
+  
+      <base_pay>
+  
+        <amount>2000000</amount>
+  
+        <currency>USD</currency>
+  
+        <frequency>monthly</frequency>
+      </base_pay>
+  
+      <bonus>
+  
+        <amount>1500001</amount>
+  
+        <currency>USD</currency>
+  
+        <frequency>Yearly</frequency>
+      </bonus>
+  
+      <custom_info>
+  
+        <custom_field>
+        <field_name>REPORTS_TO</field_name>
+        <data_type>string</data_type>
+        <field_value>File Admin</field_value>
+      </custom_field>
+      <custom_field>
+        <field_name>COMPANY_NAME</field_name>
+        <data_type>string</data_type>
+        <field_value>Testing Company</field_value>
+      </custom_field>
+      </custom_info>
+  
+        <custom_multi_value_list>
+  
+       <custom_mv_field>
+              <field_name>location</field_name>
+              <data_type>string</data_type>
+              <data_list>
+                <field_value>Mountain View, USA</field_value>
+                <field_value>Noida, India</field_value>
+              </data_list>
+            </custom_mv_field>
+            <custom_mv_field>
+              <field_name>email</field_name>
+              <data_type>string</data_type>
+              <data_list>
+                <field_value>test@ef.com</field_value>
+                <field_value>test2@ef.com</field_value>
+              </data_list>
+            </custom_mv_field>
+      </custom_multi_value_list>
+  
+        <custom_objects_list>
+  
+        <object_list>
+              <object>
+          <object_name>ctc</object_name>
+          <native_field_list>
+            <native_field>
+              <field_name>base_pay</field_name>
+              <data_type>int</data_type>
+              <field_value>200000</field_value>
+            </native_field>
+            <native_field>
+              <field_name>base_pay_currency</field_name>
+              <data_type>string</data_type>
+              <field_value>INR</field_value>
+            </native_field>
+          </native_field_list>
+          <multi_value_field_list>
+            <field_value_list>
+              <field_name>pay_days</field_name>
+              <data_type>int</data_type>
+              <data_list>
+                <field_value>20</field_value>
+                <field_value>25</field_value>
+              </data_list>
+            </field_value_list>
+          </multi_value_field_list>
+        </object>
+  
+              <object>
+                <object_name>Location</object_name>
+  
+                <native_field_list>
+  
+                  <native_field>
+                    <field_name>country</field_name>
+                    <data_type>string</data_type>
+                    <field_value>US</field_value>
+                  </native_field>
+                </native_field_list>
+  
+                <multi_value_field_list>
+  
+                  <field_value_list>
+                    <field_name>city</field_name>
+                    <data_type>string</data_type>
+                    <data_list>
+                      <field_value>Stoony Brook</field_value>
+                      <field_value>New York</field_value>
+                    </data_list>
+                  </field_value_list>
+                </multi_value_field_list>
+              </object>
+            </object_list>
+  
+            <list_of_objects>
+  
+              <object_list>
+          <object_list_name>testing_reviews</object_list_name>
+          <data_list>
+            <composite_object>
+              <object_name>review</object_name>
+              <native_field_list>
+                <native_field>
+                  <field_name>time_period</field_name>
+                  <data_type>string</data_type>
+                  <field_value>Q1 2019</field_value>
+                </native_field>
+                <native_field>
+                  <field_name>rating</field_name>
+                  <data_type>float</data_type>
+                  <field_value>4.2</field_value>
+                </native_field>
+              </native_field_list>
+            </composite_object>
+          </data_list>
+        </object_list>
+  
+            </list_of_objects>
+      </custom_objects_list>
+  
+      <candidate_data>
+  
+        <candidate_id>CM00033</candidate_id>
+  
+        <location>Stony Brook,NY,US</location>
+  
+        <address_details>
+          <address1>Chapin Apartments, Block I</address1>
+          <address2>700 Health Sciences Drive</address2>
+          <city>Stony Brook</city>
+          <state>NY</state>
+          <country>US</country>
+          <postal_code>50311</postal_code>
+        </address_details>
+  
+        <date_of_birth>2014-08-19</date_of_birth>
+  
+        <gender>female</gender>
+  
+        <summary>Client relationship specialist</summary>
+        <education_list>
+            <education>
+              <school>SAINT JOSEPH'S UNIVERSITY</school>
+              <degree>Bachelor's Degree (&#177;16 years)</degree>
+              <major>PSYCHOLOGY and Economics</major>
+            </education>
+    
+            <education>
+             <school>University of California San Diego</school>
+             <degree>Masters's Degree (&amp;#177;16 years)</degree>
+             <major>Data Science</major>
+    
+             <location>New York, US</location>
+    
+             <start_date>2015-05-16</start_date>
+    
+             <end_date>2017-08-09</end_date>
+             <verification_status>verified</verification_status>
+             <school_external_id>UT001</school_external_id>
+             <degree_external_id>MD001</degree_external_id>
+             <major_external_id>SCI001</major_external_id>
+             <is_graduated>true</is_graduated>
+             <name_alias>Test User</name_alias>
+             <verification_by>recruiter@email.com</verification_by>
+             <verification_ts>2023-01-15T10:30:00</verification_ts>
+           </education>
+          </education_list>
+        <certification_list>
+  
+          <certification>
+  
+          <certificate_name>Leadership and Management I</certificate_name>
+  
+          <issuing_authority>Workplace Tampa Organisation</issuing_authority>
+  
+          <proficiency>Average</proficiency>
+  
+          <license_no>LIC9908</license_no>
+  
+          <valid_from>2017-12-30</valid_from>
+  
+          <valid_to>2018-10-14</valid_to>
+  
+          <start_date>2017-10-18</start_date>
+  
+          <end_date>2017-12-29</end_date>
+        </certification>
+          <certification>
+  
+          <certificate_name>Leadership and Management II</certificate_name>
+  
+          <issuing_authority>Workplace Ohio Organisation</issuing_authority>
+  
+          <proficiency>Good</proficiency>
+  
+          <license_no>LIC9900</license_no>
+  
+          <start_date>2018-01-18</start_date>
+  
+          <end_date>2018-03-05</end_date>
+          <verification_status>verified</verification_status>
+          <certificate_external_id>CERT-3333</certificate_external_id>
+          <verification_by>recruiter@email.com</verification_by>
+          <verification_ts>2023-02-20T14:45:00</verification_ts>
+        </certification>
+        </certification_list>
+  
+        <url_list>
+          <url>linkedin.com/in/fileingesttest-88986000</url>
+          <url>linkedin.com/in/fileingest-88986000</url>
+        </url_list>
+  
+        <experience_list>
+  
+          <experience>
+            <company>Infant Welfare Society of Chicago</company>
+            <title>Vice President</title>
+            <description>Test File Vice President</description>
+            <location>Chicago, IL</location>
+            <is_current>0</is_current>
+            <start_date>2017-11-29</start_date>
+            <end_date>2018-11-03</end_date>
+          </experience>
+          <experience>
+  
+          <company>Eightfold Unittest Co.</company>
+  
+          <title>Senior File Testing Manager</title>
+          <detailed_title>Senior File Testing Manager II</detailed_title>
+            <description>Senior File Testing Manager</description>
+          <location>New york city, NY, US</location>
+  
+          <is_current>1</is_current>
+  
+          <start_date>2019-10-28</start_date>
+  
+        </experience>
+        </experience_list>
+  
+        <course_attendance_list>
+  
+          <course_attendance>
+            <title>The 401k Plan</title>
+            <lms_course_id>rAbbPZd</lms_course_id>
+            <start_date>2020-09-18</start_date>
+            <completed_date>2020-09-21</completed_date>
+            <points_earned>1.45</points_earned>
+            <verified>true</verified>
+          </course_attendance>
+  
+          <course_attendance>
+            <title>The 401k Plan</title>
+            <lms_course_id>rAbbPZd</lms_course_id>
+            <start_date>2020-08-18</start_date>
+            <completed_date>2020-10-21</completed_date>
+            <points_earned>1.45</points_earned>
+            <verified>true</verified>
+            <url>www.testcourse.com</url>
+            <type>course</type>
+  
+            <description>test course</description>
+  
+            <provider>Eightfold Unittest</provider>
+  
+            <is_internal>true</is_internal>
+  
+            <language>english</language>
+  
+            <difficulty>intermediate</difficulty>
+  
+           <medium>online</medium>
+  
+            <status>active</status>
+          </course_attendance>
+  
+        </course_attendance_list>
+  
+        <custom_info>
+  
+        <custom_field>
+        <field_name>REPORTS_TO</field_name>
+        <data_type>string</data_type>
+        <field_value>File Admin</field_value>
+      </custom_field>
+      <custom_field>
+        <field_name>COMPANY_NAME</field_name>
+        <data_type>string</data_type>
+        <field_value>Testing Company</field_value>
+      </custom_field>
+      </custom_info>
+  
+        <custom_multi_value_list>
+  
+       <custom_mv_field>
+              <field_name>location</field_name>
+              <data_type>string</data_type>
+              <data_list>
+                <field_value>Mountain View, USA</field_value>
+                <field_value>Noida, India</field_value>
+              </data_list>
+            </custom_mv_field>
+            <custom_mv_field>
+              <field_name>email</field_name>
+              <data_type>string</data_type>
+              <data_list>
+                <field_value>test@ef.com</field_value>
+                <field_value>test2@ef.com</field_value>
+              </data_list>
+            </custom_mv_field>
+      </custom_multi_value_list>
+  
+        <custom_objects_list>
+  
+        <object_list>
+              <object>
+          <object_name>ctc</object_name>
+          <native_field_list>
+            <native_field>
+              <field_name>base_pay</field_name>
+              <data_type>int</data_type>
+              <field_value>200000</field_value>
+            </native_field>
+            <native_field>
+              <field_name>base_pay_currency</field_name>
+              <data_type>string</data_type>
+              <field_value>INR</field_value>
+            </native_field>
+          </native_field_list>
+          <multi_value_field_list>
+            <field_value_list>
+              <field_name>pay_days</field_name>
+              <data_type>int</data_type>
+              <data_list>
+                <field_value>20</field_value>
+                <field_value>25</field_value>
+              </data_list>
+            </field_value_list>
+          </multi_value_field_list>
+        </object>
+  
+              <object>
+                <object_name>Location</object_name>
+  
+                <native_field_list>
+  
+                  <native_field>
+                    <field_name>country</field_name>
+                    <data_type>string</data_type>
+                    <field_value>US</field_value>
+                  </native_field>
+                </native_field_list>
+  
+                <multi_value_field_list>
+  
+                  <field_value_list>
+                    <field_name>city</field_name>
+                    <data_type>string</data_type>
+                    <data_list>
+                      <field_value>Stoony Brook</field_value>
+                      <field_value>New York</field_value>
+                    </data_list>
+                  </field_value_list>
+                </multi_value_field_list>
+              </object>
+            </object_list>
+  
+            <list_of_objects>
+  
+              <object_list>
+          <object_list_name>testing_reviews</object_list_name>
+          <data_list>
+            <composite_object>
+              <object_name>review</object_name>
+              <native_field_list>
+                <native_field>
+                  <field_name>time_period</field_name>
+                  <data_type>string</data_type>
+                  <field_value>Q1 2019</field_value>
+                </native_field>
+                <native_field>
+                  <field_name>rating</field_name>
+                  <data_type>float</data_type>
+                  <field_value>4.2</field_value>
+                </native_field>
+              </native_field_list>
+            </composite_object>
+          </data_list>
+        </object_list>
+  
+            </list_of_objects>
+      </custom_objects_list>
+  
+        <attachment_list>
+  
+         <attachment>
+          <attachment_id>tst123</attachment_id>
+          <attachment_type>resume</attachment_type>
+          <last_modified_ts>2020-09-16T14:33:57</last_modified_ts>
+          <url>linkedin.com/in/fileingest-88986153</url>
+          <content_is_base64_encoded>true</content_is_base64_encoded>
+  
+          <filepath>File Ingest Resume.pdf</filepath>
+          <application_metadata_list>
+  
+            <application_metadata>
+  
+              <application_id>12326100</application_id>
+  
+              <job_id>123345</job_id>
+  
+              <job_title>Senior Testing Partner</job_title>
+            </application_metadata>
+          </application_metadata_list>
+        </attachment>
+  
+        <attachment>
+          <attachment_id>tst120</attachment_id>
+          <attachment_type>photo</attachment_type>
+          <content_is_base64_encoded>true</content_is_base64_encoded>
+          <filepath>test.jpeg</filepath>
+          <content>JVBERi0xLjcNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFIvTGFuZyhlbi1VUykgL1N0cnVjdFRyZWVSb290IDI3IDAgUi9NYXJrSW5mbzw8L01hcmtlZCB0cnVlPj4vTW==</content>
+        </attachment>
+        </attachment_list>
+  
+        <skills_list>
+          <skill>Sales</skill>
+          <skill>Testing</skill>
+          <skill_detail>
+            <skill>User Stories</skill>
+            <data_source>self_rating</data_source>
+            <proficiency>5.0</proficiency>
+          </skill_detail>
+          <skill_detail>
+            <skill>User Stories</skill>
+            <data_source>manager_rating</data_source>
+            <proficiency>4.0</proficiency>
+          </skill_detail>
+          <skill_detail>
+            <skill>Management</skill>
+            <data_source>self_rating</data_source>
+            <skill_group_list>
+              <skill_group>
+                <skill_group_name>Leadership</skill_group_name>
+                <proficiency>4.1</proficiency>
+              </skill_group>
+              <skill_group>
+                <skill_group_name>Coaching</skill_group_name>
+                <proficiency>4.3</proficiency>
+              </skill_group>
+            </skill_group_list>
+          </skill_detail>
+        </skills_list>
+  
+        <application_list>
+  
+         <application>
+          <candidate_id>CM00033</candidate_id>
+          <application_id>12327000</application_id>
+          <application_ts>2020-09-18T04:36:00</application_ts>
+          <last_modified_ts>2020-09-28T04:36:01</last_modified_ts>
+          <is_prospect>true</is_prospect>
+  
+          <job_list>
+  
+            <job>
+              <job_id>20006515</job_id>
+              <job_name>Senior Manager</job_name>
+            </job>
+            <job>
+              <job_id>20006500</job_id>
+              <job_name>Senior Testing Manager</job_name>
+            </job>
+          </job_list>
+  
+          <past_stage_list>
+            <past_stage>
+              <stage>New - Completed</stage>
+              <workflow_stage>New</workflow_stage>
+              <workflow_sub_stage>Completed</workflow_sub_stage>
+              <stage_ts>2020-09-27T04:34:34-04:00</stage_ts>
+            </past_stage>
+            <past_stage>
+              <stage>New - Submission Completed</stage>
+              <workflow_stage>New</workflow_stage>
+              <workflow_sub_stage>Submission Completed</workflow_sub_stage>
+              <reason>Not Best Qualified</reason>
+              <stage_ts>2020-09-22T04:36:00-04:00</stage_ts>
+            </past_stage>
+          </past_stage_list>
+  
+          <current_stage>
+  
+            <stage>New - Completed</stage>
+            <stage_ts>2020-09-27T04:36:01-04:00</stage_ts>
+            <workflow_stage>New</workflow_stage>
+            <workflow_sub_stage>Completed</workflow_sub_stage>
+            <reason>Not Best Qualified</reason>
+  
+            <user>
+              <name>test</name>
+              <email>test@xyz.com</email>
+            </user>
+          </current_stage>
+  
+          <status>hired</status>
+  
+          <hired_ts>2020-09-29T00:30:00</hired_ts>
+  
+          <source>
+            <source_type>Linkedin.com</source_type>
+            <source_name>Linkedin</source_name>
+            <source>Job Post - Linkedin.com</source>
+          </source>
+  
+           <rejection_reason>Do not Ask</rejection_reason>
+  
+          <gender>female</gender>
+  
+          <race>American</race>
+  
+          <visa_status>US:Unauthorized</visa_status>
+  
+          <visa_status_list>
+            <visa_status>US:Unauthorized</visa_status>
+            <visa_status>US:Authorized</visa_status>
+          </visa_status_list>
+  
+          <race_list>
+  
+            <race>American</race>
+          </race_list>
+  
+          <veteran_status>false</veteran_status>
+  
+          <disability_status>false</disability_status>
+  
+          <note>
+          <body>Tested Client Side</body>
+          <note_type>other</note_type>
+          <creator>EF Test</creator>
+          <creation_ts>2020-02-06T19:21:05</creation_ts>
+          <subject>Test Notification</subject>
+          <to>fileingest@xyz.com</to>
+          <sender>fi-axp@eightfolddemo.com</sender>
+          <visibility>yes</visibility>
+        </note>
+  
+          <scorecard_list>
+  
+            <scorecard>
+  
+              <interview_name>Andrew Devis</interview_name>
+  
+              <interviewed_at>2020-09-21T06:25:16</interviewed_at>
+  
+              <description>Interview for job</description>
+  
+              <submitted_by>
+  
+                <name>Andrew Paulsen</name>
+  
+                <email>andrew_paul@xzy.com</email>
+              </submitted_by>
+  
+              <submitted_at>2020-09-21T20:08:42</submitted_at>
+  
+              <overall_rating>strong_no</overall_rating>
+              <attribute_list>
+  
+                <attribute>
+                  <question>What is leadership</question>
+                  <answer>leadership is the answer</answer>
+                  <note>leadership</note>
+                  <rating>strong_no</rating>
+                </attribute>
+              </attribute_list>
+            </scorecard>
+            <scorecard>
+  
+              <interview_name>James Devis</interview_name>
+  
+              <interviewed_at>2020-09-23T06:25:16</interviewed_at>
+  
+              <description>Interview for job</description>
+  
+              <submitted_by>
+  
+                <name>James Devis</name>
+  
+                <email>james_devis@xzy.com</email>
+              </submitted_by>
+  
+              <submitted_at>2020-09-25T20:08:42</submitted_at>
+  
+              <overall_rating>strong_yes</overall_rating>
+              <attribute_list>
+  
+                <attribute>
+                  <question>What is testing</question>
+                  <answer>testing is the answer</answer>
+                  <note>testing</note>
+                  <rating>strong_yes</rating>
+                </attribute>
+              </attribute_list>
+            </scorecard>
+          </scorecard_list>
+  
+          <question_list>
+            <question>
+              <question_id>Campus_US_19_03</question_id>
+              <question>Select the degree program you are currently pursuing:</question>
+              <question_type>text</question_type>
+              <answer>Masters</answer>
+            </question>
+            <question>
+              <question_id>Campus_US_19_05</question_id>
+              <question>Indicate your highest level of preference by work location:</question>
+               <explanation>location</explanation>
+              <question_type>text</question_type>
+              <answer>Stony Brook, NY</answer>
+            </question>
+          </question_list>
+  
+          <custom_info>
+            <custom_field>
+              <field_name>esign_doc_id</field_name>
+              <data_type>string</data_type>
+              <field_value>EF_Test</field_value>
+            </custom_field>
+            <custom_field>
+              <field_name>esign_ts</field_name>
+              <data_type>dateTime</data_type>
+              <field_value>2020-09-22T04:35:56</field_value>
+            </custom_field>
+          </custom_info>
+  
+          <custom_multi_value_list>
+            <custom_mv_field>
+              <field_name>location</field_name>
+              <data_type>string</data_type>
+              <data_list>
+                <field_value>Mountain View, USA</field_value>
+                <field_value>Noida, India</field_value>
+              </data_list>
+            </custom_mv_field>
+            <custom_mv_field>
+              <field_name>email</field_name>
+              <data_type>string</data_type>
+              <data_list>
+                <field_value>test@ef.com</field_value>
+                <field_value>test2@ef.com</field_value>
+              </data_list>
+            </custom_mv_field>
+          </custom_multi_value_list>
+  
+          <custom_objects_list>
+  
+            <object_list>
+              <object>
+          <object_name>ctc</object_name>
+          <native_field_list>
+            <native_field>
+              <field_name>base_pay</field_name>
+              <data_type>int</data_type>
+              <field_value>200000</field_value>
+            </native_field>
+            <native_field>
+              <field_name>base_pay_currency</field_name>
+              <data_type>string</data_type>
+              <field_value>INR</field_value>
+            </native_field>
+          </native_field_list>
+          <multi_value_field_list>
+            <field_value_list>
+              <field_name>pay_days</field_name>
+              <data_type>int</data_type>
+              <data_list>
+                <field_value>20</field_value>
+                <field_value>25</field_value>
+              </data_list>
+            </field_value_list>
+          </multi_value_field_list>
+        </object>
+  
+              <object>
+                <object_name>Location</object_name>
+  
+                <native_field_list>
+  
+                  <native_field>
+                    <field_name>country</field_name>
+                    <data_type>string</data_type>
+                    <field_value>US</field_value>
+                  </native_field>
+                </native_field_list>
+  
+                <multi_value_field_list>
+  
+                  <field_value_list>
+                    <field_name>city</field_name>
+                    <data_type>string</data_type>
+                    <data_list>
+                      <field_value>Stoony Brook</field_value>
+                      <field_value>New York</field_value>
+                    </data_list>
+                  </field_value_list>
+                </multi_value_field_list>
+              </object>
+            </object_list>
+  
+            <list_of_objects>
+  
+              <object_list>
+          <object_list_name>testing_reviews</object_list_name>
+          <data_list>
+            <composite_object>
+              <object_name>review</object_name>
+              <native_field_list>
+                <native_field>
+                  <field_name>time_period</field_name>
+                  <data_type>string</data_type>
+                  <field_value>Q1 2019</field_value>
+                </native_field>
+                <native_field>
+                  <field_name>rating</field_name>
+                  <data_type>float</data_type>
+                  <field_value>4.2</field_value>
+                </native_field>
+              </native_field_list>
+            </composite_object>
+          </data_list>
+        </object_list>
+  
+            </list_of_objects>
+          </custom_objects_list>
+        </application>
+  
+          <application>
+        <application_id>12326100</application_id>
+        <candidate_id>CM00033</candidate_id>
+        <is_prospect>true</is_prospect>
+        <application_ts>2020-09-22T00:00:00</application_ts>
+        <last_modified_ts>2020-09-22T00:00:00</last_modified_ts>
+        <job_list>
+          <job>
+            <job_id>A001709</job_id>
+          </job>
+        </job_list>
+        <status>active</status>
+        <current_stage>
+          <stage>Applied</stage>
+          <stage_ts>2020-02-22T00:00:00</stage_ts>
+        </current_stage>
+        <note>
+          <creator>fi.ingest@eightfolddemounittest.com</creator>
+          <creation_ts>2020-09-28T00:00:00</creation_ts>
+          <body>Interviewed with Client 1.28</body>
+          <note_type>note</note_type>
+        </note>
+      </application>
+        </application_list>
+  
+        <tags_list>
+        <tag>DO Import 6</tag>
+        <tag>DO Import 5</tag>
+      </tags_list>
+  
+        <display_tags_list>
+  
+        <tag>DO Import 6</tag>
+      </display_tags_list>
+  
+      </candidate_data>
+  
+      <last_review_rating>8.0</last_review_rating>
+  
+      <eligible_for_transfer>true</eligible_for_transfer>
+      <employee_criticality>
+        <risk_of_loss>High</risk_of_loss>
+        <impact_of_loss>Medium</impact_of_loss>
+      </employee_criticality>
+      <succession_plan>
+        <plan_name>Contructions Contract Analyst Z12</plan_name>
+        <plan_date>2020-10-01</plan_date>
+        <comments>Plan needs to be reviewed by HRBP</comments>
+        <successor_list>
+          <successor>
+            <user_id>X026028</user_id>
+            <full_name>Andy Burns</full_name>
+            <email>aburns@eightfolddemo-unittest.com</email>
+            <readiness>Ready Now</readiness>
+            <rank>1</rank>
+            <comments>This position is in line with employee's aspirations.</comments>
+          </successor>
+          <successor>
+            <user_id>X0185029</user_id>
+            <full_name>Cody Flair</full_name>
+            <email>cflair@eightfolddemo-unittest.com</email>
+            <readiness>Ready Soon</readiness>
+            <rank>2</rank>
+            <comments>Skill gaps, but promising</comments>
+          </successor>
+        </successor_list>
+      </succession_plan>
+      <mobility>
+        <relocation>Yes</relocation>
+        <relocation_list>
+          <location>Santa Clara, CA</location>
+        </relocation_list>
+        <travel>Yes</travel>
+        <travel_percentage_min>0</travel_percentage_min>
+        <travel_percentage_max>20</travel_percentage_max>
+        <comments>..</comments>
+      </mobility>
+      <language_proficiency_list>
+        <language_proficiency>
+          <language>English</language>
+          <overall>High</overall>
+          <read>High</read>
+          <write>High</write>
+          <speak>High</speak>
+        </language_proficiency>
+        <language_proficiency>
+          <language>Spanish</language>
+          <overall>Medium</overall>
+          <read>Medium</read>
+          <write>Low</write>
+          <speak>Medium</speak>
+        </language_proficiency>
+      </language_proficiency_list>
+      <performance_ratings_list>
+        <performance_rating>
+          <period_start_date>2020-01-01</period_start_date>
+          <period_end_date>2020-06-30</period_end_date>
+          <rating>4.0</rating>
+          <rating_label>Exceptional</rating_label>
+          <review_type>Half Yearly</review_type>
+          <review_comments>Very impactful towards new business initiation</review_comments>
+          <reviewed_by>
+            <name>Lauri</name>
+            <email>lauri@eightfolddemo-unittest.com</email>
+          </reviewed_by>
+        </performance_rating>
+        <performance_rating>
+          <period_start_date>2020-07-01</period_start_date>
+          <period_end_date>2020-12-31</period_end_date>
+          <rating>3.5</rating>
+          <rating_label>Great</rating_label>
+          <review_type>Half Yearly</review_type>
+          <review_comments>..</review_comments>
+          <reviewed_by>
+            <name>Lauri</name>
+            <email>lauri@eightfolddemo-unittest.com</email>
+          </reviewed_by>
+        </performance_rating>
+      </performance_ratings_list>
+      <position_criticality_list>
+        <position_criticality>vcr</position_criticality>
+      </position_criticality_list>
+    </EF_Employee>
+  </EF_Employee_List>
+  

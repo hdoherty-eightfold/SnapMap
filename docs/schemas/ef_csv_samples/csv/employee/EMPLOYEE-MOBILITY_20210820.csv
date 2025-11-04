@@ -1,0 +1,4 @@
+EMPLOYEE_ID,RELOCATION,LOCATION,TRAVEL,TRAVEL_PERCENTAGE_MIN,TRAVEL_PERCENTAGE_MAX,COMMENTS
+W00003,Yes,"Jacksonville,FL",Yes,20,40,Open to travel as needed for business requirements
+W00004,Yes,"Orlando,FL",No,10,30,I can consider upto 50% of Travel
+W00001,Yes,"Atlanta,GA",Yes,15,35,Willing to travel for business opportunities

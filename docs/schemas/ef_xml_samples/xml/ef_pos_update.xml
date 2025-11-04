@@ -1,0 +1,422 @@
+<EF_Position_List>
+
+  <EF_Position>
+    <job_id>JD10005</job_id>
+    <title>File Ingest Test</title>
+    <job_description>File Ingest Test Position</job_description>
+    <company>Eightfold Unittest Company</company>
+    <status>closed_no_longer_valid</status>
+    <is_open>0</is_open>
+    <posted_for>external</posted_for>
+    <creation_ts>2020-08-19T08:41:30-04:00</creation_ts>
+    <last_modified_ts>2020-10-08T13:04:04-04:00</last_modified_ts>
+
+    <recruiter>
+      <name>Recruiter Test</name>
+
+      <email>recruitertest@eightfolddemo-unittest.com</email>
+    </recruiter>
+
+    <job_function>File Job Testing</job_function>
+    <job_code>File ingest job code</job_code>
+
+    <business_unit>Global File Job Testing Unit</business_unit>
+
+    <posting_url>https://unittest/file/jobtest/job.com</posting_url>
+
+    <posting_title>Senior Associate Testing Team</posting_title>
+
+    <location_list>
+      <location>New Jersey, United States</location>
+      <location>New York, US</location>
+    </location_list>
+
+    <location_city>New York City</location_city>
+
+    <location_state>New York</location_state>
+
+    <location_country>US</location_country>
+
+    <address_details>
+
+      <address1>1900, queen Street</address1>
+
+      <address2>high market</address2>
+
+      <city>New York City</city>
+
+      <state>New York</state>
+
+      <country>US</country>
+
+      <postal_code>98200</postal_code>
+    </address_details>
+
+    <hiring_manager>
+
+      <name>Hiring Manager Test</name>
+
+      <email>hiring_test@eightdoldemo-unittest.com</email>
+    </hiring_manager>
+
+    <sourcer_list>
+
+      <sourcer>
+
+        <name>Test Job Source</name>
+
+        <email>testjobsource@eightfolddemo-unittest.com</email>
+      </sourcer>
+      <sourcer>
+
+        <name>Test file Source</name>
+
+        <email>testfilesource@eightfolddemo-unittest.com</email>
+      </sourcer>
+    </sourcer_list>
+
+    <follower_list>
+
+      <follower>
+
+        <name>Test Follower1</name>
+
+        <email>testfollower1@eightfolddemo-unittest.com</email>
+      </follower>
+      <follower>
+
+        <name>Test Follower2</name>
+
+        <email>testfollower2@eightfolddemo-unittest.com</email>
+      </follower>
+    </follower_list>
+
+    <company_description>Eightfold Demo Unittest</company_description>
+
+    <hiring_band>12A</hiring_band>
+
+    <is_posted>false</is_posted>
+
+    <is_evergreen>true</is_evergreen>
+
+    <restrict_access>false</restrict_access>
+
+    <display_job_id>JD10005</display_job_id>
+
+    <workflow_template_id>1234</workflow_template_id>
+    <employment_type>Full Time</employment_type>
+
+    <user_group_list>
+
+      <user_group>
+        <user_group_id>GEN</user_group_id>
+      </user_group>
+      <user_group>
+        <user_group_id>SAT</user_group_id>
+      </user_group>
+    </user_group_list>
+
+    <role_association_settings>
+      <role_id>12345678</role_id>
+      <role_association_mode>copy_role_id_only</role_association_mode>
+    </role_association_settings>
+
+    <job_stage_list>
+
+      <job_stage>NEW</job_stage>
+      <job_stage>Review</job_stage>
+    </job_stage_list>
+
+    <question_list>
+
+      <question>
+
+        <question_id>US_22</question_id>
+
+        <question_text>Have you ever applied earlier here for any position?</question_text>
+
+        <help>application</help>
+
+        <is_required>false</is_required>
+        <question_type>text</question_type>
+      </question>
+      <question>
+
+        <question_id>US_12</question_id>
+
+        <question_text>Are you willing to relocate?</question_text>
+
+        <help>Location</help>
+
+        <is_required>true</is_required>
+        <question_type>choice</question_type>
+
+        <choice_list>
+          <choice>
+            <value>yes</value>
+            <label>YES</label>
+          </choice>
+          <choice>
+            <value>no</value>
+            <label>NO</label>
+          </choice>
+        </choice_list>
+      </question>
+
+      <question>
+        <question_id>US_121</question_id>
+        <question_text>Do you want to relocate in state?</question_text>
+        <help>Location</help>
+        <is_required>true</is_required>
+        <question_type>choice</question_type>
+        <choice_list>
+          <choice>
+            <value>yes</value>
+            <label>YES</label>
+          </choice>
+          <choice>
+            <value>no</value>
+            <label>NO</label>
+          </choice>
+        </choice_list>
+      </question>
+      <question>
+        <question_id>US_122</question_id>
+        <question_text>When do you want to relocate?</question_text>
+        <help>Location</help>
+        <is_required>true</is_required>
+        <question_type>date</question_type>
+      </question>
+
+    </question_list>
+
+    <questionnaire>
+      <questionnaire_id>1234</questionnaire_id>
+      <question_dependency_list>
+        <question_dependency>
+          <question_id>US_12</question_id>
+          <question_source>ats</question_source>
+          <choice_value>Yes</choice_value>
+          <child_question_id_list>
+            <id>US_121</id>
+          </child_question_id_list>
+        </question_dependency>
+        <question_dependency>
+          <question_id>US_12</question_id>
+          <question_source>ats</question_source>
+          <choice_value>No</choice_value>
+          <child_question_id_list>
+            <id>US_122</id>
+          </child_question_id_list>
+        </question_dependency>
+      </question_dependency_list>
+    </questionnaire>
+
+    <job_post_list>
+
+      <job_post>
+        <posting_title>JOB_TEST_POSTING-3</posting_title>
+        <posting_id>test_123</posting_id>
+        <posted_for>all</posted_for>
+
+        <job_description>job post description</job_description>
+
+        <locale>en_US</locale>
+
+        <is_primary_post>false</is_primary_post>
+        <published_ts>2020-08-29T05:48:37+05:30</published_ts>
+
+        <expiration_ts>2021-09-13T18:30:34+05:30</expiration_ts>
+        <posting_url>http://test.com/posting-url-1</posting_url>
+      </job_post>
+      <job_post>
+        <posting_title>JOB_TEST_POSTING-4</posting_title>
+        <posting_id>test_124</posting_id>
+        <posted_for>external</posted_for>
+
+        <job_description>External job post description</job_description>
+
+        <locale>zh_CN</locale>
+
+        <is_primary_post>true</is_primary_post>
+        <published_ts>2020-09-29T05:48:37+05:30</published_ts>
+
+        <expiration_ts>2021-10-13T18:30:34+05:30</expiration_ts>
+        <posting_url>http://test.com/posting-url-2</posting_url>
+      </job_post>
+    </job_post_list>
+
+    <custom_info>
+
+      <custom_field>
+      <field_name>JOB_REQUIREMENT</field_name>
+      <data_type>string</data_type>
+      <field_value>Analyze problems, propose and implement their solutions. Handle the optimal level of communication with the client.</field_value>
+    </custom_field>
+    <custom_field>
+      <field_name>PROJECT_DESCRIPTION</field_name>
+      <data_type>string</data_type>
+      <field_value>The client is a German global IT service and consulting company. Our team is working on a project of Internet of Things type, which is an online platform providing communication, data exchange solution between various car connected devices and modules. </field_value>
+    </custom_field>
+    </custom_info>
+
+    <custom_multi_value_list>
+
+      <custom_mv_field>
+            <field_name>location</field_name>
+            <data_type>string</data_type>
+            <data_list>
+              <field_value>Mountain View, USA</field_value>
+              <field_value>Noida, India</field_value>
+            </data_list>
+          </custom_mv_field>
+      <custom_mv_field>
+            <field_name>Preferred location</field_name>
+            <data_type>string</data_type>
+            <data_list>
+              <field_value>New york, USA</field_value>
+              <field_value>Mumbai, India</field_value>
+            </data_list>
+          </custom_mv_field>
+    </custom_multi_value_list>
+
+    <custom_objects_list>
+    <object_list>
+      <object>
+        <object_name>assignee</object_name>
+        <native_field_list>
+          <native_field>
+            <field_name>name</field_name>
+            <data_type>string</data_type>
+            <field_value>John Dale</field_value>
+          </native_field>
+          <native_field>
+            <field_name>email</field_name>
+            <data_type>string</data_type>
+            <field_value>john.dale@gmail.com</field_value>
+          </native_field>
+        </native_field_list>
+        <multi_value_field_list>
+          <field_value_list>
+            <field_name>locations</field_name>
+            <data_type>string</data_type>
+            <data_list>
+              <field_value>Mountain View, USA</field_value>
+              <field_value>Mumbai, India</field_value>
+            </data_list>
+          </field_value_list>
+        </multi_value_field_list>
+      </object>
+    </object_list>
+    <list_of_objects>
+      <object_list>
+        <object_list_name>approver_list</object_list_name>
+        <data_list>
+          <composite_object>
+            <object_name>approver</object_name>
+            <native_field_list>
+              <native_field>
+                <field_name>name</field_name>
+                <data_type>string</data_type>
+                <field_value>file test</field_value>
+              </native_field>
+              <native_field>
+                <field_name>email</field_name>
+                <data_type>string</data_type>
+                <field_value>filetest@eightfolddemo-unittest.com</field_value>
+              </native_field>
+            </native_field_list>
+          </composite_object>
+        </data_list>
+      </object_list>
+    </list_of_objects>
+  </custom_objects_list>
+
+    <skills_list>
+
+      <skill>Sales</skill>
+      <skill>Testing</skill>
+      <skill>Management</skill>
+      <skill_detail>
+        <skill>Marketing</skill>
+        <data_source>internal</data_source>
+        <proficiency>5.0</proficiency>
+      </skill_detail>
+      <skill_detail>
+        <skill>Marketing</skill>
+        <data_source>external</data_source>
+        <proficiency>5.0</proficiency>
+      </skill_detail>
+      <skill_detail>
+        <skill>Management</skill>
+        <skill_group_list>
+          <skill_group>
+            <skill_group_name>Leadership</skill_group_name>
+            <proficiency>4.1</proficiency>
+          </skill_group>
+          <skill_group>
+            <skill_group_name>Coaching</skill_group_name>
+            <proficiency>4.3</proficiency>
+          </skill_group>
+        </skill_group_list>
+      </skill_detail>
+    </skills_list>
+
+    <required_skills_list>
+
+      <skill>Testing</skill>
+      <skill>Influencing</skill>
+      <skill>User Story</skill>
+    </required_skills_list>
+
+    <activity_list>
+
+      <activity>
+        <activity_ts>2020-09-14T12:46:36</activity_ts>
+        <activity_type>Position Description change</activity_type>
+        <message>Description Change</message>
+
+        <change_log_list>
+
+          <change_log>
+            <field_name>job_description</field_name>
+
+            <prev_value>File Ingest Test Position Description</prev_value>
+
+            <new_value>File Ingest Test Position</new_value>
+          </change_log>
+        </change_log_list>
+      </activity>
+      <activity>
+        <activity_ts>2020-09-14T12:46:36</activity_ts>
+        <activity_type>Position Recruiter change</activity_type>
+        <message>Recruiter Change</message>
+
+        <change_log_list>
+
+          <change_log>
+            <field_name>recruiter</field_name>
+
+            <prev_value>HR Test</prev_value>
+
+            <new_value>pbalodia</new_value>
+          </change_log>
+        </change_log_list>
+      </activity>
+    </activity_list>
+    <org_unit_list>
+      <org_unit>
+        <external_id>sales</external_id>
+      </org_unit>
+      <org_unit>
+        <external_id>administration</external_id>
+      </org_unit>
+    </org_unit_list>
+    <pay_grade>
+      <name>Pay grade 1</name>
+    </pay_grade>
+    <intake_form_template>
+      <id>12345</id>
+    </intake_form_template>
+  </EF_Position>
+</EF_Position_List>

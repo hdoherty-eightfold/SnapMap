@@ -1,0 +1,4 @@
+JOB_ID,POSTING_TITLE,POSTING_ID,POSTING_STATUS,POSTED_FOR,JOB_DESCRIPTION,LOCALE,PUBLISHED_TS,EXPIRATION_TS,IS_PRIMARY_POST,POSTING_URL
+A1B2C3,Senior Software Engineer,P101,Active,external,Job description for senior engineer role,en-US,2023-01-01T00:00:00,2023-12-31T23:59:59,true,https://careers.example.com/jobs/p101
+A1B2C3,Ingeniero de Software Senior,P102,Active,external,Descripción del trabajo para el puesto de ingeniero senior,es-ES,2023-01-01T00:00:00,2023-12-31T23:59:59,false,https://careers.example.com/es/jobs/p102
+A1B2C3,高级软件工程师,P103,Active,external,高级工程师角色的工作描述,zh-CN,2023-01-01T00:00:00,2023-12-31T23:59:59,false,https://careers.example.com/cn/jobs/p103

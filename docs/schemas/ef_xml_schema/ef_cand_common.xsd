@@ -1,0 +1,378 @@
+<?xml version="1.1" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="ef_common_types.xsd" />
+
+    <xs:complexType name="IngestType">
+        <xs:all>
+            <xs:element name="candidate_id"  type="NoSpaceString" />
+            <xs:element name="group_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="system_id" type="xs:string" minOccurs="0"/>
+            <xs:element name="first_name"  type="xs:string" />
+            <xs:element name="last_name"  type="xs:string" />
+            <xs:element name="preferred_first_name" type="xs:string" minOccurs="0"/>
+            <xs:element name="preferred_last_name" type="xs:string" minOccurs="0" />
+            <xs:element name="last_activity_ts" type="xs:dateTime" />
+            <xs:element name="email_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="email"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="phone_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="phone"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="title" type="xs:string" minOccurs="0"/>
+            <xs:element name="location" type="xs:string" minOccurs="0"/>
+            <xs:element name="address_details" type="LocationType" minOccurs="0"/>
+            <xs:element name="date_of_birth" type="xs:date" minOccurs="0"/>
+            <xs:element name="highest_education_level" type="xs:string" minOccurs="0"/>
+            <xs:element name="is_internal" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="is_alumni" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="emp_start_ts" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="emp_termination_ts" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="gender" type="GenderType" minOccurs="0" />
+            <xs:element name="veteran_status" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="disability_status" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="summary" type="xs:string" minOccurs="0"/>
+            <xs:element name="visa_status" type="xs:string" minOccurs="0"/>
+            <xs:element name="visa_status_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="visa_status"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="education_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="education" type="EducationType" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="certification_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="certification" type="CertificationType" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="url_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="url"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="attachment_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="attachment"  type="AttachmentType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="experience_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="experience"  type="ExperienceType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="project_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="project"  type="ProjectType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="skills_list" type="SkillListType" minOccurs="0"/>
+            <xs:element name="notes_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="note"  type="NoteType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="tags_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="tag"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="display_tags_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="tag"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="detail_tags_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="tag_data"  type="TagType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="application_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="application"  type="ApplicationType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="question_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="question"  type="QuestionAnswerType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_info" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="custom_field" type="CustomFieldType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_multi_value_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="custom_mv_field" type="CustomFieldNativeListType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_objects_list" minOccurs="0">
+            <xs:complexType>
+                <xs:all>
+                <xs:element name="object_list" minOccurs="0">
+                    <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="object" type="CustomFieldCompositeType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="list_of_objects" minOccurs="0">
+                    <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="object_list" type="CustomCompositeListType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                </xs:all>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="contact_consent" type="ContactConsentType" minOccurs="0" />
+            <xs:element name="race_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="race"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="expiry_days" type="xs:integer" minOccurs="0"/>
+            <xs:element name="expiry_update_ts" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="expiry_type" type="xs:string" minOccurs="0"/>
+        </xs:all>
+        <xs:attribute name="operation" fixed="ingest"/>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateType">
+        <xs:all>
+            <xs:element name="candidate_id"  type="NoSpaceString" />
+            <xs:element name="group_id" type="NoSpaceString" minOccurs="0"/>
+            <xs:element name="system_id" type="xs:string" minOccurs="0"/>
+            <xs:element name="first_name"  type="xs:string" minOccurs="0" />
+            <xs:element name="last_name"  type="xs:string" minOccurs="0" />
+            <xs:element name="preferred_first_name" type="xs:string" minOccurs="0" />
+            <xs:element name="preferred_last_name" type="xs:string" minOccurs="0" />
+            <xs:element name="last_activity_ts" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="email_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="email"  type="NoSpaceString" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="phone_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="phone"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="title" type="xs:string" minOccurs="0"/>
+            <xs:element name="location" type="xs:string" minOccurs="0"/>
+            <xs:element name="address_details" type="LocationType" minOccurs="0"/>
+            <xs:element name="date_of_birth" type="xs:date" minOccurs="0"/>
+            <xs:element name="highest_education_level" type="xs:string" minOccurs="0"/>
+            <xs:element name="is_internal" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="is_alumni" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="emp_start_ts" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="emp_termination_ts" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="gender" type="GenderType" minOccurs="0" />
+            <xs:element name="veteran_status" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="disability_status" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="summary" type="xs:string" minOccurs="0"/>
+            <xs:element name="visa_status" type="xs:string" minOccurs="0"/>
+            <xs:element name="visa_status_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="visa_status"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="education_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="education" type="EducationType" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="certification_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="certification" type="CertificationType" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="url_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="url"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="attachment_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="attachment"  type="AttachmentType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="experience_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="experience"  type="ExperienceType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="project_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="project"  type="ProjectType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="skills_list" type="SkillListType" minOccurs="0"/>
+            <xs:element name="notes_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="note"  type="NoteType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="tags_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="tag"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="display_tags_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="tag"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="detail_tags_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="tag_data"  type="TagType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="application_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="application" type="ApplicationType" maxOccurs="unbounded" minOccurs="0" >
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="question_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="question"  type="QuestionAnswerType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_info" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="custom_field" type="CustomFieldType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_multi_value_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="custom_mv_field" type="CustomFieldNativeListType" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="custom_objects_list" minOccurs="0">
+            <xs:complexType>
+                <xs:all>
+                <xs:element name="object_list" minOccurs="0">
+                    <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="object" type="CustomFieldCompositeType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="list_of_objects" minOccurs="0">
+                    <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="object_list" type="CustomCompositeListType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                </xs:all>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="contact_consent" type="ContactConsentType" minOccurs="0" />
+            <xs:element name="race_list" minOccurs="0">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="race"  type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="expiry_days" type="xs:integer" minOccurs="0"/>
+            <xs:element name="expiry_update_ts" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="expiry_type" type="xs:string" minOccurs="0"/>
+        </xs:all>
+        <xs:attribute name="operation">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="update"/>
+                    <xs:enumeration value="upsert"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="DeleteType">
+        <xs:all>
+            <xs:element name="candidate_id"  type="NoSpaceString" />
+        </xs:all>
+        <xs:attribute name="operation" fixed="delete"/>
+    </xs:complexType>
+
+</xs:schema>

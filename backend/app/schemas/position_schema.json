@@ -1,0 +1,106 @@
+{
+  "entity_name": "position",
+  "display_name": "Position",
+  "description": "Position/job requisition data for Eightfold integration",
+  "fields": [
+    {
+      "name": "POSITION_ID",
+      "display_name": "Position ID",
+      "type": "string",
+      "required": true,
+      "max_length": 50,
+      "example": "POS-001",
+      "description": "Unique position identifier"
+    },
+    {
+      "name": "POSITION_TITLE",
+      "display_name": "Position Title",
+      "type": "string",
+      "required": true,
+      "max_length": 200,
+      "example": "Senior Software Engineer",
+      "description": "Position title"
+    },
+    {
+      "name": "DEPARTMENT",
+      "display_name": "Department",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "Engineering",
+      "description": "Department or business unit"
+    },
+    {
+      "name": "LOCATION",
+      "display_name": "Location",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "San Francisco",
+      "description": "Position location"
+    },
+    {
+      "name": "EMPLOYMENT_TYPE",
+      "display_name": "Employment Type",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "Full-time",
+      "description": "Type of employment (Full-time, Part-time, Contract)"
+    },
+    {
+      "name": "JOB_LEVEL",
+      "display_name": "Job Level",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "Senior",
+      "description": "Job level or grade"
+    },
+    {
+      "name": "SALARY_RANGE_MIN",
+      "display_name": "Minimum Salary",
+      "type": "string",
+      "required": false,
+      "max_length": 20,
+      "example": "100000",
+      "description": "Minimum salary for the position"
+    },
+    {
+      "name": "SALARY_RANGE_MAX",
+      "display_name": "Maximum Salary",
+      "type": "string",
+      "required": false,
+      "max_length": 20,
+      "example": "150000",
+      "description": "Maximum salary for the position"
+    },
+    {
+      "name": "POSTED_DATE",
+      "display_name": "Posted Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2025-10-01",
+      "description": "Date position was posted"
+    },
+    {
+      "name": "STATUS",
+      "display_name": "Position Status",
+      "type": "string",
+      "required": false,
+      "max_length": 20,
+      "example": "open",
+      "description": "Position status (open, closed, filled)"
+    },
+    {
+      "name": "LAST_ACTIVITY_TS",
+      "display_name": "Last Activity Timestamp",
+      "type": "datetime",
+      "required": true,
+      "format": "YYYY-MM-DDTHH:MM:SS",
+      "example": "2025-11-02T14:30:00",
+      "description": "Timestamp of last data update (auto-generated)"
+    }
+  ]
+}

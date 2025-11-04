@@ -1,0 +1,16 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="ef_position_common.xsd" />
+
+    <xs:element name="EF_Position_List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EF_Position" maxOccurs="unbounded" minOccurs="0" type="DeleteType">
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="PositionUniqueKey">
+      <xs:selector xpath="EF_Position" />
+      <xs:field xpath="job_id" />
+    </xs:unique>
+    </xs:element>
+</xs:schema>

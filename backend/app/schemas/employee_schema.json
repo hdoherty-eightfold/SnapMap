@@ -1,0 +1,106 @@
+{
+  "entity_name": "employee",
+  "display_name": "Employee",
+  "description": "Employee master data for Eightfold integration",
+  "fields": [
+    {
+      "name": "EMPLOYEE_ID",
+      "display_name": "Employee ID",
+      "type": "string",
+      "required": true,
+      "max_length": 50,
+      "example": "E001",
+      "description": "Unique employee identifier"
+    },
+    {
+      "name": "FIRST_NAME",
+      "display_name": "First Name",
+      "type": "string",
+      "required": true,
+      "max_length": 100,
+      "example": "John",
+      "description": "Employee's first name"
+    },
+    {
+      "name": "LAST_NAME",
+      "display_name": "Last Name",
+      "type": "string",
+      "required": true,
+      "max_length": 100,
+      "example": "Doe",
+      "description": "Employee's last name"
+    },
+    {
+      "name": "EMAIL",
+      "display_name": "Email Address",
+      "type": "email",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "example": "john@company.com",
+      "description": "Employee's work email address"
+    },
+    {
+      "name": "HIRING_DATE",
+      "display_name": "Hiring Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2020-10-30",
+      "description": "Date employee was hired"
+    },
+    {
+      "name": "TITLE",
+      "display_name": "Job Title",
+      "type": "string",
+      "required": false,
+      "max_length": 200,
+      "example": "Software Engineer",
+      "description": "Employee's job title or position"
+    },
+    {
+      "name": "BUSINESS_UNIT",
+      "display_name": "Business Unit",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "Engineering",
+      "description": "Department or business unit"
+    },
+    {
+      "name": "PHONE",
+      "display_name": "Phone Number",
+      "type": "string",
+      "required": false,
+      "pattern": "^\\+?[0-9\\-\\s()]+$",
+      "example": "+1-555-0100",
+      "description": "Employee's work phone number"
+    },
+    {
+      "name": "LOCATION",
+      "display_name": "Work Location",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "San Francisco",
+      "description": "Employee's primary work location"
+    },
+    {
+      "name": "MANAGER",
+      "display_name": "Manager Name",
+      "type": "string",
+      "required": false,
+      "max_length": 200,
+      "example": "Jane Smith",
+      "description": "Employee's direct manager"
+    },
+    {
+      "name": "LAST_ACTIVITY_TS",
+      "display_name": "Last Activity Timestamp",
+      "type": "datetime",
+      "required": true,
+      "format": "YYYY-MM-DDTHH:MM:SS",
+      "example": "2025-11-02T14:30:00",
+      "description": "Timestamp of last data update (auto-generated)"
+    }
+  ]
+}

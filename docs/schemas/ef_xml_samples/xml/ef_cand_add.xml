@@ -1,0 +1,633 @@
+<EF_Candidate_List>
+
+  <EF_Candidate>
+    <candidate_id>8999901</candidate_id>
+
+    <first_name>File Ingest</first_name>
+
+    <last_name>Test</last_name>
+
+    <last_activity_ts>2020-09-29T07:19:45</last_activity_ts>
+
+    <email_list>
+      <email>fileingest@xyz.com</email>
+    </email_list>
+
+    <phone_list>
+      <phone>9548054787</phone>
+    </phone_list>
+
+    <title>Sr. Specialist, Third Party Partnerships</title>
+
+    <location>New York City,NY,US</location>
+
+    <address_details>
+      <address1>003 NW 50th Place</address1>
+
+      <address2>Lafayette St</address2>
+
+      <city>New York City</city>
+
+      <state>NY</state>
+
+      <country>US</country>
+
+      <postal_code>50313</postal_code>
+
+    </address_details>
+
+    <date_of_birth>2014-09-19</date_of_birth>
+
+    <is_internal>false</is_internal>
+
+    <gender>decline to self identify</gender>
+
+    <veteran_status>false</veteran_status>
+
+    <disability_status>false</disability_status>
+
+    <summary>File ingest is responsible for overseeing information technology operations at BCBS of TN.</summary>
+
+    <race_list>
+      <race>Asian (not Hispanic or Latino)</race>
+    </race_list>
+
+    <visa_status>US:Authorized</visa_status>
+
+    <visa_status_list>
+      <visa_status>US:Authorized</visa_status>
+    </visa_status_list>
+
+    <education_list>
+      <education>
+        <school>SAINT JOSEPH'S UNIVERSITY</school>
+        <degree>Bachelor's Degree (&#177;16 years)</degree>
+        <major>PSYCHOLOGY</major>
+        <description></description>
+
+        <location>New York, US</location>
+
+        <start_date>2011-05-16</start_date>
+
+        <end_date>2015-08-09</end_date>
+      </education>
+      <education>
+        <school>UNIVERSITY OF TAMPA</school>
+        <degree>Master's Degree (&#177;18 years)</degree>
+        <major>SCIENCES</major>
+        <start_date>2015-09-16</start_date>
+
+        <end_date>2017-08-09</end_date>
+      </education>
+    </education_list>
+
+    <certification_list>
+
+      <certification>
+
+        <certificate_name>Leadership and Management</certificate_name>
+
+        <issuing_authority>Workplace Organisation</issuing_authority>
+
+        <proficiency>Good</proficiency>
+
+        <license_no>LIC9908</license_no>
+
+        <valid_from>2017-12-30</valid_from>
+
+        <valid_to>2018-10-14</valid_to>
+
+        <start_date>2017-10-18</start_date>
+
+        <end_date>2017-12-29</end_date>
+      </certification>
+    </certification_list>
+
+    <url_list>
+      <url>linkedin.com/in/fileingest-88986153</url>
+    </url_list>
+
+    <attachment_list>
+
+      <attachment>
+
+        <attachment_type>resume</attachment_type>
+
+        <attachment_id>wal123</attachment_id>
+
+        <url>linkedin.com/in/fileingest-88986153</url>
+
+        <content>JVBERi0xLjcNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFIvTGFuZyhlbi1VUykgL1N0cnVjdFRyZWVSb290IDU1OCAwIFIvTWFya0luZm88PC9NYXJrZWQgdHJ1ZT4+L01ldGFkYXRhIDEyNDkgMCBSL1ZpZXdlclByZWZlcmVuY2VzIDEyNTAgMCBSPj4NCmVuZG9iag0KMiAwIG9iag0KPDwvVHlwZS9QYWdlcy9Db3VudCAxL0tpZHNbIDMgMCBSXSA+</content>
+
+        <content_is_base64_encoded>true</content_is_base64_encoded>
+
+        <filepath>File Ingest Resume.pdf</filepath>
+
+        <last_modified_ts>2019-11-16T14:33:57</last_modified_ts>
+
+        <application_metadata_list>
+
+          <application_metadata>
+
+            <application_id>12327000</application_id>
+
+            <job_id>123345</job_id>
+
+            <job_title>Senior Partner</job_title>
+          </application_metadata>
+        </application_metadata_list>
+      </attachment>
+    </attachment_list>
+
+    <experience_list>
+
+      <experience>
+
+        <company>Infant Welfare Society of Chicago</company>
+
+        <title>Vice President, Operations</title>
+
+        <description>This position is the intermediate-level role of the Finance Leadership Development Program (FLDP). Following prescribed practices and procedures, this position has developed in-depth skills in preparing monthly and quarterly GAAP financial statements, analyzing and reconciling financial results and preparing/posting journal entries. Participates in forecasting GAAP based earnings and provides financial support to business management teams. Some rotation assignments may include non-finance or accounting responsibilities, such as Audit, Tax, etc. Position typically requires a degree in business/accounting or a related field are preferred.</description>
+
+        <location>Chicago, IL</location>
+
+        <is_current>0</is_current>
+
+        <start_date>2017-11-29</start_date>
+
+        <end_date>2018-11-03</end_date>
+      </experience>
+      <experience>
+
+        <company></company>
+
+        <title>Junior Partner</title>
+
+        <description>Design and implement projects using SQL based proprietary software to streamline data processing and incentive calculation for telecommunication clients from initial requirement analysis to UAT testing following Agile methodologies.  Configure solutions for incentive calculation plan changes, data manipulation, software failures, and ad- hock reporting requested by the client.  Responsible for maintaining accrual and AP reports for the client's over 4, 500 internal and external payees with average monthly payouts averaging $10 million .</description>
+
+        <location>New York, US</location>
+
+        <is_current>1</is_current>
+
+        <start_date>2019-01-09</start_date>
+
+      </experience>
+    </experience_list>
+
+    <project_list>
+
+      <project>
+
+        <company>Infant Welfare Society of Chicago</company>
+
+        <title>Food Security Management</title>
+
+        <description>Infant Welfare Society of Chicago - Food Security Management</description>
+
+        <start_date>2017-06-28</start_date>
+
+        <end_date>2018-08-17</end_date>
+
+        <links_list>
+
+          <link>www.fsm-ch.com</link>
+        </links_list>
+
+        <contributors_list>
+
+          <contributor>Joe Andrew</contributor>
+        </contributors_list>
+      </project>
+    </project_list>
+
+    <skills_list>
+
+      <skill>User Stories</skill>
+      <skill_detail>
+        <skill>User Stories</skill>
+
+        <proficiency>Excellent</proficiency>
+      </skill_detail>
+    </skills_list>
+
+    <notes_list>
+
+      <note>
+
+          <body>Interviewed with Client 1.28</body>
+          <note_type>note</note_type>
+
+          <creator>EF Human Resources</creator>
+
+          <creation_ts>2008-02-06T19:21:05</creation_ts>
+
+          <subject>Job Posting Notification</subject>
+
+          <to>fileingest@xyz.com</to>
+
+          <sender>hr-axp@eightfolddemo.com</sender>
+
+        </note>
+
+    </notes_list>
+
+    <tags_list>
+      <tag>DO Import 5</tag>
+    </tags_list>
+
+    <display_tags_list>
+
+      <tag>DO Import 5</tag>
+    </display_tags_list>
+
+    <application_list>
+
+      <application>
+        <candidate_id>8999900</candidate_id>
+        <application_id>12327000</application_id>
+        <application_ts>2020-09-18T04:36:00</application_ts>
+        <last_modified_ts>2020-09-22T04:36:01</last_modified_ts>
+        <is_prospect>false</is_prospect>
+        <status>active</status>
+
+        <job_list>
+
+          <job>
+            <job_id>20006515</job_id>
+
+            <job_name>Senior Manager - Customer Growth Direct Marketing</job_name>
+          </job>
+        </job_list>
+
+        <past_stage_list>
+          <past_stage>
+            <stage>New - Submitted</stage>
+            <workflow_stage>New</workflow_stage>
+            <workflow_sub_stage>Submitted</workflow_sub_stage>
+            <stage_ts>2020-09-22T04:34:34-04:00</stage_ts>
+          </past_stage>
+          <past_stage>
+            <stage>New - Submission Completed</stage>
+            <workflow_stage>New</workflow_stage>
+            <workflow_sub_stage>Submission Completed</workflow_sub_stage>
+            <reason>Not Best Qualified (education, experience, etc) (US Recruitment: Do not use in Status NEW)</reason>
+            <stage_ts>2020-09-22T04:36:00-04:00</stage_ts>
+          </past_stage>
+        </past_stage_list>
+
+        <current_stage>
+          <stage>New - Submission Completed</stage>
+          <stage_ts>2020-09-22T04:36:01-04:00</stage_ts>
+          <workflow_stage>New</workflow_stage>
+          <workflow_sub_stage>Submission Completed</workflow_sub_stage>
+          <reason>Not Best Qualified (education, experience, etc) (US Recruitment: Do not use in Status NEW)</reason>
+        </current_stage>
+
+        <source>
+
+          <source_type>Naukri.com</source_type>
+
+          <source_name>Naukri</source_name>
+
+          <source>Job Board - Naukri.com</source>
+        </source>
+
+        <gender>decline to self identify</gender>
+
+        <race>Asian (Not Hispanic or Latino)</race>
+
+        <visa_status>US:Authorized</visa_status>
+
+        <visa_status_list>
+          <visa_status>US:Authorized</visa_status>
+        </visa_status_list>
+
+        <race_list>
+          <race>Asian (Not Hispanic or Latino)</race>
+        </race_list>
+
+        <veteran_status>true</veteran_status>
+
+        <disability_status>true</disability_status>
+
+        <note>
+
+          <body>Interviewed with Client 1.28</body>
+          <note_type>note</note_type>
+
+          <creator>EF Human Resources</creator>
+
+          <creation_ts>2008-02-06T19:21:05</creation_ts>
+
+          <subject>Job Posting Notification</subject>
+
+          <to>fileingest@xyz.com</to>
+
+          <sender>hr-axp@eightfolddemo.com</sender>
+
+        </note>
+
+        <scorecard_list>
+
+          <scorecard>
+
+            <interview_name>Andrew Devis</interview_name>
+
+            <interviewed_at>2020-09-21T06:25:16</interviewed_at>
+
+            <description>Interview for job</description>
+
+            <submitted_by>
+
+              <name>Andrew Devis</name>
+
+              <email>andrew_devis@xzy.com</email>
+            </submitted_by>
+
+            <submitted_at>2020-09-21T20:08:42</submitted_at>
+
+            <overall_rating>strong_no</overall_rating>
+            <attribute_list>
+
+              <attribute>
+                <question>What is leadership</question>
+                <answer>leadership is the answer</answer>
+                <note>leadership</note>
+                <rating>strong_no</rating>
+              </attribute>
+            </attribute_list>
+          </scorecard>
+        </scorecard_list>
+
+        <question_list>
+
+          <question>
+            <question_id>Campus_US_19_03</question_id>
+            <question>Select the degree program you are currently pursuing:</question>
+            <question_type>text</question_type>
+            <answer>Bachelor (BA/BS)</answer>
+          </question>
+          <question>
+            <question_id>Campus_US_19_04</question_id>
+            <question>Indicate your highest level of preference by work location:</question>
+            <question_type>text</question_type>
+            <answer>New York, NY</answer>
+          </question>
+        </question_list>
+
+        <custom_info>
+          <custom_field>
+            <field_name>esign_doc_id</field_name>
+            <data_type>string</data_type>
+            <field_value>AXP_Esign_US - ESignature - US</field_value>
+          </custom_field>
+          <custom_field>
+            <field_name>esign_ts</field_name>
+            <data_type>dateTime</data_type>
+            <field_value>2020-09-22T04:35:56</field_value>
+          </custom_field>
+          <custom_field>
+            <field_name>esign_ip</field_name>
+            <data_type>string</data_type>
+            <field_value>54.174.252.149</field_value>
+          </custom_field>
+        </custom_info>
+
+        <custom_multi_value_list>
+          <custom_mv_field>
+            <field_name>location</field_name>
+            <data_type>string</data_type>
+            <data_list>
+              <field_value>Mountain View, USA</field_value>
+              <field_value>Noida, India</field_value>
+            </data_list>
+          </custom_mv_field>
+        </custom_multi_value_list>
+
+        <custom_objects_list>
+         <object_list>
+          <object>
+            <object_name>compensation</object_name>
+            <native_field_list>
+              <native_field>
+                <field_name>base_pay</field_name>
+                <data_type>float</data_type>
+                <field_value>100000</field_value>
+              </native_field>
+              <native_field>
+                <field_name>base_pay_currency</field_name>
+                <data_type>string</data_type>
+                <field_value>USD</field_value>
+              </native_field>
+            </native_field_list>
+            <multi_value_field_list>
+              <field_value_list>
+                <field_name>pay_days</field_name>
+                <data_type>int</data_type>
+                <data_list>
+                  <field_value>15</field_value>
+                  <field_value>30</field_value>
+                </data_list>
+              </field_value_list>
+            </multi_value_field_list>
+          </object>
+         </object_list>
+         <list_of_objects>
+            <object_list>
+              <object_list_name>performance_reviews</object_list_name>
+              <data_list>
+                <composite_object>
+                  <object_name>review</object_name>
+                  <native_field_list>
+                    <native_field>
+                      <field_name>time_period</field_name>
+                      <data_type>string</data_type>
+                      <field_value>Q1 2019</field_value>
+                    </native_field>
+                    <native_field>
+                      <field_name>rating</field_name>
+                      <data_type>float</data_type>
+                      <field_value>4.2</field_value>
+                    </native_field>
+                  </native_field_list>
+                </composite_object>
+                <composite_object>
+                  <object_name>review</object_name>
+                  <native_field_list>
+                    <native_field>
+                      <field_name>time_period</field_name>
+                      <data_type>string</data_type>
+                      <field_value>Q2 2019</field_value>
+                    </native_field>
+                    <native_field>
+                      <field_name>rating</field_name>
+                      <data_type>float</data_type>
+                      <field_value>4.5</field_value>
+                    </native_field>
+                  </native_field_list>
+                </composite_object>
+              </data_list>
+            </object_list>
+         </list_of_objects>
+        </custom_objects_list>
+      </application>
+
+      <application>
+        <application_id>12327170</application_id>
+        <candidate_id>8999900</candidate_id>
+        <is_prospect>0</is_prospect>
+        <application_ts>2020-02-10T00:00:00</application_ts>
+        <last_modified_ts>2020-02-10T00:00:00</last_modified_ts>
+        <job_list>
+          <job>
+            <job_id>A001709</job_id>
+          </job>
+        </job_list>
+        <status>rejected</status>
+        <current_stage>
+          <stage>Applied</stage>
+          <stage_ts>2020-02-10T00:00:00</stage_ts>
+        </current_stage>
+        <note>
+          <creator>valeria.escamilla@eightfolddemounittest.com</creator>
+          <creation_ts>2019-12-08T00:00:00</creation_ts>
+          <body>Interviewed with Client 1.28</body>
+          <note_type>note</note_type>
+        </note>
+        <rejection_reason>Requisition was Cancelled "No Hires Made"</rejection_reason>
+        <rejected_ts>2020-02-10T00:00:00</rejected_ts>
+      </application>
+    </application_list>
+
+    <question_list>
+      <question>
+        <question_id>DQ-GBL-002</question_id>
+        <question>(GBL.01) Have you ever been offered a position at American Express Company or any of its subsidiaries or affiliates?</question>
+        <question_type>text</question_type>
+        <answer>No</answer>
+      </question>
+      <question>
+        <question_id>DQ-USA-001</question_id>
+        <question>(US.01) Are you legally authorized to work in the United States?</question>
+        <question_type>text</question_type>
+        <answer>Yes</answer>
+      </question>
+      <question>
+        <question_id>DQ-GBR-006</question_id>
+        <question>(UK.04)  At the time of completing this application, have you lived in the United Kingdom for the last three consecutive months or more?</question>
+        <question_type>text</question_type>
+        <answer>No</answer>
+        <explanation>India</explanation>
+      </question>
+    </question_list>
+
+    <custom_info>
+      <custom_field>
+        <field_name>REPORTS_TO</field_name>
+        <data_type>string</data_type>
+        <field_value>Mikel Durham</field_value>
+      </custom_field>
+      <custom_field>
+        <field_name>COMPANY_WEBSITE</field_name>
+        <data_type>string</data_type>
+        <field_value>www.americanseafoods.com</field_value>
+      </custom_field>
+      <custom_field>
+        <field_name>COMPANY_HQ_PHONE</field_name>
+        <data_type>string</data_type>
+        <field_value> (206) 374-1515</field_value>
+      </custom_field>
+      <custom_field>
+        <field_name>COMPANY_EMAIL_DOMAIN</field_name>
+        <data_type>string</data_type>
+        <field_value>americanseafoods.com</field_value>
+      </custom_field>
+      <custom_field>
+        <field_name>COMPANY_DESCRIPTION</field_name>
+        <data_type>string</data_type>
+        <field_value>American Seafoods Group LLC is a major seafood company based in Seattle, Washington. American Seafoods Company is a subsidiary of American Seafoods Group and is well known for its Alaskan Bering Sea pollock fishery operation. It manages a fleet of large catcher-processor vessels, also known as Factory Trawlers, where the fish is caught, processed and frozen onboard.  American Seafoods is the largest harvester in the U.S. Bering Sea fishery with approximately 45% catcher-processor market share.</field_value>
+      </custom_field>
+    </custom_info>
+
+    <custom_multi_value_list>
+      <custom_mv_field>
+        <field_name>location</field_name>
+        <data_type>string</data_type>
+        <data_list>
+          <field_value>Mountain View, USA</field_value>
+          <field_value>Noida, India</field_value>
+        </data_list>
+      </custom_mv_field>
+    </custom_multi_value_list>
+
+    <custom_objects_list>
+      <object_list>
+        <object>
+          <object_name>compensation</object_name>
+          <native_field_list>
+            <native_field>
+              <field_name>base_pay</field_name>
+              <data_type>float</data_type>
+              <field_value>100000</field_value>
+            </native_field>
+            <native_field>
+              <field_name>base_pay_currency</field_name>
+              <data_type>string</data_type>
+              <field_value>USD</field_value>
+            </native_field>
+          </native_field_list>
+          <multi_value_field_list>
+            <field_value_list>
+              <field_name>pay_days</field_name>
+              <data_type>int</data_type>
+              <data_list>
+                <field_value>15</field_value>
+                <field_value>30</field_value>
+              </data_list>
+            </field_value_list>
+          </multi_value_field_list>
+        </object>
+      </object_list>
+      <list_of_objects>
+        <object_list>
+          <object_list_name>performance_reviews</object_list_name>
+          <data_list>
+            <composite_object>
+              <object_name>review</object_name>
+              <native_field_list>
+                <native_field>
+                  <field_name>time_period</field_name>
+                  <data_type>string</data_type>
+                  <field_value>Q1 2019</field_value>
+                </native_field>
+                <native_field>
+                  <field_name>rating</field_name>
+                  <data_type>float</data_type>
+                  <field_value>4.2</field_value>
+                </native_field>
+              </native_field_list>
+            </composite_object>
+            <composite_object>
+              <object_name>review</object_name>
+              <native_field_list>
+                <native_field>
+                  <field_name>time_period</field_name>
+                  <data_type>string</data_type>
+                  <field_value>Q2 2019</field_value>
+                </native_field>
+                <native_field>
+                  <field_name>rating</field_name>
+                  <data_type>float</data_type>
+                  <field_value>4.5</field_value>
+                </native_field>
+              </native_field_list>
+            </composite_object>
+          </data_list>
+        </object_list>
+      </list_of_objects>
+    </custom_objects_list>
+
+    <contact_consent>all</contact_consent>
+
+  </EF_Candidate>
+</EF_Candidate_List>

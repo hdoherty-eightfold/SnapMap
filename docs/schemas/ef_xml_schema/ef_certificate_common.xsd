@@ -1,0 +1,35 @@
+<?xml version="1.1" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
+    <!-- Certificate Schema Definition -->
+    <xs:complexType name="IngestType">
+        <xs:all>
+            <xs:element name="external_id" type="xs:string" minOccurs="1"/>
+            <xs:element name="title" type="xs:string" minOccurs="1"/>
+            <xs:element name="status" minOccurs="1">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"><xs:pattern value="active|inactive"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="provider" type="xs:string" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateType">
+        <xs:all>
+            <xs:element name="external_id" type="xs:string" minOccurs="1"/>
+            <xs:element name="title" type="xs:string" minOccurs="0"/>
+            <xs:element name="status" type="xs:string" minOccurs="0"/>
+            <xs:element name="provider" type="xs:string" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="DeleteType">
+        <xs:all>
+            <xs:element name="external_id" type="xs:string" minOccurs="1" />
+        </xs:all>
+        <xs:attribute name="operation" fixed="delete"/>
+    </xs:complexType>
+    
+</xs:schema> 

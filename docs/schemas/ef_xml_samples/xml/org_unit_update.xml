@@ -1,0 +1,47 @@
+<EF_Org_Unit_List>
+
+  <EF_Org_Unit>
+    <external_id>Program_000</external_id>
+    <title>Program 000</title>
+    <description>Program 000 Description</description>
+    <status>active</status>
+    <type>program</type>
+    <system_id>resourcing</system_id>
+    <last_modified_ts>2015-03-11T00:00:00</last_modified_ts>
+    <start_date>2015-03-11T00:00:00</start_date>
+    <end_date>2016-03-11T00:00:00</end_date>
+    <custom_info>
+      <custom_field>
+        <field_name>PROGRAM_STATUS</field_name>
+        <data_type>string</data_type>
+        <field_value>active</field_value>
+      </custom_field>
+    </custom_info>
+    <entity_tags_list>
+      <tag>
+        <name>tag1</name>
+      </tag>
+      <tag>
+        <name>tag2</name>
+      </tag>
+    </entity_tags_list>
+  </EF_Org_Unit>
+
+  <EF_Org_Unit>
+    <external_id>Project_000</external_id>
+    <title>Project 000</title>
+    <status>active</status>
+    <type>project</type>
+    <user_group_list>
+      <user_group>
+        <user_group_id>user_group_1</user_group_id>
+      </user_group>
+    </user_group_list>
+    <entity_tags_list>
+      <tag>
+        <name>tag1</name>
+      </tag>
+    </entity_tags_list>
+  </EF_Org_Unit>
+
+</EF_Org_Unit_List>

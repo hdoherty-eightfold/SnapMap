@@ -1,0 +1,19 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="ef_cand_common.xsd" />
+
+  <xs:element name="EF_Candidate_List">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="EF_Candidate_Ingest" type="IngestType" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="EF_Candidate_Update" type="UpdateType" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="EF_Candidate_Upsert" type="UpdateType" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="EF_Candidate_Delete" type="DeleteType" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:all>
+      <xs:anyAttribute processContents="skip"/>
+    </xs:complexType>
+    <xs:unique name="CandidateUniqueKey">
+      <xs:selector xpath="EF_Candidate_Ingest|EF_Candidate_Update|EF_Candidate_Upsert|EF_Candidate_Delete" />
+      <xs:field xpath="candidate_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

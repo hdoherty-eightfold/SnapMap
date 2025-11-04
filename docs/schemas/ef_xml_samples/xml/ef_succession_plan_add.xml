@@ -1,0 +1,22 @@
+<EF_Succession_Plan_List>
+    <EF_Succession_Plan>
+        <plan_id>1234</plan_id>
+        <plan_date>2023-07-25</plan_date>
+        <incumbent_list>
+            <incumbent>
+                <user_id>1</user_id>
+                <email>incumbent@eightfolddemo-unittest.com</email>
+            </incumbent>
+        </incumbent_list>
+        <successor_list>
+            <successor>
+                <user_id>2</user_id>
+                <full_name>Test Successor</full_name>
+                <email>testsuccessor@eightfolddemo-unittest.com</email>
+                <readiness>ready soon</readiness>
+                <rank>1</rank>
+                <comments>This is a test successor</comments>
+            </successor>
+        </successor_list>
+    </EF_Succession_Plan>
+</EF_Succession_Plan_List>

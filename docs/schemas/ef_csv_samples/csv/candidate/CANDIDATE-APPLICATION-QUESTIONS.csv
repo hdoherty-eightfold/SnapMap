@@ -1,0 +1,5 @@
+CANDIDATE_ID,APPLICATION_ID,QUESTION_ID,QUESTION,ANSWER,EXPLANATION,QUESTION_TYPE,CHOICES
+1,1,Q1,Years of Experience?,5 years,N/A,text,
+1,1,Q2,Preferred Location,San Francisco,N/A,choice,SF|NY|LA
+2,2,Q1,Years of Python Experience?,8 years,Lead Developer Role,text,
+2,2,Q2,Work Location Preference,Seattle,Close to current location,choice,Seattle|Portland|Vancouver
