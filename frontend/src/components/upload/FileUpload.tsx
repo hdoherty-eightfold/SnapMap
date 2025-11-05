@@ -45,15 +45,16 @@ export const FileUpload: React.FC = () => {
       try {
         setEntitiesLoading(true);
         const response = await getAvailableEntities();
-        setAvailableEntities(response.entities);
+        // Filter to only show employee entity
+        const employeeOnly = response.entities.filter((e: any) => e.id === 'employee');
+        setAvailableEntities(employeeOnly.length > 0 ? employeeOnly : [
+          { id: 'employee', name: 'Employee', description: 'Employee master data' }
+        ]);
       } catch (err) {
         console.error('Error loading entities:', err);
-        // Set fallback entities if API fails
+        // Set fallback to employee only if API fails
         setAvailableEntities([
-          { id: 'employee', name: 'Employee', description: 'Employee master data' },
-          { id: 'user', name: 'User', description: 'User account data' },
-          { id: 'position', name: 'Position', description: 'Job positions' },
-          { id: 'candidate', name: 'Candidate', description: 'Job candidates' },
+          { id: 'employee', name: 'Employee', description: 'Employee master data' }
         ]);
       } finally {
         setEntitiesLoading(false);
@@ -270,7 +271,7 @@ export const FileUpload: React.FC = () => {
           className={cn(
             'relative border-2 border-dashed rounded-lg p-12 text-center transition-all duration-200',
             isDragging && 'border-primary-500 bg-primary-50',
-            !isDragging && 'border-gray-300 hover:border-primary-400',
+            !isDragging && 'border-gray-300 dark:border-gray-600 hover:border-primary-400',
             uploadSuccess && 'border-success-500 bg-success-50',
             error && 'border-error-500 bg-error-50'
           )}
@@ -315,10 +316,10 @@ export const FileUpload: React.FC = () => {
                 </div>
 
                 <div>
-                  <p className="text-lg font-semibold text-gray-900 mb-1">
-                    Drop your file here, or <span className="text-primary-600">browse</span>
+                  <p className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                    Drop your file here, or <span className="text-primary-600 dark:text-primary-400">browse</span>
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     Supports CSV and XML (.csv, .xml)
                   </p>
                 </div>
@@ -350,9 +351,9 @@ export const FileUpload: React.FC = () => {
         )}
 
         {/* Info */}
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <p className="text-sm text-gray-700 font-semibold mb-2">Supported formats:</p>
-          <ul className="text-sm text-gray-600 space-y-1">
+        <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <p className="text-sm text-gray-700 dark:text-gray-200 font-semibold mb-2">Supported formats:</p>
+          <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
             <li>• CSV files (.csv)</li>
             <li>• XML files (.xml)</li>
             <li>• Maximum file size: 100 MB</li>

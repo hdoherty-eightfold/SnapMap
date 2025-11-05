@@ -158,6 +158,37 @@ class APIClient {
   }
 
   /**
+   * Preview XML transformation
+   */
+  async previewXML(request: {
+    file_id: string;
+    mappings: any[];
+    entity_name: string;
+  }): Promise<{
+    xml_preview: string;
+    preview_row_count: number;
+    total_row_count: number;
+  }> {
+    const response = await this.client.post('/transform/preview-xml', request);
+    return response.data;
+  }
+
+  /**
+   * Export transformed XML
+   */
+  async exportXML(request: {
+    file_id: string;
+    mappings: any[];
+    entity_name: string;
+  }): Promise<Blob> {
+    const response = await this.client.post('/transform/export-xml', request, {
+      responseType: 'blob',
+    });
+
+    return response.data;
+  }
+
+  /**
    * Download blob as file
    */
   downloadBlob(blob: Blob, filename: string): void {
@@ -185,4 +216,6 @@ export const autoMap = apiClient.autoMap.bind(apiClient);
 export const previewTransform = apiClient.previewTransform.bind(apiClient);
 export const validate = apiClient.validate.bind(apiClient);
 export const exportCSV = apiClient.exportCSV.bind(apiClient);
+export const previewXML = apiClient.previewXML.bind(apiClient);
+export const exportXML = apiClient.exportXML.bind(apiClient);
 export const downloadBlob = apiClient.downloadBlob.bind(apiClient);

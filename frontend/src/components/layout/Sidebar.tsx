@@ -36,15 +36,15 @@ const navItems: NavItem[] = [
   },
   {
     id: 3,
-    name: 'Preview',
+    name: 'Preview CSV',
     icon: '👁️',
-    description: 'Preview transformations'
+    description: 'Preview CSV transformations'
   },
   {
     id: 4,
-    name: 'Export',
-    icon: '💾',
-    description: 'Download standardized data'
+    name: 'Preview XML',
+    icon: '📄',
+    description: 'Preview XML format'
   },
   {
     id: 5,

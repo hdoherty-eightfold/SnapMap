@@ -74,7 +74,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   // Validation state
   const [validationResults, setValidationResults] = useState<ValidationResult | null>(null);
 
-  // Workflow state (0: upload, 1: mapping, 2: preview, 3: export)
+  // Workflow state (0: upload, 1: review, 2: mapping, 3: preview CSV, 4: preview XML, 5: SFTP, 6: settings)
   const [currentStep, setCurrentStep] = useState<number>(0);
 
   // UI state
@@ -96,7 +96,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   };
 
   const nextStep = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, 3));
+    setCurrentStep((prev) => Math.min(prev + 1, 6));
   };
 
   const previousStep = () => {

@@ -1,10 +1,10 @@
 /**
- * TransformPreview Component
- * Preview transformation and export
+ * PreviewCSV Component
+ * Preview CSV transformation and export
  */
 
 import React, { useEffect, useState } from 'react';
-import { Download, Check, FileDown, Loader2, Upload, Server } from 'lucide-react';
+import { Download, Check, FileDown, Loader2, Upload, Server, FileCode } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { previewTransform, exportCSV, downloadBlob } from '../../services/api';
 import { getSFTPCredentials, uploadToSFTP, type SFTPCredential } from '../../services/sftp-api';
@@ -13,8 +13,8 @@ import { Card, CardHeader, CardTitle, CardContent } from '../common/Card';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import type { PreviewResponse } from '../../types';
 
-export const TransformPreview: React.FC = () => {
-  const { uploadedFile, mappings, selectedEntityType, isLoading, setIsLoading } = useApp();
+export const PreviewCSV: React.FC = () => {
+  const { uploadedFile, mappings, selectedEntityType, isLoading, setIsLoading, nextStep } = useApp();
   const [previewData, setPreviewData] = useState<PreviewResponse | null>(null);
   const [exporting, setExporting] = useState(false);
   const [exportSuccess, setExportSuccess] = useState(false);
@@ -296,6 +296,16 @@ export const TransformPreview: React.FC = () => {
         <Button
           variant="primary"
           size="lg"
+          onClick={nextStep}
+          leftIcon={<FileCode className="w-5 h-5" />}
+          className="bg-purple-600 hover:bg-purple-700"
+        >
+          Transform to XML
+        </Button>
+
+        <Button
+          variant="primary"
+          size="lg"
           onClick={handleShowSFTPModal}
           isLoading={uploadingSFTP}
           leftIcon={uploadSuccess ? <Check className="w-5 h-5" /> : <Upload className="w-5 h-5" />}
@@ -404,4 +414,4 @@ export const TransformPreview: React.FC = () => {
   );
 };
 
-export default TransformPreview;
+export default PreviewCSV;

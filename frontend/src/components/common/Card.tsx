@@ -29,7 +29,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div
       className={cn(
-        'bg-white rounded-lg border border-gray-200 shadow-sm',
+        'bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm',
         hover && 'transition-all duration-200 hover:shadow-md hover:-translate-y-0.5',
         paddingStyles[padding],
         className
@@ -52,7 +52,7 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
 }) => {
   return (
     <div
-      className={cn('mb-4 border-b border-gray-200 pb-3', className)}
+      className={cn('mb-4 border-b border-gray-200 dark:border-gray-700 pb-3', className)}
       {...props}
     >
       {children}
@@ -71,7 +71,7 @@ export const CardTitle: React.FC<CardTitleProps> = ({
 }) => {
   return (
     <h3
-      className={cn('text-lg font-semibold text-gray-900', className)}
+      className={cn('text-lg font-semibold text-gray-900 dark:text-white', className)}
       {...props}
     >
       {children}
@@ -89,7 +89,7 @@ export const CardContent: React.FC<CardContentProps> = ({
   ...props
 }) => {
   return (
-    <div className={cn('text-gray-700', className)} {...props}>
+    <div className={cn('text-gray-700 dark:text-gray-300', className)} {...props}>
       {children}
     </div>
   );

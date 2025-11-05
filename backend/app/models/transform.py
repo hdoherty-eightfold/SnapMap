@@ -11,7 +11,8 @@ from app.models.mapping import Mapping
 class PreviewRequest(BaseModel):
     """Request for transformation preview"""
     mappings: List[Mapping] = Field(..., description="Field mappings")
-    source_data: List[Dict[str, Any]] = Field(..., description="Source data rows")
+    source_data: Optional[List[Dict[str, Any]]] = Field(None, description="Source data rows (optional if file_id provided)")
+    file_id: Optional[str] = Field(None, description="File ID from upload (alternative to source_data)")
     sample_size: Optional[int] = Field(5, description="Number of rows to preview")
     entity_name: Optional[str] = Field("employee", description="Entity type to transform to")
 
