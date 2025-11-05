@@ -82,7 +82,14 @@ class XMLTransformer:
         root = Element("EF_Employee_List")
 
         # Create mapping dictionary: target -> source
-        target_to_source = {m['target']: m['source'] for m in mappings}
+        # Handle both dict and Pydantic Mapping objects
+        target_to_source = {}
+        for m in mappings:
+            if isinstance(m, dict):
+                target_to_source[m['target']] = m['source']
+            else:
+                # Handle Pydantic Mapping object
+                target_to_source[m.target] = m.source
 
         # Process each row as an employee
         for idx, row in df.iterrows():

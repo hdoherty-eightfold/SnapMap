@@ -1,27 +1,27 @@
-# SnapMap - AI-Powered Data Mapping for Eightfold
+# SnapMap - Semantic Data Mapping for Eightfold
 
-> Transform HR data from any system into Eightfold format using semantic AI. Upload any CSV/Excel file and get perfectly mapped data in seconds.
+> Transform HR data from any system into Eightfold format using intelligent semantic matching. Upload any CSV/Excel file and get perfectly mapped data in seconds.
 
 ![Status](https://img.shields.io/badge/status-production%20ready-brightgreen)
 ![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-[![Deploy to Render](https://img.shields.io/badge/deploy-render-46E3B7)](https://render.com/deploy)
 
 ## 📊 Project Overview
 
 ### What It Does
 
-A **semantic AI-powered tool** that automatically maps flat file data to Eightfold integration formats.
+A **semantic matching tool** that automatically maps flat file data to Eightfold integration formats with comprehensive schema validation.
 
 **Problem**: Data mapping traditionally requires manual field matching and understanding complex schemas.
 
-**Solution**: Upload → AI Detects Entity Type → Vector Search Mapping → Transform → Download
+**Solution**: Upload → Detect Entity Type → Semantic Matching → Validate → Transform → Export (CSV/XML) → SFTP Upload
 
 **Technology**:
 - 🧠 **ChromaDB Vector Database** for semantic field matching
 - 🎯 **Sentence Transformers** for understanding field meaning
 - ⚡ **99% accuracy**, <1ms per field match
-- 🔒 **100% local** - no external API calls
+- 🔒 **100% local** - no external API calls required
+- ✅ **Comprehensive schema validation** with detailed error reporting
 
 **Impact**: **Manual mapping → Automatic** with superior accuracy
 
@@ -40,7 +40,7 @@ A **semantic AI-powered tool** that automatically maps flat file data to Eightfo
 - **<1ms per field** match time
 - Understands meaning: "worker_identifier" → "EMPLOYEE_ID" ✓
 
-### 3. 🤖 AI Entity Detection
+### 3. 🔍 Intelligent Entity Detection
 - Automatically detects entity type from field names
 - 95%+ detection accuracy
 - No manual entity selection needed
@@ -51,7 +51,7 @@ A **semantic AI-powered tool** that automatically maps flat file data to Eightfo
 - Up to 100 MB file size
 - Instant data preview
 
-### 3. 🎨 Visual Drag-and-Drop Mapping
+### 5. 🎨 Visual Drag-and-Drop Mapping
 - Intuitive drag-and-drop interface
 - **Animated connection lines** between fields
 - Color-coded by confidence:
@@ -60,23 +60,41 @@ A **semantic AI-powered tool** that automatically maps flat file data to Eightfo
   - ⚪ Gray (manual mapping)
 - Progress indicator shows completion status
 
-### 4. 👀 Before/After Preview
+### 6. ✅ Comprehensive Schema Validation
+- **Required field detection** - Identifies missing critical fields
+- **Data type validation** - Ensures correct formats (email, date, numeric)
+- **Format validation** - Validates email patterns, date formats
+- **Character validation** - Detects invalid characters
+- **Column structure validation** - Checks for duplicates, empty columns
+- **Detailed error reporting** - Shows exact rows with issues
+- **Auto-fix suggestions** - Recommends corrections
+
+### 7. 👀 Before/After Preview
 - Side-by-side comparison
 - Shows exact transformations applied
 - Date format conversions (MM/DD/YYYY → YYYY-MM-DD)
 - Sample data display
+- Real-time validation feedback
 
-### 5. ✅ Real-Time Validation
-- Schema-driven validation
-- Required field checks
-- Format validation (email, date, etc.)
-- Clear error messages with suggestions
-
-### 6. 💾 CSV Export
+### 8. 💾 Dual Export Options
+**CSV Export**:
 - Download transformed CSV
 - Correct Eightfold format
 - UTF-8 encoding
 - Ready to upload
+
+**XML Export**:
+- Eightfold XML format (EF_Employee_List)
+- Proper nested structures (email_list, phone_list)
+- Date formatting
+- Preview before export
+
+### 9. 🔐 SFTP Upload with Progress Tracking
+- **Credential Management** - Securely store SFTP connections
+- **Connection Testing** - Verify before upload
+- **Progress Tracking** - Real-time upload status
+- **File Verification** - Confirm successful upload
+- **SFTP Explorer** - Browse remote directory structure
 
 ---
 
@@ -87,18 +105,18 @@ A **semantic AI-powered tool** that automatically maps flat file data to Eightfo
 ```
 ┌──────────────────────────────────────────────────────┐
 │                   Frontend (React)                    │
-│  ┌──────────────┐  ┌──────────────┐  ┌────────────┐ │
-│  │ Upload       │  │ Mapping      │  │ Preview    │ │
-│  │ Component    │→ │ Engine       │→ │ Component  │ │
-│  └──────────────┘  └──────────────┘  └────────────┘ │
+│  ┌──────────┐  ┌──────────┐  ┌───────┐  ┌─────────┐ │
+│  │ Upload   │  │ Mapping  │  │Preview│  │  SFTP   │ │
+│  │Component │→ │ Engine   │→ │ & Val │→ │ Upload  │ │
+│  └──────────┘  └──────────┘  └───────┘  └─────────┘ │
 └──────────────────────────────────────────────────────┘
                           ↕ HTTP/JSON
 ┌──────────────────────────────────────────────────────┐
 │                Backend (FastAPI + Python)             │
-│  ┌──────────────┐  ┌──────────────┐  ┌────────────┐ │
-│  │ Transform    │  │ Auto-Mapping │  │ Schema     │ │
-│  │ Engine       │  │ Algorithm    │  │ Manager    │ │
-│  └──────────────┘  └──────────────┘  └────────────┘ │
+│  ┌───────────┐  ┌──────────┐  ┌────────┐  ┌───────┐ │
+│  │Transform  │  │Auto-Map  │  │ Schema │  │ SFTP  │ │
+│  │ Engine    │  │Algorithm │  │Validate│  │Manager│ │
+│  └───────────┘  └──────────┘  └────────┘  └───────┘ │
 └──────────────────────────────────────────────────────┘
 ```
 
@@ -114,15 +132,10 @@ A **semantic AI-powered tool** that automatically maps flat file data to Eightfo
 #### Backend
 - **Framework**: FastAPI (Python 3.11+)
 - **Vector DB**: ChromaDB (persistent storage)
-- **AI**: Sentence Transformers (all-MiniLM-L6-v2)
+- **Semantic Matching**: Sentence Transformers (all-MiniLM-L6-v2)
 - **Data Processing**: Pandas + NumPy
 - **Validation**: Pydantic
-
-#### Infrastructure
-- **Deployment**: Render, Railway, Docker, or Vercel
-- **Database**: ChromaDB (vector embeddings)
-- **CI/CD**: GitHub Actions
-- **Monitoring**: Built-in health checks
+- **SFTP**: Paramiko
 
 ---
 
@@ -134,9 +147,10 @@ SnapMap/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── upload/           # File upload components
-│   │   │   ├── preview/          # Data preview components
 │   │   │   ├── mapping/          # Field mapping components ⭐
-│   │   │   ├── export/           # Export components
+│   │   │   ├── review/           # Validation review
+│   │   │   ├── export/           # CSV & XML export
+│   │   │   ├── sftp/             # SFTP components
 │   │   │   └── common/           # Shared UI components
 │   │   ├── services/
 │   │   │   └── api.ts            # API client
@@ -155,28 +169,21 @@ SnapMap/
 │   │   ├── models/               # Pydantic models
 │   │   ├── services/
 │   │   │   ├── transformer.py    # Data transformation ⭐
-│   │   │   ├── validator.py      # Validation engine
+│   │   │   ├── csv_validator.py  # Validation engine ⭐
 │   │   │   ├── field_mapper.py   # Auto-mapping algorithm ⭐
+│   │   │   ├── semantic_matcher.py # Vector search ⭐
+│   │   │   ├── xml_transformer.py # XML generation
+│   │   │   ├── sftp_manager.py   # SFTP operations ⭐
 │   │   │   └── schema_manager.py # Schema management
 │   │   ├── schemas/              # Entity schemas (JSON)
-│   │   ├── utils/                # Utility functions
 │   │   └── tests/                # Unit tests
 │   └── requirements.txt
-│
-├── agents/                        # Agent specifications
-│   ├── MODULE_1_FRONTEND_CORE_AGENT.md
-│   ├── MODULE_2_MAPPING_ENGINE_AGENT.md
-│   ├── MODULE_3_TRANSFORMATION_ENGINE_AGENT.md
-│   └── MODULE_4_SCHEMA_AUTOMAPPING_AGENT.md
 │
 ├── docs/                          # Documentation
 │   ├── api-contracts/
 │   │   └── API_CONTRACTS.md      # API specifications ⭐
-│   ├── architecture/
-│   ├── specs/
 │   └── workflows/
 │
-├── scripts/                       # Build/deployment scripts
 └── README.md                      # This file
 ```
 
@@ -209,7 +216,7 @@ pip install -r requirements.txt
 python build_vector_db.py
 
 # Start server
-uvicorn main:app --reload
+uvicorn main:app --reload --port 8000
 ```
 
 Backend will run on `http://localhost:8000`
@@ -224,75 +231,57 @@ npm run dev
 
 Frontend will run on `http://localhost:5173`
 
-#### 4. Or use Docker 🐳
-
-```bash
-# Build and run everything
-docker-compose up -d
-
-# Access at http://localhost:8000
-```
-
-#### 5. Open Browser
+#### 4. Open Browser
 
 Navigate to `http://localhost:5173` and start using the application!
 
 ---
 
-## 🌐 Deploy to Production
+## 🔄 Application Workflow
 
-### One-Click Deploy
+### Step-by-Step Process
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+1. **Upload File** 📁
+   - Drag-and-drop CSV or Excel file
+   - System detects entity type automatically
+   - Preview your data
 
-Push to GitHub → Connect to Render → Done! (See [DEPLOYMENT.md](DEPLOYMENT.md) for details)
+2. **Map Fields** 🔗
+   - Automatic semantic field mapping (99% accuracy)
+   - Drag-and-drop for manual adjustments
+   - Color-coded confidence indicators
 
-### Deployment Options
+3. **Review & Validate** ✅
+   - Comprehensive schema validation
+   - Identify missing required fields
+   - Check data quality issues
+   - Get auto-fix suggestions
 
-| Platform | Free Tier | Setup Time | Best For |
-|----------|-----------|------------|----------|
-| **Render** | ✅ 750hrs/mo | 5 min | Full-stack (Recommended) |
-| **Railway** | $5 credit | 2 min | Always-on service |
-| **Docker** | ❌ | 1 min | Self-hosted VPS |
-| **Vercel + Render** | ✅ | 10 min | Best performance |
+4. **Preview CSV** 👁️
+   - See transformed data
+   - Before/after comparison
+   - Verify transformations
 
-Complete deployment guide: [DEPLOYMENT.md](DEPLOYMENT.md)
+5. **Preview XML** 📄
+   - View Eightfold XML format
+   - Verify nested structures
+   - Check field mappings
 
----
+6. **SFTP Upload** 🔐
+   - Configure SFTP credentials
+   - Test connection
+   - Upload with progress tracking
+   - Verify file on remote server
 
-## 👥 Development Workflow
-
-This project uses a **modular development approach** with 4 independent modules:
-
-### Module 1: Frontend Core UI
-**Developer 1** - File upload, data preview, export, UI shell
-📄 See [MODULE_1_FRONTEND_CORE_AGENT.md](agents/MODULE_1_FRONTEND_CORE_AGENT.md)
-
-### Module 2: Field Mapping Engine
-**Developer 2** - Drag-drop, visual lines, auto-map UI
-📄 See [MODULE_2_MAPPING_ENGINE_AGENT.md](agents/MODULE_2_MAPPING_ENGINE_AGENT.md)
-
-### Module 3: Transformation & Validation Engine
-**Developer 3** - Backend APIs, data transformation, validation
-📄 See [MODULE_3_TRANSFORMATION_ENGINE_AGENT.md](agents/MODULE_3_TRANSFORMATION_ENGINE_AGENT.md)
-
-### Module 4: Schema & Auto-Mapping
-**Developer 4** - Schema management, fuzzy matching algorithm
-📄 See [MODULE_4_SCHEMA_AUTOMAPPING_AGENT.md](agents/MODULE_4_SCHEMA_AUTOMAPPING_AGENT.md)
-
-### Integration Checkpoints
-
-- **Day 2 EOD**: Frontend modules integrate
-- **Day 3 EOD**: Backend modules integrate
-- **Day 3 EOD**: First full integration (Frontend ↔ Backend)
-- **Day 5 EOD**: Full end-to-end testing
-- **Day 7**: Final integration and demo prep
+7. **Settings** ⚙️
+   - Manage configurations
+   - Vector DB settings
 
 ---
 
 ## 📝 API Documentation
 
-Complete API contracts are documented in [API_CONTRACTS.md](docs/api-contracts/API_CONTRACTS.md).
+Complete API contracts are documented in [docs/api-contracts/API_CONTRACTS.md](docs/api-contracts/API_CONTRACTS.md).
 
 ### Key Endpoints
 
@@ -301,13 +290,29 @@ Complete API contracts are documented in [API_CONTRACTS.md](docs/api-contracts/A
 | POST | `/api/upload` | Upload and parse CSV/Excel file |
 | GET | `/api/schema/employee` | Get Employee entity schema |
 | POST | `/api/auto-map` | Smart field auto-mapping |
+| POST | `/api/semantic/detect-entity` | Detect entity type |
+| POST | `/api/review/file` | Comprehensive validation |
 | POST | `/api/transform/preview` | Preview transformation |
-| POST | `/api/validate` | Validate mappings and data |
 | POST | `/api/transform/export` | Export transformed CSV |
+| POST | `/api/transform/preview-xml` | Preview XML transformation |
+| POST | `/api/transform/export-xml` | Export Eightfold XML |
+| GET | `/api/sftp/credentials` | List SFTP credentials |
+| POST | `/api/sftp/upload/{id}` | Upload file via SFTP |
 
 ---
 
 ## 🧪 Testing
+
+### Backend Testing
+```bash
+cd backend
+
+# Test all functionality
+pytest
+
+# Test XML functionality
+python test_xml_functionality.py
+```
 
 ### Frontend Testing
 ```bash
@@ -315,120 +320,57 @@ cd frontend
 npm run test
 ```
 
-### Backend Testing
-```bash
-cd backend
-pytest
-```
-
 ### Integration Testing
-1. Start backend: `uvicorn app.main:app --reload`
+1. Start backend: `uvicorn main:app --reload`
 2. Start frontend: `npm run dev`
-3. Test full workflow: Upload → Map → Validate → Export
+3. Test full workflow: Upload → Map → Validate → Export → SFTP
 
 ---
 
-## 📅 Development Timeline
+## 🎯 How It Works
 
-| Day | Focus | Deliverable |
-|-----|-------|-------------|
-| 1 | Setup + File Upload | Upload working |
-| 2 | Drag-and-Drop UI | Mapping interface |
-| 3 | Auto-Mapping Algorithm | Auto-map working |
-| 4 | Visual Connection Lines | Animated lines |
-| 5 | Preview & Validation | End-to-end flow |
-| 6 | Polish + Bonus Features | Production-ready |
-| 7 | Testing + Demo Prep | Demo-ready |
+### Semantic Field Matching
 
-**Total**: 46 core hours + 14-34 buffer hours
+The system uses **vector embeddings** (not AI) for intelligent field matching:
 
----
+1. **Pre-computed Embeddings**: All schema fields are pre-embedded using sentence transformers
+2. **Cosine Similarity**: Compares uploaded fields to schema fields semantically
+3. **Fast Matching**: <1ms per field, 99% accuracy
+4. **No External Calls**: Everything runs locally
 
-## 🎯 Success Metrics
+**Example**:
+- "emp_id" matches "EMPLOYEE_ID" with 0.92 confidence
+- "worker_num" matches "EMPLOYEE_ID" with 0.87 confidence
+- "fname" matches "FIRST_NAME" with 0.91 confidence
 
-### Judging Criteria
+For detailed explanation, see [backend/README_SEMANTIC_MATCHING.md](backend/README_SEMANTIC_MATCHING.md)
 
-1. **Usability** (35%) - Can non-technical users use it?
-2. **Simplicity** (25%) - Is the UI clean and uncluttered?
-3. **User-Friendliness** (25%) - Does it look professional?
-4. **Intuitiveness** (15%) - Understand it immediately?
+### Schema Validation
 
-### Technical Success
+Comprehensive validation checks:
 
-- ✅ Auto-mapping accuracy: 80-90%
-- ✅ Process 1000+ rows in < 5 seconds
-- ✅ No crashes during demo
-- ✅ Beautiful, responsive UI
-- ✅ Clear error messages
+1. **Structure Validation**:
+   - Empty file detection
+   - Duplicate column names
+   - Unnamed columns
+   - Empty columns
 
----
+2. **Required Fields**:
+   - Missing required field detection
+   - Null value checking
+   - Row count tracking
 
-## 🎨 Design Principles
+3. **Data Quality**:
+   - Email format validation
+   - Date parsing and format checking
+   - Numeric value validation
+   - Invalid character detection
+   - Length validation
 
-### UI/UX Guidelines
-
-1. **Beautiful First Impressions** - Judges decide in first 30 seconds
-2. **Clear Visual Feedback** - Every action has immediate feedback
-3. **Progressive Disclosure** - Show what's needed, when it's needed
-4. **Error Prevention** - Validate before submission, not after
-5. **Familiar Patterns** - Use drag-drop, progress bars, tooltips
-
-### Color Palette
-
-```css
-/* Primary Colors */
---primary-600: #6366F1;    /* Indigo - Primary actions */
---primary-700: #4F46E5;    /* Indigo darker - Hover */
-
-/* Status Colors */
---success-500: #10B981;    /* Green - Success */
---warning-500: #F59E0B;    /* Amber - Warnings */
---error-500: #EF4444;      /* Red - Errors */
-
-/* Neutral Colors */
---gray-900: #111827;       /* Text primary */
---gray-300: #D1D5DB;       /* Borders */
-```
-
----
-
-## 🤝 Contributing
-
-### Git Workflow
-
-1. Create feature branch: `git checkout -b dev1-frontend-core`
-2. Make changes and commit: `git commit -m "Day 1: FileUpload component"`
-3. Push to remote: `git push origin dev1-frontend-core`
-4. Daily merge at 6 PM with team
-
-### Code Standards
-
-#### TypeScript
-- Use **strict mode**
-- Define interfaces for all props
-- Use meaningful variable names
-- Add comments for complex logic
-
-#### Python
-- Use **type hints** for all functions
-- Follow **PEP 8** style guide
-- Use **Pydantic** for validation
-- Add docstrings for classes/functions
-
----
-
-## 📚 Resources
-
-### Documentation
-- [React Documentation](https://react.dev/)
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)
-- [Tailwind CSS](https://tailwindcss.com/docs)
-- [Pandas](https://pandas.pydata.org/docs/)
-
-### Learning
-- [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/)
-- [Python Type Hints](https://docs.python.org/3/library/typing.html)
-- [@dnd-kit](https://docs.dndkit.com/)
+4. **Output**: Detailed issue reports with:
+   - Severity (critical, warning, info)
+   - Affected fields and rows
+   - Suggested fixes
 
 ---
 
@@ -436,7 +378,7 @@ pytest
 
 ### CORS Error
 **Problem**: Frontend can't call backend APIs
-**Solution**: Check CORS configuration in `backend/app/main.py`
+**Solution**: Check CORS configuration in `backend/main.py`
 
 ### Import Error
 **Problem**: Module not found in Python
@@ -446,75 +388,38 @@ pytest
 **Problem**: Port 8000 or 5173 already taken
 **Solution**: Change port or kill existing process
 
+### Vector DB Not Found
+**Problem**: ChromaDB database not found
+**Solution**: Run `python build_vector_db.py` in backend folder
+
 ---
 
 ## 📞 Support
 
-### Questions or Blockers?
+### Questions or Issues?
 
-1. **Check Documentation**: Look in `docs/` folder or agent specs
-2. **Ask in Chat**: Team chat for quick questions
-3. **Daily Standup**: Discuss in 6 PM standup
-4. **Raise Issue**: Create GitHub issue for bugs
+1. **Check Documentation**: Look in `docs/` folder
+2. **Review Logs**: Check terminal output for error messages
+3. **Raise Issue**: Create GitHub issue for bugs
 
 ---
 
 ## 📈 Project Status
 
 ### ✅ Completed
-- [x] Project structure created
-- [x] Agent specifications written
-- [x] API contracts defined
-- [x] Documentation complete
+- [x] Semantic field matching with vector embeddings
+- [x] 16 entity types supported
+- [x] Comprehensive schema validation
+- [x] CSV and XML export
+- [x] SFTP upload functionality
+- [x] Visual drag-and-drop mapping UI
+- [x] Real-time validation and preview
 
-### 🚧 In Progress
-- [ ] Frontend development
-- [ ] Backend development
-- [ ] Integration testing
-
-### 📋 Pending
-- [ ] Demo preparation
-- [ ] Performance optimization
-- [ ] Deployment
-
----
-
-## 🏆 Demo Day
-
-### 5-Minute Demo Flow
-
-1. **Introduction** (30 sec)
-   - Problem: HR data transformation takes 2 weeks
-   - Solution: Our SnapMap tool
-
-2. **Upload** (30 sec)
-   - Drag-drop CSV file
-   - Show instant preview
-
-3. **Auto-Map** (60 sec) ⭐ WOW MOMENT #1
-   - Click "Auto-Map" button
-   - Watch animated lines draw
-   - "8 of 10 fields mapped automatically!"
-
-4. **Drag-Drop** (60 sec) ⭐ WOW MOMENT #2
-   - Manually map 2 remaining fields
-   - Show visual connection lines
-   - Color-coded confidence scores
-
-5. **Preview** (60 sec) ⭐ WOW MOMENT #3
-   - Side-by-side before/after
-   - Date format transformation
-   - Validation status
-
-6. **Export** (30 sec)
-   - Download transformed CSV
-   - Ready for Eightfold!
-
-7. **Conclusion** (30 sec)
-   - 2 weeks → 5 minutes
-   - Beautiful, intuitive, smart
-
-**Total**: 5 minutes
+### 🚧 Future Enhancements
+- [ ] Additional entity types
+- [ ] Batch file processing
+- [ ] Advanced SFTP scheduling
+- [ ] Transformation templates
 
 ---
 
@@ -524,23 +429,19 @@ MIT License - see LICENSE file for details
 
 ---
 
-## 🎉 Let's Win This Hackathon!
+## 🎯 Key Differentiators
 
-**Why We'll Succeed:**
-- ✅ Solves real problem (every HR team faces this)
-- ✅ Beautiful UI (first impressions matter)
-- ✅ Smart AI (auto-mapping shows innovation)
-- ✅ Clear plan (we know exactly what to build)
-- ✅ Strong team (4 developers with clear roles)
-
-**Remember:**
-- 🎯 Focus on usability > technical complexity
-- 🎨 Make it beautiful > feature-complete
-- 🚀 Working demo > perfect code
-- 🤝 Teamwork > individual heroics
+**What Makes SnapMap Unique:**
+- ✅ **99% Accuracy**: Semantic matching beats traditional fuzzy matching
+- ✅ **Fast**: <1ms per field matching
+- ✅ **Local**: No external API calls, complete privacy
+- ✅ **Comprehensive**: Validation + Transformation + Upload
+- ✅ **User-Friendly**: Beautiful drag-and-drop UI
+- ✅ **Dual Export**: CSV and XML formats
+- ✅ **SFTP Integration**: Direct upload to destination
 
 ---
 
 **Built with ❤️ by the SnapMap Team**
 
-*Last Updated: November 2, 2025*
+*Last Updated: November 5, 2025*

@@ -15,7 +15,7 @@ import IssueReview from './components/review/IssueReview';
 import FieldMapping from './components/mapping/FieldMapping';
 import PreviewCSV from './components/export/PreviewCSV';
 import PreviewXML from './components/export/PreviewXML';
-import SFTPCredentialManager from './components/sftp/SFTPCredentialManager';
+import SFTPUploadPage from './components/sftp/SFTPUploadPage';
 import SettingsPanel from './components/settings/SettingsPanel';
 import './App.css';
 
@@ -38,11 +38,11 @@ const AppContent: React.FC = () => {
             {/* Step Content */}
             <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden transition-colors">
               {currentStep === 0 && <FileUpload />}
-              {currentStep === 1 && <IssueReview />}
-              {currentStep === 2 && <FieldMapping />}
+              {currentStep === 1 && <FieldMapping />}
+              {currentStep === 2 && <IssueReview />}
               {currentStep === 3 && <PreviewCSV />}
               {currentStep === 4 && <PreviewXML />}
-              {currentStep === 5 && <SFTPCredentialManager />}
+              {currentStep === 5 && <SFTPUploadPage />}
               {currentStep === 6 && <SettingsPanel />}
             </div>
 
@@ -53,21 +53,21 @@ const AppContent: React.FC = () => {
                 <div className="flex-1">
                   <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-1">
                     {currentStep === 0 && 'Getting Started'}
-                    {currentStep === 1 && 'AI-Powered Analysis'}
-                    {currentStep === 2 && 'Pro Tip'}
+                    {currentStep === 1 && 'Field Mapping'}
+                    {currentStep === 2 && 'Schema Validation'}
                     {currentStep === 3 && 'CSV Preview'}
                     {currentStep === 4 && 'XML Preview'}
-                    {currentStep === 5 && 'SFTP Setup'}
+                    {currentStep === 5 && 'SFTP Upload'}
                     {currentStep === 6 && 'Configuration'}
                   </h3>
                   <p className="text-sm text-blue-700 dark:text-blue-300">
-                    {currentStep === 0 && 'Upload CSV or Excel files up to 100MB. AI will automatically detect the entity type from your data.'}
-                    {currentStep === 1 && 'Our AI analyzes your file and detects issues like missing fields, misspelled columns, and data quality problems. Review suggested fixes before proceeding.'}
-                    {currentStep === 2 && 'Our AI auto-maps 80-90% of fields correctly. Green badges show high confidence matches. Click any source field, then click a target to map manually.'}
+                    {currentStep === 0 && 'Upload CSV or Excel files up to 100MB. The system will automatically detect the entity type from your data.'}
+                    {currentStep === 1 && 'Semantic auto-mapping matches 80-90% of fields correctly. Green badges show high confidence matches. Click any source field, then click a target to map manually.'}
+                    {currentStep === 2 && 'System analyzes your file and detects issues like missing fields, misspelled columns, and data quality problems. Review suggested fixes before proceeding.'}
                     {currentStep === 3 && 'Review the CSV transformations carefully. Check date formats, field mappings, and data quality. Click "Transform to XML" to see the XML format.'}
                     {currentStep === 4 && 'Preview the XML format of your transformed data. Download the full XML file or proceed to upload to SFTP.'}
-                    {currentStep === 5 && 'Configure SFTP credentials to automatically upload transformed files to your server.'}
-                    {currentStep === 6 && 'Configure your Google Gemini API key for AI-powered features and select your preferred vector database.'}
+                    {currentStep === 5 && 'Upload transformed files directly to your SFTP server. Select credentials and track upload progress in real-time.'}
+                    {currentStep === 6 && 'Configure your Google Gemini API key for semantic mapping features and select your preferred vector database.'}
                   </p>
                 </div>
               </div>

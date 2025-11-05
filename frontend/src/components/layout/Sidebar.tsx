@@ -24,15 +24,15 @@ const navItems: NavItem[] = [
   },
   {
     id: 1,
-    name: 'Review Issues',
-    icon: '🔍',
-    description: 'AI-powered file analysis'
-  },
-  {
-    id: 2,
     name: 'Map Fields',
     icon: '🔗',
     description: 'Auto-map and adjust field mappings'
+  },
+  {
+    id: 2,
+    name: 'Review & Validate',
+    icon: '🔍',
+    description: 'Schema validation'
   },
   {
     id: 3,
@@ -48,9 +48,9 @@ const navItems: NavItem[] = [
   },
   {
     id: 5,
-    name: 'SFTP',
-    icon: '🔐',
-    description: 'Manage SFTP connections'
+    name: 'SFTP Upload',
+    icon: '📤',
+    description: 'Upload files to SFTP server'
   },
   {
     id: 6,
@@ -74,12 +74,12 @@ export const Sidebar: React.FC = () => {
 
   const isStepAccessible = (stepId: number): boolean => {
     if (stepId === 0) return true; // Upload
-    if (stepId === 1) return !!uploadedFile; // Review Issues - requires upload
-    if (stepId === 2) return !!uploadedFile; // Map Fields - requires upload
-    if (stepId === 3) return !!uploadedFile && mappings.length > 0; // Preview
-    if (stepId === 4) return !!uploadedFile && mappings.length > 0; // Export
-    if (stepId === 5) return true; // SFTP credentials always accessible
-    if (stepId === 6) return true; // Settings always accessible
+    if (stepId === 1) return !!uploadedFile; // Map Fields - requires upload
+    if (stepId === 2) return !!uploadedFile; // Review & Validate - requires upload
+    if (stepId === 3) return !!uploadedFile && mappings.length > 0; // Preview CSV
+    if (stepId === 4) return !!uploadedFile && mappings.length > 0; // Preview XML
+    if (stepId === 5) return true; // SFTP Upload - always accessible
+    if (stepId === 6) return true; // Settings - always accessible
     return false;
   };
 

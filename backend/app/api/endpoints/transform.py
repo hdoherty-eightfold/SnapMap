@@ -202,24 +202,12 @@ async def preview_xml_transformation(request: PreviewRequest):
 
         # Transform to XML
         xml_transformer = get_xml_transformer()
-        # Convert Pydantic models to dicts for xml_transformer
-        print(f"[XML_PREVIEW_DEBUG] Converting mappings to dicts...")
-        # Try model_dump() first (Pydantic v2), fallback to dict() (Pydantic v1)
-        try:
-            mappings_dicts = [m.model_dump() if hasattr(m, 'model_dump') else m.dict() for m in request.mappings]
-        except Exception as e:
-            print(f"[XML_PREVIEW_DEBUG] Error converting mappings: {e}")
-            # If both fail, just try to access as dict
-            mappings_dicts = [dict(m) for m in request.mappings]
-        print(f"[XML_PREVIEW_DEBUG] Mappings converted. First mapping: {mappings_dicts[0] if mappings_dicts else None}")
-
-        print(f"[XML_PREVIEW_DEBUG] Calling xml_transformer.transform_csv_to_xml...")
+        # Pass mappings directly - xml_transformer handles both dict and Pydantic objects
         xml_content = xml_transformer.transform_csv_to_xml(
             df=sample_df,
-            mappings=mappings_dicts,
+            mappings=request.mappings,
             entity_name=request.entity_name
         )
-        print(f"[XML_PREVIEW_DEBUG] XML transform complete, length: {len(xml_content)}")
 
         return {
             "xml_preview": xml_content,
@@ -231,14 +219,16 @@ async def preview_xml_transformation(request: PreviewRequest):
         raise
     except Exception as e:
         import traceback
+        import sys
         error_traceback = traceback.format_exc()
-        print(f"[XML_PREVIEW_ERROR] {error_traceback}")
+        print(f"[XML_PREVIEW_ERROR] {error_traceback}", file=sys.stderr, flush=True)
         raise HTTPException(
             status_code=500,
             detail={
                 "error": {
                     "code": "XML_PREVIEW_ERROR",
                     "message": f"Error generating XML preview: {str(e)}",
+                    "traceback": error_traceback
                 },
                 "status": 500
             }

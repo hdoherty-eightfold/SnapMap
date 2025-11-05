@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "SnapMap - HR Data Transformation Tool Frontend",
+  "description": "SnapMap - Semantic data mapping and transformation tool for Eightfold",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
