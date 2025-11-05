@@ -56,24 +56,51 @@ Upload CSV/Excel files → Auto-map fields → Validate data → Export as CSV o
 - Node.js 18+
 - Python 3.10+
 
-### Setup
+### Setup Instructions
 
-**Backend:**
+**1. Backend Setup:**
 ```bash
 cd backend
+
+# Install dependencies
 pip install -r requirements.txt
-python build_vector_db.py  # One-time setup
+
+# CRITICAL: Build vector database (required for semantic matching)
+# This creates the ChromaDB vector database - takes ~30 seconds
+python build_vector_db.py
+
+# Start backend server
 python -m uvicorn main:app --reload --port 8000
 ```
 
-**Frontend:**
+**2. Frontend Setup:**
 ```bash
 cd frontend
+
+# Install dependencies
 npm install
+
+# Start frontend server
 npm run dev
 ```
 
-Access at: http://localhost:5173
+**3. Access Application:**
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:8000
+- API Docs: http://localhost:8000/api/docs
+
+### Common Setup Issues
+
+**500 Error when uploading files:**
+- ❌ Forgot to run `python build_vector_db.py`
+- ✅ Run it in the `backend/` folder before starting the server
+
+**Import errors in Python:**
+- ❌ Wrong directory or virtual environment not activated
+- ✅ Make sure you're in `backend/` folder when running pip install
+
+**Port already in use:**
+- Change port: `uvicorn main:app --port 8001`
 
 ---
 
