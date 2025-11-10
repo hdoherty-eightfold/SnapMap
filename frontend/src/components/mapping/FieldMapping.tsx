@@ -135,12 +135,32 @@ export const FieldMapping: React.FC = () => {
   const progressPercentage = (progress / requiredFields.length) * 100;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
+      {/* Auto-Mapping Loading Overlay */}
+      {autoMapping && (
+        <div className="absolute inset-0 bg-white/80 dark:bg-gray-900/80 z-50 flex items-center justify-center rounded-lg backdrop-blur-sm">
+          <div className="text-center p-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-100 dark:bg-primary-900/30 mb-4">
+              <Sparkles className="w-8 h-8 text-primary-600 dark:text-primary-400 animate-pulse" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              Auto-Mapping Fields
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 max-w-md">
+              Using AI to semantically match your source fields to Eightfold target fields...
+            </p>
+            <div className="mt-4">
+              <LoadingSpinner size="sm" />
+            </div>
+          </div>
+        </div>
+      )}
+      
       {/* Header with Auto-Map Button */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between px-8 pt-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Field Mapping</h2>
-          <p className="text-gray-600 mt-1">Map your source fields to Eightfold target fields</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Field Mapping</h2>
+          <p className="text-gray-600 dark:text-gray-300 mt-1">Map your source fields to Eightfold target fields</p>
         </div>
         <Button
           variant="primary"
@@ -153,27 +173,8 @@ export const FieldMapping: React.FC = () => {
         </Button>
       </div>
 
-      {/* Progress Bar */}
-      <Card>
-        <CardContent>
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-gray-700">
-              Required Fields Mapped: {progress} / {requiredFields.length}
-            </span>
-            <span className="text-sm font-semibold text-primary-600">
-              {progressPercentage.toFixed(0)}%
-            </span>
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-3">
-            <div
-              className="bg-primary-600 h-3 rounded-full transition-all duration-500"
-              style={{ width: `${progressPercentage}%` }}
-            />
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Mapping Interface */}
+      <div className="px-8">
       <div className="relative">
         {/* Connection Lines Overlay */}
         <ConnectionLines
@@ -185,10 +186,10 @@ export const FieldMapping: React.FC = () => {
         <div className="grid grid-cols-2 gap-6">
           {/* Source Fields */}
           <Card>
-          <CardHeader>
-            <CardTitle>Your Source Fields</CardTitle>
-          </CardHeader>
-          <CardContent>
+            <CardHeader>
+              <CardTitle>Your Source Fields</CardTitle>
+            </CardHeader>
+            <CardContent>
             <div className="space-y-2">
               {uploadedFile.columns.map((field) => {
                 const isMapped = mappedSources.has(field);
@@ -202,7 +203,7 @@ export const FieldMapping: React.FC = () => {
                     className={`
                       p-3 rounded-lg border-2 cursor-pointer transition-all
                       ${isMapped
-                        ? 'border-success-300 bg-success-50 cursor-not-allowed'
+                        ? 'border-success-400 bg-success-200 cursor-not-allowed'
                         : isSelected
                         ? 'border-primary-500 bg-primary-50'
                         : 'border-gray-200 hover:border-primary-300'
@@ -224,15 +225,15 @@ export const FieldMapping: React.FC = () => {
                 );
               })}
             </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        {/* Target Fields */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Eightfold Target Fields</CardTitle>
-          </CardHeader>
-          <CardContent>
+          {/* Target Fields */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Eightfold Target Fields</CardTitle>
+            </CardHeader>
+            <CardContent>
             <div className="space-y-4">
               {/* Required Fields */}
               <div>
@@ -296,9 +297,11 @@ export const FieldMapping: React.FC = () => {
 
               {/* Optional Fields */}
               <div>
-                <p className="text-sm font-semibold text-gray-700 mb-2">Optional Fields</p>
-                <div className="space-y-2">
-                  {optionalFields.slice(0, 5).map((field) => {
+                <p className="text-sm font-semibold text-gray-700 mb-2">
+                  Optional Fields ({optionalFields.length})
+                </p>
+                <div className="space-y-2 max-h-96 overflow-y-auto pr-2">
+                  {optionalFields.map((field) => {
                     const mapping = getMappingForTarget(field.name);
 
                     return (
@@ -349,13 +352,15 @@ export const FieldMapping: React.FC = () => {
                 </div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </div>
       </div>
 
       {/* Validation Results */}
       {validationResults && (
+        <div className="px-8">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -393,11 +398,12 @@ export const FieldMapping: React.FC = () => {
             </div>
           </CardContent>
         </Card>
+        </div>
       )}
 
       {/* Actions */}
-      <div className="flex justify-between">
-        <Button variant="outline" onClick={() => window.location.reload()}>
+      <div className="flex justify-center gap-6 pt-6 pb-8 px-8 border-t border-gray-200 dark:border-gray-700">
+        <Button variant="outline" size="lg" onClick={() => window.location.reload()}>
           Start Over
         </Button>
         <Button

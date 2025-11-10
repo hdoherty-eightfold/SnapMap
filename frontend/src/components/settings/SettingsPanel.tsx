@@ -4,8 +4,9 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Settings, Key, Database, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { Settings, Key, Database, CheckCircle, XCircle, AlertCircle, Server, Plus, Trash2 } from 'lucide-react';
 import axios from 'axios';
+import { getSFTPCredentials, addSFTPCredential, deleteSFTPCredential, testSFTPConnection, type SFTPCredential } from '../../services/sftp-api';
 
 interface VectorDBOption {
   id: string;
@@ -54,8 +55,21 @@ const SettingsPanel: React.FC = () => {
   const [selectedAIProvider, setSelectedAIProvider] = useState('gemini');
   const [testingConnection, setTestingConnection] = useState(false);
 
+  // SFTP state
+  const [sftpCredentials, setSftpCredentials] = useState<SFTPCredential[]>([]);
+  const [showSFTPForm, setShowSFTPForm] = useState(false);
+  const [sftpForm, setSftpForm] = useState({
+    name: '',
+    host: '',
+    port: '22',
+    username: '',
+    password: '',
+    remote_path: '/'
+  });
+
   useEffect(() => {
     loadConfig();
+    loadSFTPCredentials();
   }, []);
 
   const loadConfig = async () => {
@@ -147,6 +161,67 @@ const SettingsPanel: React.FC = () => {
     }
   };
 
+  // SFTP Functions
+  const loadSFTPCredentials = async () => {
+    try {
+      const creds = await getSFTPCredentials();
+      setSftpCredentials(creds);
+    } catch (error) {
+      console.error('Error loading SFTP credentials:', error);
+    }
+  };
+
+  const handleSaveSFTP = async () => {
+    if (!sftpForm.name || !sftpForm.host || !sftpForm.username || !sftpForm.password) {
+      setMessage({ type: 'error', text: 'Please fill in all required fields' });
+      return;
+    }
+
+    setSaving(true);
+    try {
+      await addSFTPCredential({
+        ...sftpForm,
+        port: parseInt(sftpForm.port)
+      });
+      setMessage({ type: 'success', text: 'SFTP credentials saved successfully!' });
+      setSftpForm({ name: '', host: '', port: '22', username: '', password: '', remote_path: '/' });
+      setShowSFTPForm(false);
+      loadSFTPCredentials();
+    } catch (error: any) {
+      setMessage({ type: 'error', text: error.message || 'Failed to save SFTP credentials' });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDeleteSFTP = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this SFTP connection?')) return;
+
+    try {
+      await deleteSFTPCredential(id);
+      setMessage({ type: 'success', text: 'SFTP connection deleted' });
+      loadSFTPCredentials();
+    } catch (error: any) {
+      setMessage({ type: 'error', text: error.message || 'Failed to delete SFTP connection' });
+    }
+  };
+
+  const handleTestSFTP = async (id: string) => {
+    setTestingConnection(true);
+    try {
+      const result = await testSFTPConnection(id);
+      if (result.success) {
+        setMessage({ type: 'success', text: 'SFTP connection successful!' });
+      } else {
+        setMessage({ type: 'error', text: `SFTP connection failed: ${result.error}` });
+      }
+    } catch (error: any) {
+      setMessage({ type: 'error', text: error.message || 'Failed to test SFTP connection' });
+    } finally {
+      setTestingConnection(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -201,7 +276,7 @@ const SettingsPanel: React.FC = () => {
                     <span className="ml-2 text-xs text-green-600 dark:text-green-400">✓ Configured</span>
                   )}
                 </label>
-                <div className="flex gap-2">
+                <div className="flex gap-4">
                   <input
                     type="password"
                     value={geminiApiKey}
@@ -212,14 +287,14 @@ const SettingsPanel: React.FC = () => {
                   <button
                     onClick={() => saveApiKey('GEMINI_API_KEY', geminiApiKey)}
                     disabled={saving || !geminiApiKey}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Save
                   </button>
                   <button
                     onClick={() => testAPIConnection('gemini')}
                     disabled={testingConnection || !config?.api_keys.gemini_configured}
-                    className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Test
                   </button>
@@ -240,7 +315,7 @@ const SettingsPanel: React.FC = () => {
                     <span className="ml-2 text-xs text-green-600 dark:text-green-400">✓ Configured</span>
                   )}
                 </label>
-                <div className="flex gap-2">
+                <div className="flex gap-4">
                   <input
                     type="password"
                     value={openaiApiKey}
@@ -251,7 +326,7 @@ const SettingsPanel: React.FC = () => {
                   <button
                     onClick={() => saveApiKey('OPENAI_API_KEY', openaiApiKey)}
                     disabled={saving || !openaiApiKey}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Save
                   </button>
@@ -339,6 +414,128 @@ const SettingsPanel: React.FC = () => {
                   </div>
                 </label>
               ))}
+            </div>
+          </div>
+
+          {/* SFTP Configuration */}
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Server className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">SFTP Connections</h2>
+              </div>
+              <button
+                onClick={() => setShowSFTPForm(!showSFTPForm)}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center gap-2"
+              >
+                <Plus className="w-4 h-4" />
+                Add Connection
+              </button>
+            </div>
+
+            {/* SFTP Form */}
+            {showSFTPForm && (
+              <div className="mb-4 p-4 border border-indigo-200 dark:border-indigo-800 rounded-lg bg-indigo-50 dark:bg-indigo-900/20">
+                <h3 className="font-medium text-gray-900 dark:text-white mb-3">New SFTP Connection</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <input
+                    type="text"
+                    placeholder="Connection Name"
+                    value={sftpForm.name}
+                    onChange={(e) => setSftpForm({ ...sftpForm, name: e.target.value })}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Host"
+                    value={sftpForm.host}
+                    onChange={(e) => setSftpForm({ ...sftpForm, host: e.target.value })}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Port"
+                    value={sftpForm.port}
+                    onChange={(e) => setSftpForm({ ...sftpForm, port: e.target.value })}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    value={sftpForm.username}
+                    onChange={(e) => setSftpForm({ ...sftpForm, username: e.target.value })}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white"
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={sftpForm.password}
+                    onChange={(e) => setSftpForm({ ...sftpForm, password: e.target.value })}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Remote Path (optional)"
+                    value={sftpForm.remote_path}
+                    onChange={(e) => setSftpForm({ ...sftpForm, remote_path: e.target.value })}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white"
+                  />
+                </div>
+                <div className="flex justify-end gap-4 mt-3">
+                  <button
+                    onClick={() => setShowSFTPForm(false)}
+                    className="px-6 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSaveSFTP}
+                    disabled={saving}
+                    className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+                  >
+                    {saving ? 'Saving...' : 'Save'}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Existing Connections */}
+            <div className="space-y-3">
+              {sftpCredentials.length === 0 ? (
+                <p className="text-gray-500 dark:text-gray-400 text-sm text-center py-4">
+                  No SFTP connections configured. Click "Add Connection" to get started.
+                </p>
+              ) : (
+                sftpCredentials.map((cred) => (
+                  <div key={cred.id} className="flex items-center justify-between p-4 border border-gray-300 dark:border-gray-700 rounded-lg">
+                    <div>
+                      <p className="font-medium text-gray-900 dark:text-white">{cred.name}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {cred.username}@{cred.host}:{cred.port}
+                      </p>
+                      {cred.remote_path && (
+                        <p className="text-xs text-gray-500 dark:text-gray-500">Path: {cred.remote_path}</p>
+                      )}
+                    </div>
+                    <div className="flex gap-4">
+                      <button
+                        onClick={() => handleTestSFTP(cred.id)}
+                        disabled={testingConnection}
+                        className="px-4 py-2 text-sm bg-gray-600 text-white rounded hover:bg-gray-700 disabled:opacity-50"
+                      >
+                        Test
+                      </button>
+                      <button
+                        onClick={() => handleDeleteSFTP(cred.id)}
+                        className="px-4 py-2 text-sm bg-red-600 text-white rounded hover:bg-red-700 flex items-center gap-1"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>

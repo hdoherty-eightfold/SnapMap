@@ -1,6 +1,6 @@
 /**
  * FileUpload Component
- * Drag-and-drop file upload for CSV/Excel files
+ * Drag-and-drop file upload for CSV/XML files
  */
 
 import React, { useState, useCallback, useEffect } from 'react';
@@ -324,10 +324,12 @@ export const FileUpload: React.FC = () => {
                   </p>
                 </div>
 
-                <Button variant="primary" size="lg" type="button">
-                  <File className="w-4 h-4" />
-                  Browse Files
-                </Button>
+                <div onClick={() => document.getElementById('file-upload')?.click()}>
+                  <Button variant="primary" size="lg" type="button">
+                    <File className="w-4 h-4" />
+                    Browse Files
+                  </Button>
+                </div>
               </label>
             </>
           )}

@@ -58,15 +58,22 @@ class FieldMapper:
         self,
         source_fields: List[str],
         target_schema: EntitySchema,
-        min_confidence: float = None
+        min_confidence: float = None,
+        column_types: Optional[Dict[str, str]] = None
     ) -> List[Mapping]:
         """
-        Automatically map source fields to target fields using semantic matching
+        Automatically map source fields to target fields using hybrid approach
+
+        Uses multi-stage matching:
+        1. Alias/exact/partial matching (highest priority - 85-100% confidence)
+        2. Semantic embedding matching (medium priority - 70-85% confidence)
+        3. Fuzzy string matching (fallback - 70-84% confidence)
 
         Args:
             source_fields: List of source field names
             target_schema: Target entity schema
             min_confidence: Minimum confidence threshold (default: 0.70)
+            column_types: Optional dict mapping column names to detected types (email, phone, date, etc.)
 
         Returns:
             List of Mapping objects sorted by confidence (highest first)
@@ -74,19 +81,40 @@ class FieldMapper:
         if min_confidence is not None:
             self.min_confidence = min_confidence
 
-        # Try semantic matching first (much better!)
-        if self.semantic_matcher and self.semantic_matcher.model:
+        column_types = column_types or {}
+        mappings = []
+        used_targets = set()
+
+        # STAGE 1: Try enhanced fuzzy/alias matching first (most accurate for known patterns)
+        for source_field in source_fields:
+            best_match = self.get_best_match(
+                source_field,
+                target_schema.fields,
+                used_targets
+            )
+
+            # Accept high-confidence matches (85%+) immediately
+            if best_match and best_match.confidence >= 0.85:
+                mappings.append(best_match)
+                used_targets.add(best_match.target)
+
+        # Track which source fields were mapped
+        mapped_sources = {m.source for m in mappings}
+        unmapped_sources = [f for f in source_fields if f not in mapped_sources]
+
+        # STAGE 2: Try semantic matching for remaining unmapped fields
+        if unmapped_sources and self.semantic_matcher and self.semantic_matcher.model:
             try:
                 semantic_mappings = self.semantic_matcher.map_fields_batch(
-                    source_fields,
+                    unmapped_sources,
                     target_schema.entity_name,
-                    min_confidence=self.min_confidence
+                    min_confidence=self.min_confidence,
+                    column_types=column_types  # Pass column types to semantic matcher
                 )
 
-                # Convert to Mapping objects
-                mappings = []
+                # Convert semantic mappings to Mapping objects
                 for sm in semantic_mappings:
-                    if sm['target_field']:
+                    if sm['target_field'] and sm['target_field'] not in used_targets:
                         alternatives = [
                             Alternative(target=alt['target_field'], confidence=alt['similarity'])
                             for alt in sm.get('alternatives', [])
@@ -98,28 +126,27 @@ class FieldMapper:
                             method='semantic',
                             alternatives=alternatives if alternatives else None
                         ))
-
-                mappings.sort(key=lambda m: m.confidence, reverse=True)
-                return mappings
+                        used_targets.add(sm['target_field'])
+                        mapped_sources.add(sm['source_field'])
 
             except Exception as e:
-                print(f"Semantic mapping failed, falling back to fuzzy: {e}")
+                print(f"Semantic mapping encountered error: {e}")
 
-        # Fallback to traditional fuzzy matching
-        mappings = []
-        used_targets = set()
-
-        for source_field in source_fields:
+        # STAGE 3: Final pass - try lower confidence fuzzy matches for any remaining fields
+        still_unmapped = [f for f in source_fields if f not in mapped_sources]
+        for source_field in still_unmapped:
             best_match = self.get_best_match(
                 source_field,
                 target_schema.fields,
                 used_targets
             )
 
+            # Accept matches above minimum confidence threshold
             if best_match and best_match.confidence >= self.min_confidence:
                 mappings.append(best_match)
                 used_targets.add(best_match.target)
 
+        # Sort by confidence (highest first)
         mappings.sort(key=lambda m: m.confidence, reverse=True)
         return mappings
 
@@ -185,7 +212,13 @@ class FieldMapper:
         target: str
     ) -> Tuple[float, str]:
         """
-        Calculate match confidence and method
+        Calculate match confidence and method using multi-stage priority-based matching
+
+        Priority order:
+        1. Exact match (100% confidence)
+        2. Alias dictionary lookup (95% confidence)
+        3. Substring/partial matching (85-90% confidence)
+        4. Fuzzy string matching (70-84% confidence)
 
         Args:
             source: Source field name
@@ -194,29 +227,140 @@ class FieldMapper:
         Returns:
             Tuple of (confidence, method)
             - confidence: 0.0 to 1.0
-            - method: "exact" | "alias" | "fuzzy"
+            - method: "exact" | "alias" | "partial" | "fuzzy"
         """
         # Normalize strings for comparison
-        source_norm = self._normalize(source)
-        target_norm = self._normalize(target)
+        source_norm = self.normalize_field_name(source)
+        target_norm = self.normalize_field_name(target)
 
-        # 1. Exact match (100% confidence)
+        # STAGE 1: Exact match (100% confidence)
         if source_norm == target_norm:
             return (1.0, "exact")
 
-        # 2. Alias match (98% confidence)
+        # STAGE 2: Alias dictionary lookup (95% confidence)
         if target in self.alias_dictionary:
-            aliases = [self._normalize(a) for a in self.alias_dictionary[target]]
-            if source_norm in aliases:
-                return (0.98, "alias")
+            # Normalize all aliases for comparison
+            aliases_norm = [self.normalize_field_name(a) for a in self.alias_dictionary[target]]
+            if source_norm in aliases_norm:
+                return (0.95, "alias")
 
-        # 3. Fuzzy match using Levenshtein distance (70-97% confidence)
+        # STAGE 3: Partial/Substring matching (85-90% confidence)
+        # Handles cases like:
+        # - "PersonID" contains "ID" -> matches "CANDIDATE_ID"
+        # - "WorkEmails" contains "Email" -> matches "EMAIL"
+        partial_score = self._calculate_partial_match(source_norm, target_norm)
+        if partial_score > 0:
+            return (partial_score, "partial")
+
+        # STAGE 4: Enhanced alias matching with partial overlap
+        # Check if source matches any alias substring
+        if target in self.alias_dictionary:
+            for alias in self.alias_dictionary[target]:
+                alias_norm = self.normalize_field_name(alias)
+                partial_alias_score = self._calculate_partial_match(source_norm, alias_norm)
+                if partial_alias_score >= 0.85:
+                    # Adjust confidence slightly lower for partial alias match
+                    return (min(partial_alias_score - 0.05, 0.93), "alias_partial")
+
+        # STAGE 5: Fuzzy match using Levenshtein distance (70-84% confidence)
         similarity = self._levenshtein_similarity(source_norm, target_norm)
 
         if similarity >= 0.70:
-            return (similarity, "fuzzy")
+            # Cap fuzzy matching at 0.84 to prioritize other methods
+            return (min(similarity, 0.84), "fuzzy")
 
         return (0.0, "none")
+
+    def _calculate_partial_match(self, source: str, target: str) -> float:
+        """
+        Calculate partial/substring match confidence
+
+        Handles compound field names like:
+        - "personid" vs "candidateid" (both contain "id")
+        - "workemails" vs "email" ("email" is substring)
+
+        Args:
+            source: Normalized source field name
+            target: Normalized target field name
+
+        Returns:
+            Confidence score (0.0 to 0.90)
+        """
+        if not source or not target:
+            return 0.0
+
+        # Direct substring match
+        if source in target or target in source:
+            # Calculate confidence based on length ratio
+            min_len = min(len(source), len(target))
+            max_len = max(len(source), len(target))
+            ratio = min_len / max_len
+
+            # High confidence for good substring matches
+            if ratio >= 0.6:  # e.g., "email" in "workemails" (5/10 = 0.5)
+                return 0.85 + (ratio * 0.05)  # 0.85 to 0.90
+
+        # Check for common suffix/prefix patterns
+        # e.g., "personid" and "candidateid" both end with "id"
+        common_suffixes = ["id", "name", "email", "phone", "date", "time", "timestamp", "ts", "url", "location"]
+        for suffix in common_suffixes:
+            if source.endswith(suffix) and target.endswith(suffix):
+                # Both end with same meaningful suffix
+                return 0.82
+
+        # Check for common word components
+        # Split camelCase and extract words
+        source_words = self._extract_words(source)
+        target_words = self._extract_words(target)
+
+        if source_words and target_words:
+            # Calculate word overlap
+            common_words = source_words.intersection(target_words)
+            if common_words:
+                overlap_ratio = len(common_words) / max(len(source_words), len(target_words))
+                if overlap_ratio >= 0.5:
+                    return 0.80 + (overlap_ratio * 0.05)
+
+        return 0.0
+
+    def _extract_words(self, text: str) -> Set[str]:
+        """
+        Extract meaningful word components from a field name
+
+        Examples:
+        - "workemails" -> {"work", "email", "emails"}
+        - "personid" -> {"person", "id"}
+        - "lastactivitytimestamp" -> {"last", "activity", "time", "timestamp"}
+
+        Args:
+            text: Normalized field name
+
+        Returns:
+            Set of extracted words
+        """
+        words = set()
+
+        # Common word patterns in field names
+        patterns = [
+            "work", "home", "business", "personal", "primary", "secondary",
+            "first", "last", "middle", "full", "legal",
+            "email", "emails", "phone", "phones", "address",
+            "name", "id", "number", "code", "key",
+            "date", "time", "timestamp", "ts", "datetime",
+            "activity", "modified", "updated", "created",
+            "person", "candidate", "employee", "user", "staff", "worker",
+            "location", "office", "site", "city", "country",
+            "title", "position", "role", "job",
+            "status", "state", "stage",
+            "url", "link", "website"
+        ]
+
+        # Check for each pattern in the text
+        for pattern in patterns:
+            if pattern in text:
+                words.add(pattern)
+
+        return words
 
     def _normalize(self, text: str) -> str:
         """
@@ -228,6 +372,36 @@ class FieldMapper:
         text = re.sub(r'[^a-zA-Z0-9]', '', text)
         # Convert to lowercase
         return text.lower()
+
+    def normalize_field_name(self, text: str) -> str:
+        """
+        Advanced normalization for field name matching
+
+        Handles multi-word variations:
+        - "WorkEmails" -> "workemails"
+        - "Work_Emails" -> "workemails"
+        - "work-emails" -> "workemails"
+        - "WORK EMAILS" -> "workemails"
+
+        Args:
+            text: Field name to normalize
+
+        Returns:
+            Normalized field name (lowercase, no separators)
+        """
+        if not text:
+            return ""
+
+        # Convert to lowercase
+        normalized = text.lower()
+
+        # Remove all separators: underscores, hyphens, spaces
+        normalized = re.sub(r'[_\-\s]+', '', normalized)
+
+        # Remove any remaining special characters
+        normalized = re.sub(r'[^a-z0-9]', '', normalized)
+
+        return normalized
 
     def _levenshtein_similarity(self, s1: str, s2: str) -> float:
         """

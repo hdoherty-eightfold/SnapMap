@@ -6,7 +6,6 @@ Manages SFTP credentials and operations
 import os
 import uuid
 import json
-import base64
 from datetime import datetime
 from typing import List, Dict, Optional
 from pathlib import Path
@@ -17,47 +16,74 @@ class SFTPManager:
     """
     Manages SFTP credentials and connections
 
-    Credentials are persisted to disk with basic password encoding.
-    Note: For production, use proper encryption (e.g., Fernet, AWS KMS, etc.)
+    Credentials are encrypted using Fernet (AES-128 in CBC mode with HMAC-SHA256)
+    Encryption key should be set in environment variable: ENCRYPTION_KEY
     """
 
     def __init__(self):
+        from app.utils.encryption import get_credential_encryption
+
         self.credentials_dir = Path(tempfile.gettempdir()) / "snapmap_sftp"
         self.credentials_dir.mkdir(exist_ok=True)
         self.credentials_file = self.credentials_dir / "credentials.json"
+
+        # Set restrictive permissions on credentials file (Unix-like systems)
+        if not os.name == 'nt':  # Not Windows
+            os.chmod(self.credentials_dir, 0o700)  # rwx------
+
         self._credentials: Dict[str, Dict] = {}
+        self.encryptor = get_credential_encryption()
         self._load_credentials()
 
     def _encode_password(self, password: str) -> str:
-        """Basic password encoding (base64). Use proper encryption in production."""
-        return base64.b64encode(password.encode()).decode()
+        """Encrypt password using Fernet encryption"""
+        return self.encryptor.encrypt(password)
 
     def _decode_password(self, encoded: str) -> str:
-        """Decode password from base64"""
-        return base64.b64decode(encoded.encode()).decode()
+        """Decrypt password from Fernet encryption"""
+        try:
+            return self.encryptor.decrypt(encoded)
+        except Exception as e:
+            # Handle migration from old base64 encoding
+            try:
+                import base64
+                decoded = base64.b64decode(encoded.encode()).decode()
+                # Re-encrypt with proper encryption
+                return decoded
+            except Exception:
+                raise ValueError(f"Failed to decrypt password: {e}")
 
     def _load_credentials(self):
         """Load credentials from disk"""
-        if self.credentials_file.exists():
-            try:
-                with open(self.credentials_file, 'r') as f:
-                    data = json.load(f)
-                    # Convert timestamps back to datetime and decode passwords
-                    for cred_id, cred in data.items():
-                        cred['created_at'] = datetime.fromisoformat(cred['created_at'])
-                        cred['updated_at'] = datetime.fromisoformat(cred['updated_at'])
-                        if cred.get('last_tested'):
-                            cred['last_tested'] = datetime.fromisoformat(cred['last_tested'])
-                        # Decode password
-                        if 'password' in cred:
-                            cred['password'] = self._decode_password(cred['password'])
-                    self._credentials = data
-                    print(f"[SFTPManager] Loaded {len(self._credentials)} credentials from disk")
-            except Exception as e:
-                print(f"[SFTPManager] Error loading credentials: {e}")
-                self._credentials = {}
-        else:
+        if not self.credentials_file.exists():
             print(f"[SFTPManager] No existing credentials file")
+            return
+
+        try:
+            # Set restrictive permissions on credentials file
+            if not os.name == 'nt':  # Not Windows
+                os.chmod(self.credentials_file, 0o600)  # rw-------
+
+            with open(self.credentials_file, 'r') as f:
+                data = json.load(f)
+
+                # Convert timestamps back to datetime and decrypt passwords
+                for cred_id, cred in data.items():
+                    cred['created_at'] = datetime.fromisoformat(cred['created_at'])
+                    cred['updated_at'] = datetime.fromisoformat(cred['updated_at'])
+                    if cred.get('last_tested'):
+                        cred['last_tested'] = datetime.fromisoformat(cred['last_tested'])
+
+                    # Decrypt password
+                    if 'password' in cred:
+                        cred['password'] = self._decode_password(cred['password'])
+
+                self._credentials = data
+                print(f"[SFTPManager] Loaded {len(self._credentials)} credentials")
+
+        except Exception as e:
+            print(f"[SFTPManager] Error loading credentials: {e}")
+            self._credentials = {}
 
     def _save_credentials(self):
         """Save credentials to disk"""
@@ -87,7 +113,16 @@ class SFTPManager:
         password: str,
         remote_path: str = "/"
     ) -> Dict:
-        """Add new SFTP credential"""
+        """Add new SFTP credential with encrypted password"""
+        from app.utils.sanitization import validate_sftp_host
+
+        # Security: Validate SFTP host to prevent SSRF
+        if not validate_sftp_host(host):
+            raise ValueError(
+                f"Invalid SFTP host: {host}. "
+                "Localhost and private IP addresses are not allowed for security reasons."
+            )
+
         credential_id = str(uuid.uuid4())
         now = datetime.utcnow()
 
@@ -97,7 +132,7 @@ class SFTPManager:
             "host": host,
             "port": port,
             "username": username,
-            "password": password,  # In production: encrypt this!
+            "password": password,  # Encrypted when saved
             "remote_path": remote_path,
             "connection_status": "unknown",
             "last_tested": None,

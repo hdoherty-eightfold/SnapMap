@@ -1,0 +1,42 @@
+{
+  "xml_size_bytes": 245307,
+  "special_char_tests": {
+    "Türkiye": {
+      "found": false,
+      "count": 0
+    },
+    "Torreón": {
+      "found": false,
+      "count": 0
+    },
+    "Kayır": {
+      "found": true,
+      "count": 1
+    },
+    "Uveys": {
+      "found": true,
+      "count": 1
+    },
+    "Pivaral": {
+      "found": true,
+      "count": 1
+    },
+    "García": {
+      "found": true,
+      "count": 3
+    },
+    "Muñoz": {
+      "found": false,
+      "count": 0
+    }
+  },
+  "xml_valid": true,
+  "root_tag": "EF_Employee_List",
+  "record_count": 1169,
+  "first_record_fields": [
+    "first_name",
+    "last_name",
+    "last_activity_ts",
+    "candidate_id"
+  ]
+}

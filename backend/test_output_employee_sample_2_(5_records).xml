@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EF_Employee_List>
+  <EF_Employee>
+    <first_name>Michael</first_name>
+    <last_name>Anderson</last_name>
+    <email_list>
+      <email>michael.anderson@company.com</email>
+    </email_list>
+    <title>Software Architect</title>
+    <location>Boston</location>
+    <employee_id>SF001</employee_id>
+    <hiring_date>2020-04-10</hiring_date>
+    <business_unit>Engineering</business_unit>
+    <phone_list>
+      <phone>+1-555-0200</phone>
+    </phone_list>
+    <manager>SF010</manager>
+  </EF_Employee>
+  <EF_Employee>
+    <first_name>Jennifer</first_name>
+    <last_name>Thomas</last_name>
+    <email_list>
+      <email>jennifer.thomas@company.com</email>
+    </email_list>
+    <title>Product Owner</title>
+    <location>Denver</location>
+    <employee_id>SF002</employee_id>
+    <hiring_date>2019-01-25</hiring_date>
+    <business_unit>Product</business_unit>
+    <phone_list>
+      <phone>+1-555-0201</phone>
+    </phone_list>
+    <manager>SF011</manager>
+  </EF_Employee>
+  <EF_Employee>
+    <first_name>Christopher</first_name>
+    <last_name>Jackson</last_name>
+    <email_list>
+      <email>christopher.jackson@company.com</email>
+    </email_list>
+    <title>DevOps Engineer</title>
+    <location>Portland</location>
+    <employee_id>SF003</employee_id>
+    <hiring_date>2021-11-05</hiring_date>
+    <business_unit>Engineering</business_unit>
+    <phone_list>
+      <phone>+1-555-0202</phone>
+    </phone_list>
+    <manager>SF001</manager>
+  </EF_Employee>
+  <EF_Employee>
+    <first_name>Jessica</first_name>
+    <last_name>White</last_name>
+    <email_list>
+      <email>jessica.white@company.com</email>
+    </email_list>
+    <title>Marketing Manager</title>
+    <location>Miami</location>
+    <employee_id>SF004</employee_id>
+    <hiring_date>2020-08-14</hiring_date>
+    <business_unit>Marketing</business_unit>
+    <phone_list>
+      <phone>+1-555-0203</phone>
+    </phone_list>
+    <manager>SF012</manager>
+  </EF_Employee>
+  <EF_Employee>
+    <first_name>Daniel</first_name>
+    <last_name>Harris</last_name>
+    <email_list>
+      <email>daniel.harris@company.com</email>
+    </email_list>
+    <title>VP Engineering</title>
+    <location>San Francisco</location>
+    <employee_id>SF005</employee_id>
+    <hiring_date>2018-03-22</hiring_date>
+    <business_unit>Engineering</business_unit>
+    <phone_list>
+      <phone>+1-555-0204</phone>
+    </phone_list>
+    <manager>CEO</manager>
+  </EF_Employee>
+</EF_Employee_List>

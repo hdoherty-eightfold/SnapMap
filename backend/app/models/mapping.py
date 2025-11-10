@@ -6,7 +6,7 @@ from typing import List, Optional, Literal
 from pydantic import BaseModel, Field
 
 
-MatchMethod = Literal["exact", "alias", "fuzzy", "manual"]
+MatchMethod = Literal["exact", "alias", "partial", "alias_partial", "fuzzy", "manual", "semantic"]
 
 
 class Alternative(BaseModel):
@@ -26,7 +26,8 @@ class Mapping(BaseModel):
 
 class AutoMapRequest(BaseModel):
     """Request for auto-mapping"""
-    source_fields: List[str] = Field(..., description="List of source field names")
+    file_id: Optional[str] = Field(None, description="File ID from upload (if provided, source_fields will be extracted)")
+    source_fields: Optional[List[str]] = Field(None, description="List of source field names (optional if file_id is provided)")
     target_schema: Optional[str] = Field("employee", description="Target schema name")
     min_confidence: Optional[float] = Field(0.70, ge=0.0, le=1.0, description="Minimum confidence threshold")
 

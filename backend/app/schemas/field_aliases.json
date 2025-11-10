@@ -1,23 +1,120 @@
 {
-  "EMPLOYEE_ID": [
-    "EmpID", "EmployeeID", "EmpNo", "EmployeeNumber", "EE_ID", "ID",
-    "WorkerID", "Worker_ID", "PersonID", "StaffID", "Staff_ID",
-    "EmployeeNo", "Employee_No", "EmpNum", "userId", "user_id", "UserID"
+  "CANDIDATE_ID": [
+    "PersonID", "Person_ID", "CandidateID", "Candidate_ID", "ID", "EmpID", "EmployeeID",
+    "EmpNo", "EmployeeNumber", "EE_ID", "WorkerID", "Worker_ID", "StaffID", "Staff_ID",
+    "EmployeeNo", "Employee_No", "EmpNum", "userId", "user_id", "UserID", "CandID",
+    "Cand_ID", "ApplicantID", "Applicant_ID", "PersonId", "personid", "candidateid"
   ],
   "FIRST_NAME": [
     "FirstName", "FName", "GivenName", "First", "Firstname", "First_Name",
     "Name", "ForeName", "Legal_First_Name", "LegalFirstName", "firstName",
-    "first_name", "Given_Name", "ChristianName"
+    "first_name", "Given_Name", "ChristianName", "firstname", "givenname"
   ],
   "LAST_NAME": [
     "LastName", "LName", "Surname", "Last", "FamilyName", "Lastname",
     "Last_Name", "SecondName", "Legal_Last_Name", "LegalLastName",
-    "lastName", "last_name", "Family_Name", "Sur_Name"
+    "lastName", "last_name", "Family_Name", "Sur_Name", "lastname", "surname"
   ],
   "EMAIL": [
-    "Email", "EmailAddress", "E-mail", "WorkEmail", "Mail", "EmailAddr",
-    "E-Mail", "email", "Email_Address", "Work_Email", "BusinessEmail",
-    "email_address", "EmailId", "Email_ID", "MailAddress"
+    "WorkEmails", "Work_Emails", "WorkEmail", "Work_Email", "Email", "EmailAddress",
+    "E-mail", "Mail", "EmailAddr", "E-Mail", "email", "Email_Address",
+    "BusinessEmail", "Business_Email", "email_address", "EmailId", "Email_ID",
+    "MailAddress", "ContactEmail", "Contact_Email", "PrimaryEmail", "Primary_Email",
+    "HomeEmails", "Home_Emails", "HomeEmail", "Home_Email", "PersonalEmail",
+    "workemail", "workemails", "emailaddress", "businessemail"
+  ],
+  "PHONE": [
+    "WorkPhones", "Work_Phones", "WorkPhone", "Work_Phone", "HomePhones", "Home_Phones",
+    "HomePhone", "Home_Phone", "PhoneNumber", "Phone_Number", "Phone", "Tel", "Telephone",
+    "Mobile", "Contact", "ContactNumber", "BusinessPhone", "Business_Phone",
+    "phone", "phone_number", "TelephoneNumber", "Tel_Number", "PhoneNo", "ContactNo",
+    "MobileNumber", "Mobile_Number", "CellPhone", "Cell_Phone", "PrimaryPhone",
+    "workphone", "workphones", "homephone", "homephones", "phonenumber"
+  ],
+  "LAST_ACTIVITY_TS": [
+    "LastActivityTimeStamp", "Last_Activity_Time_Stamp", "LastActivity", "Last_Activity",
+    "LastActivityTS", "Last_Activity_TS", "UpdatedAt", "Updated_At", "ModifiedDate",
+    "Modified_Date", "LastModified", "Last_Modified", "LastUpdated", "Last_Updated",
+    "UpdateDate", "Update_Date", "ModifiedAt", "Modified_At", "LastModifiedDate",
+    "LastUpdatedDate", "Timestamp", "TimeStamp", "Time_Stamp", "ActivityDate",
+    "lastactivity", "lastactivitytimestamp", "updatedat", "modifieddate"
+  ],
+  "APPLICATION_DATE": [
+    "ApplicationDate", "Application_Date", "AppliedDate", "Applied_Date", "ApplyDate",
+    "Apply_Date", "SubmissionDate", "Submission_Date", "CreateDate", "Create_Date",
+    "CreatedAt", "Created_At", "CreatedDate", "RegistrationDate", "Registration_Date",
+    "applicationdate", "applieddate", "createddate"
+  ],
+  "POSITION_APPLIED": [
+    "PositionApplied", "Position_Applied", "JobApplied", "Job_Applied", "RoleApplied",
+    "Role_Applied", "Position", "JobTitle", "Job_Title", "AppliedPosition",
+    "Applied_Position", "TargetPosition", "Target_Position", "DesiredPosition",
+    "positionapplied", "jobapplied", "jobtitle"
+  ],
+  "STATUS": [
+    "Status", "ApplicationStatus", "Application_Status", "CandidateStatus",
+    "Candidate_Status", "State", "ProcessStatus", "Process_Status", "Stage",
+    "CurrentStage", "Current_Stage", "Visibility", "VisibilityAsCandidate",
+    "Visibility_As_Candidate", "status", "applicationstatus", "candidatestatus"
+  ],
+  "SOURCE": [
+    "Source", "Referral", "ReferralSource", "Referral_Source", "Channel",
+    "SourceChannel", "Source_Channel", "ApplicationSource", "Application_Source",
+    "RecruitmentSource", "Recruitment_Source", "Origin", "source", "referralsource"
+  ],
+  "RESUME_URL": [
+    "ResumeURL", "Resume_URL", "CVUrl", "CV_URL", "ResumeLink", "Resume_Link",
+    "CVLink", "CV_Link", "DocumentURL", "Document_URL", "AttachmentURL",
+    "Attachment_URL", "resumeurl", "cvurl"
+  ],
+  "SALUTATION": [
+    "Salutation", "Title", "Prefix", "NamePrefix", "Name_Prefix", "Honorific",
+    "salutation", "prefix"
+  ],
+  "LOCATION": [
+    "HomeLocation", "Home_Location", "Location", "Office", "Site", "WorkLocation",
+    "Work_Location", "Branch", "City", "OfficeLocation", "Office_Location",
+    "WorkSite", "Work_Site", "location", "work_location", "PrimaryLocation",
+    "HomeOffice", "BaseLocation", "Workplace", "WorkPlace", "Address", "HomeAddress",
+    "Home_Address", "homelocation", "worklocation"
+  ],
+  "WEBSITE": [
+    "Website", "WebSite", "Web_Site", "URL", "PersonalWebsite", "Personal_Website",
+    "Homepage", "Home_Page", "WebURL", "Web_URL", "website", "url"
+  ],
+  "SKILLS": [
+    "Skills", "Skill", "SkillSet", "Skill_Set", "Competencies", "Competency",
+    "Expertise", "TechnicalSkills", "Technical_Skills", "CoreSkills", "Core_Skills",
+    "skills", "skillset", "competencies"
+  ],
+  "SUMMARY": [
+    "Summary", "Bio", "Biography", "Profile", "ProfileSummary", "Profile_Summary",
+    "About", "AboutMe", "About_Me", "Description", "Overview", "Introduction",
+    "summary", "bio", "profile"
+  ],
+  "INTERNAL": [
+    "IsInternal", "Is_Internal", "Internal", "InternalCandidate", "Internal_Candidate",
+    "EmployeeReferral", "Employee_Referral", "CurrentEmployee", "Current_Employee",
+    "isinternal", "internal"
+  ],
+  "CITIZENSHIP": [
+    "CountryRegionOfCitizenship", "Country_Region_Of_Citizenship", "Citizenship",
+    "Nationality", "Country", "CitizenshipCountry", "Citizenship_Country",
+    "NationalityCountry", "Nationality_Country", "citizenship", "nationality"
+  ],
+  "AVAILABILITY": [
+    "NoticePeriodDateOfAvailability", "Notice_Period_Date_Of_Availability", "Availability",
+    "AvailabilityDate", "Availability_Date", "StartDate", "Start_Date", "AvailableFrom",
+    "Available_From", "NoticePeriod", "Notice_Period", "availability", "startdate"
+  ],
+  "HOME_COUNTRY": [
+    "HomeCountry", "Home_Country", "Country", "ResidenceCountry", "Residence_Country",
+    "CountryOfResidence", "Country_Of_Residence", "homecountry", "country"
+  ],
+  "EMPLOYEE_ID": [
+    "EmpID", "EmployeeID", "EmpNo", "EmployeeNumber", "EE_ID", "ID",
+    "WorkerID", "Worker_ID", "PersonID", "StaffID", "Staff_ID",
+    "EmployeeNo", "Employee_No", "EmpNum", "userId", "user_id", "UserID"
   ],
   "HIRING_DATE": [
     "HireDate", "DateHired", "StartDate", "JoinDate", "EmploymentDate",
@@ -37,22 +134,187 @@
     "division", "department", "Org_Unit", "OrgUnit", "Cost_Center",
     "CostCenter", "BusinessUnit", "Organizational_Unit"
   ],
-  "PHONE": [
-    "PhoneNumber", "Phone", "Tel", "Telephone", "Mobile", "Contact",
-    "Phone_Number", "ContactNumber", "WorkPhone", "Work_Phone",
-    "BusinessPhone", "phone", "phone_number", "TelephoneNumber",
-    "Tel_Number", "PhoneNo", "ContactNo", "MobileNumber"
-  ],
-  "LOCATION": [
-    "Office", "Site", "WorkLocation", "Branch", "City", "OfficeLocation",
-    "Work_Location", "WorkSite", "Work_Site", "location", "work_location",
-    "Office_Location", "PrimaryLocation", "HomeOffice", "BaseLocation",
-    "Workplace", "WorkPlace"
-  ],
   "MANAGER": [
     "ManagerName", "Manager", "Supervisor", "ReportsTo", "Boss",
     "Manager_Name", "ManagerID", "Manager_ID", "SupervisorName",
     "Supervisor_Name", "ReportsToName", "DirectManager", "LineManager",
     "manager", "supervisor", "reports_to", "reportsTo"
+  ],
+  "ROLE": [
+    "Role", "JobRole", "Job_Role", "EmployeeRole", "Employee_Role",
+    "WorkRole", "Work_Role", "Function", "JobFunction", "Job_Function",
+    "role", "jobrole", "function", "Position", "PositionType", "Position_Type"
+  ],
+  "JOB_CODE": [
+    "JobCode", "Job_Code", "PositionCode", "Position_Code", "RoleCode",
+    "Role_Code", "JobID", "Job_ID", "PositionID", "Position_ID",
+    "jobcode", "positioncode", "ClassificationCode", "Classification_Code"
+  ],
+  "COMPANY_NAME": [
+    "CompanyName", "Company_Name", "Company", "Organization", "Org",
+    "Employer", "OrganizationName", "Organization_Name", "BusinessName",
+    "Business_Name", "companyname", "company", "CorporateName", "Corporate_Name"
+  ],
+  "DETAILED_TITLE": [
+    "DetailedTitle", "Detailed_Title", "ExtendedTitle", "Extended_Title",
+    "FullTitle", "Full_Title", "CompleteTitle", "Complete_Title",
+    "LongTitle", "Long_Title", "detailedtitle", "fulltitle"
+  ],
+  "LEVEL": [
+    "Level", "Grade", "JobLevel", "Job_Level", "EmployeeLevel", "Employee_Level",
+    "Seniority", "Rank", "Position_Level", "PositionLevel", "Career_Level",
+    "CareerLevel", "level", "grade", "seniority", "Band", "PayBand", "Pay_Band"
+  ],
+  "ROLE_CHANGE_DATE": [
+    "RoleChangeDate", "Role_Change_Date", "PromotionDate", "Promotion_Date",
+    "TransferDate", "Transfer_Date", "PositionChangeDate", "Position_Change_Date",
+    "JobChangeDate", "Job_Change_Date", "rolechangedate", "promotiondate",
+    "LastPromotionDate", "Last_Promotion_Date", "MovementDate", "Movement_Date"
+  ],
+  "MANAGER_ID": [
+    "ManagerID", "Manager_ID", "SupervisorID", "Supervisor_ID", "ReportsToID",
+    "ReportsTo_ID", "DirectManagerID", "Direct_Manager_ID", "LineManagerID",
+    "Line_Manager_ID", "managerid", "supervisorid", "BossID", "Boss_ID"
+  ],
+  "MANAGER_EMAIL": [
+    "ManagerEmail", "Manager_Email", "SupervisorEmail", "Supervisor_Email",
+    "ReportsToEmail", "ReportsTo_Email", "BossEmail", "Boss_Email",
+    "manageremail", "supervisoremail", "ManagerEmailAddress", "Manager_Email_Address"
+  ],
+  "MANAGER_FULLNAME": [
+    "ManagerFullName", "Manager_Full_Name", "ManagerName", "Manager_Name",
+    "SupervisorFullName", "Supervisor_Full_Name", "SupervisorName", "Supervisor_Name",
+    "ReportsToName", "ReportsTo_Name", "managerfullname", "managername",
+    "DirectManagerName", "LineManagerName", "BossName", "Boss_Name"
+  ],
+  "DIVISION": [
+    "Division", "BusinessDivision", "Business_Division", "Div", "Sector",
+    "Branch", "Wing", "division", "sector", "CompanyDivision", "Company_Division"
+  ],
+  "TERMINATION_DATE": [
+    "TerminationDate", "Termination_Date", "EndDate", "End_Date", "ExitDate",
+    "Exit_Date", "SeparationDate", "Separation_Date", "LeaveDate", "Leave_Date",
+    "terminationdate", "enddate", "exitdate", "LastWorkingDay", "Last_Working_Day",
+    "ResignationDate", "Resignation_Date", "DepartureDate", "Departure_Date"
+  ],
+  "URL": [
+    "URL", "ProfileURL", "Profile_URL", "LinkedInURL", "LinkedIn_URL",
+    "PersonalURL", "Personal_URL", "WebURL", "Web_URL", "url", "Link",
+    "ProfileLink", "Profile_Link", "LinkedInProfile", "LinkedIn_Profile",
+    "Website", "WebSite", "Web_Site", "website"
+  ],
+  "PLAN_NAME": [
+    "PlanName", "Plan_Name", "DevelopmentPlan", "Development_Plan", "CareerPlan",
+    "Career_Plan", "SuccessionPlan", "Succession_Plan", "planname", "plan",
+    "IDPName", "IDP_Name", "PersonalDevelopmentPlan", "Personal_Development_Plan"
+  ],
+  "PLAN_DATE": [
+    "PlanDate", "Plan_Date", "PlanCreatedDate", "Plan_Created_Date",
+    "ReviewDate", "Review_Date", "PlanReviewDate", "Plan_Review_Date",
+    "plandate", "reviewdate", "DevelopmentDate", "Development_Date"
+  ],
+  "PLAN_COMMENTS": [
+    "PlanComments", "Plan_Comments", "Comments", "Notes", "PlanNotes",
+    "Plan_Notes", "Remarks", "DevelopmentComments", "Development_Comments",
+    "plancomments", "comments", "notes", "PlanDescription", "Plan_Description"
+  ],
+  "GENDER": [
+    "Gender", "Sex", "gender", "sex", "GenderIdentity", "Gender_Identity"
+  ],
+  "RACE": [
+    "Race", "Ethnicity", "race", "ethnicity", "RaceEthnicity", "Race_Ethnicity",
+    "EthnicGroup", "Ethnic_Group", "RacialGroup", "Racial_Group"
+  ],
+  "USER_ID": [
+    "UserID", "User_ID", "Username", "User_Name", "LoginID", "Login_ID",
+    "AccountID", "Account_ID", "userid", "username", "login", "UserName",
+    "SystemID", "System_ID", "UID", "EmployeeUserID", "Employee_User_ID"
+  ],
+  "PERSONAL_EMAIL": [
+    "PersonalEmail", "Personal_Email", "PrivateEmail", "Private_Email",
+    "HomeEmail", "Home_Email", "AlternateEmail", "Alternate_Email",
+    "personalemail", "homeemail", "SecondaryEmail", "Secondary_Email",
+    "PersonalEmailAddress", "Personal_Email_Address"
+  ],
+  "EXTERNAL_JOB_ID": [
+    "ExternalJobID", "External_Job_ID", "RequisitionID", "Requisition_ID",
+    "JobReqID", "Job_Req_ID", "JobPostingID", "Job_Posting_ID",
+    "externaljobid", "requisitionid", "VacancyID", "Vacancy_ID",
+    "OpeningID", "Opening_ID", "JobOpeningID", "Job_Opening_ID"
+  ],
+  "RM_USER_GROUP_LIST": [
+    "RMUserGroupList", "RM_User_Group_List", "UserGroupList", "User_Group_List",
+    "Groups", "UserGroups", "User_Groups", "GroupList", "Group_List",
+    "usergrouplist", "groups", "MemberGroups", "Member_Groups",
+    "AccessGroups", "Access_Groups", "SecurityGroups", "Security_Groups"
+  ],
+  "PREFERRED_FIRST_NAME": [
+    "PreferredFirstName", "Preferred_First_Name", "PreferredName", "Preferred_Name",
+    "NickName", "Nick_Name", "CommonName", "Common_Name", "UsedName", "Used_Name",
+    "preferredfirstname", "nickname", "GoesBy", "Goes_By", "KnownAs", "Known_As"
+  ],
+  "PREFERRED_LAST_NAME": [
+    "PreferredLastName", "Preferred_Last_Name", "PreferredSurname", "Preferred_Surname",
+    "UsedLastName", "Used_Last_Name", "preferredlastname", "usedsurname"
+  ],
+  "EMPLOYEE_TYPE": [
+    "EmployeeType", "Employee_Type", "WorkerType", "Worker_Type", "EmploymentType",
+    "Employment_Type", "StaffType", "Staff_Type", "employeetype", "employmenttype",
+    "ContractType", "Contract_Type", "EmploymentCategory", "Employment_Category",
+    "WorkType", "Work_Type", "JobType", "Job_Type"
+  ],
+  "LOCATION_COUNTRY": [
+    "LocationCountry", "Location_Country", "WorkCountry", "Work_Country",
+    "OfficeCountry", "Office_Country", "BaseCountry", "Base_Country",
+    "locationcountry", "workcountry", "Country", "CountryCode", "Country_Code",
+    "HomeCountry", "Home_Country", "homecountry"
+  ],
+  "BONUS_AMOUNT": [
+    "BonusAmount", "Bonus_Amount", "Bonus", "BonusPay", "Bonus_Pay",
+    "IncentiveAmount", "Incentive_Amount", "bonusamount", "bonus",
+    "AnnualBonus", "Annual_Bonus", "PerformanceBonus", "Performance_Bonus"
+  ],
+  "BONUS_CURRENCY": [
+    "BonusCurrency", "Bonus_Currency", "BonusCurrencyCode", "Bonus_Currency_Code",
+    "bonuscurrency", "IncentiveCurrency", "Incentive_Currency"
+  ],
+  "BONUS_FREQUENCY": [
+    "BonusFrequency", "Bonus_Frequency", "BonusPeriod", "Bonus_Period",
+    "bonusfrequency", "IncentiveFrequency", "Incentive_Frequency",
+    "BonusSchedule", "Bonus_Schedule"
+  ],
+  "BASE_PAY_AMOUNT": [
+    "BasePayAmount", "Base_Pay_Amount", "BasePay", "Base_Pay", "BaseSalary",
+    "Base_Salary", "Salary", "Pay", "basepayamount", "basesalary", "salary",
+    "AnnualSalary", "Annual_Salary", "GrossPay", "Gross_Pay", "Compensation"
+  ],
+  "BASE_PAY_CURRENCY": [
+    "BasePayCurrency", "Base_Pay_Currency", "SalaryCurrency", "Salary_Currency",
+    "PayCurrency", "Pay_Currency", "basepaycurrency", "salarycurrency",
+    "CurrencyCode", "Currency_Code", "CompensationCurrency", "Compensation_Currency"
+  ],
+  "BASE_PAY_FREQUENCY": [
+    "BasePayFrequency", "Base_Pay_Frequency", "PayFrequency", "Pay_Frequency",
+    "SalaryFrequency", "Salary_Frequency", "basepayfrequency", "payfrequency",
+    "PayPeriod", "Pay_Period", "SalaryPeriod", "Salary_Period"
+  ],
+  "SPECIALISED_SKILLS_LIST": [
+    "SpecialisedSkillsList", "Specialised_Skills_List", "SpecializedSkillsList",
+    "Specialized_Skills_List", "Skills", "SkillsList", "Skills_List",
+    "TechnicalSkills", "Technical_Skills", "Competencies", "CoreSkills",
+    "Core_Skills", "specialisedskillslist", "skills", "skillset",
+    "KeySkills", "Key_Skills", "ProfessionalSkills", "Professional_Skills"
+  ],
+  "POSITION_CRITICALITY_LIST": [
+    "PositionCriticalityList", "Position_Criticality_List", "CriticalityList",
+    "Criticality_List", "PositionCriticality", "Position_Criticality",
+    "positioncriticalitylist", "criticality", "Importance", "Priority",
+    "CriticalRole", "Critical_Role", "KeyPosition", "Key_Position"
+  ],
+  "ORG_UNIT_LIST": [
+    "OrgUnitList", "Org_Unit_List", "OrganizationalUnitList", "Organizational_Unit_List",
+    "OrgUnits", "Org_Units", "OrgList", "Org_List", "orgunitlist", "orgunits",
+    "DepartmentList", "Department_List", "UnitList", "Unit_List",
+    "BusinessUnitList", "Business_Unit_List", "OrganizationList", "Organization_List"
   ]
 }

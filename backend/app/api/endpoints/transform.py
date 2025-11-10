@@ -11,6 +11,7 @@ from app.services.transformer import get_transformation_engine
 from app.services.schema_manager import get_schema_manager
 from app.services.file_storage import get_file_storage
 from app.services.xml_transformer import get_xml_transformer
+from app.services.data_validator import get_data_validator, DataLossError
 
 router = APIRouter()
 
@@ -31,6 +32,41 @@ async def preview_transformation(request: PreviewRequest):
         500: Error during transformation
     """
     try:
+        # Get source data - either from request or from stored file
+        source_data = request.source_data
+
+        if source_data is None and request.file_id:
+            # Retrieve full data from storage using file_id
+            storage = get_file_storage()
+            df = storage.retrieve_dataframe(request.file_id)
+
+            if df is None:
+                raise HTTPException(
+                    status_code=404,
+                    detail={
+                        "error": {
+                            "code": "FILE_NOT_FOUND",
+                            "message": f"File with ID '{request.file_id}' not found or expired",
+                        },
+                        "status": 404
+                    }
+                )
+
+            # Convert DataFrame to list of dicts
+            source_data = df.to_dict('records')
+
+        elif source_data is None:
+            raise HTTPException(
+                status_code=400,
+                detail={
+                    "error": {
+                        "code": "MISSING_SOURCE_DATA",
+                        "message": "Either 'source_data' or 'file_id' must be provided",
+                    },
+                    "status": 400
+                }
+            )
+
         # Get schema
         schema_manager = get_schema_manager()
         schema = schema_manager.get_schema(request.entity_name)
@@ -38,7 +74,7 @@ async def preview_transformation(request: PreviewRequest):
         # Transform data
         engine = get_transformation_engine()
         transformed_df, transformations = engine.transform_data(
-            request.source_data,
+            source_data,
             request.mappings,
             schema
         )
@@ -54,6 +90,22 @@ async def preview_transformation(request: PreviewRequest):
             warnings=[]
         )
 
+    except DataLossError as e:
+        # Data loss detected - return HTTP 400 with detailed error
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "error": {
+                    "code": "DATA_LOSS_DETECTED",
+                    "message": e.message,
+                    "lost_rows": e.lost_rows,
+                    "total_rows": e.total_rows,
+                    "loss_percentage": f"{(e.lost_rows / e.total_rows * 100):.1f}%",
+                    "details": e.details
+                },
+                "status": 400
+            }
+        )
     except Exception as e:
         raise HTTPException(
             status_code=500,
@@ -131,6 +183,32 @@ async def export_csv(request: ExportRequest):
             schema
         )
 
+        # Validate no data loss during export preparation
+        import pandas as pd
+        source_df = pd.DataFrame(source_data)
+        validator = get_data_validator()
+
+        try:
+            validator.validate_row_count(
+                input_df=source_df,
+                output_df=transformed_df,
+                operation_name="CSV export transformation"
+            )
+        except DataLossError as e:
+            raise HTTPException(
+                status_code=400,
+                detail={
+                    "error": {
+                        "code": "DATA_LOSS_DETECTED",
+                        "message": f"Data loss detected during CSV export: {e.message}",
+                        "lost_rows": e.lost_rows,
+                        "total_rows": e.total_rows,
+                        "details": e.details
+                    },
+                    "status": 400
+                }
+            )
+
         # Convert to CSV
         csv_buffer = StringIO()
         transformed_df.to_csv(csv_buffer, index=False, encoding='utf-8')
@@ -147,6 +225,20 @@ async def export_csv(request: ExportRequest):
 
     except HTTPException:
         raise
+    except DataLossError as e:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "error": {
+                    "code": "DATA_LOSS_DETECTED",
+                    "message": e.message,
+                    "lost_rows": e.lost_rows,
+                    "total_rows": e.total_rows,
+                    "details": e.details
+                },
+                "status": 400
+            }
+        )
     except Exception as e:
         raise HTTPException(
             status_code=500,
@@ -286,6 +378,10 @@ async def export_xml(request: ExportRequest):
                 }
             )
 
+        # Validate row count before XML transformation
+        validator = get_data_validator()
+        initial_row_count = len(df)
+
         # Transform to XML
         xml_transformer = get_xml_transformer()
         # Convert Pydantic models to dicts for xml_transformer
@@ -300,6 +396,26 @@ async def export_xml(request: ExportRequest):
             mappings=mappings_dicts,
             entity_name=request.entity_name
         )
+
+        # Validate XML transformation preserved all rows
+        # Parse XML to count EF_Employee elements
+        from xml.etree.ElementTree import fromstring
+        try:
+            xml_root = fromstring(xml_content)
+            xml_row_count = len(xml_root.findall('EF_Employee'))
+
+            if xml_row_count != initial_row_count:
+                raise DataLossError(
+                    message=f"Data loss during XML transformation: {initial_row_count - xml_row_count} rows lost",
+                    lost_rows=initial_row_count - xml_row_count,
+                    total_rows=initial_row_count,
+                    details={"xml_rows": xml_row_count, "input_rows": initial_row_count}
+                )
+        except DataLossError:
+            raise
+        except Exception as xml_parse_error:
+            # If we can't parse the XML for validation, log warning but continue
+            print(f"Warning: Could not validate XML row count: {xml_parse_error}")
 
         # Generate filename
         output_filename = request.output_filename.replace('.csv', '.xml') if request.output_filename else 'export.xml'
@@ -317,6 +433,20 @@ async def export_xml(request: ExportRequest):
 
     except HTTPException:
         raise
+    except DataLossError as e:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "error": {
+                    "code": "DATA_LOSS_DETECTED",
+                    "message": f"Data loss during XML export: {e.message}",
+                    "lost_rows": e.lost_rows,
+                    "total_rows": e.total_rows,
+                    "details": e.details
+                },
+                "status": 400
+            }
+        )
     except Exception as e:
         raise HTTPException(
             status_code=500,

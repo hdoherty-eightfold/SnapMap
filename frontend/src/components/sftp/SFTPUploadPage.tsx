@@ -100,7 +100,7 @@ export const SFTPUploadPage: React.FC = () => {
       // Generate the transformed file
       const blob = await generateTransformedFile();
       const fileExtension = fileFormat === 'csv' ? '.csv' : '.xml';
-      const filename = uploadedFile.filename.replace(/\.(csv|xlsx?)$/i, fileExtension);
+      const filename = uploadedFile.filename.replace(/\.(csv|xml)$/i, fileExtension);
 
       setUploadProgress(30);
       setStatusMessage('Connecting to SFTP server...');
@@ -344,7 +344,7 @@ export const SFTPUploadPage: React.FC = () => {
             )}
 
             {/* Action Buttons */}
-            <div className="flex gap-3">
+            <div className="flex gap-6">
               {uploadStatus === 'idle' && (
                 <Button
                   variant="primary"

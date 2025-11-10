@@ -1,0 +1,423 @@
+{
+  "timestamp": "2025-11-06T21:55:36.491991",
+  "tests": {
+    "file_analysis": {
+      "status": "passed",
+      "findings": [
+        {
+          "encoding": "utf-8",
+          "special_chars": {
+            "ü": true,
+            "ö": true,
+            "é": true,
+            "ñ": true,
+            "á": true,
+            "ı": true,
+            "İ": true
+          }
+        },
+        {
+          "encoding": "latin-1",
+          "special_chars": {
+            "ü": false,
+            "ö": false,
+            "é": true,
+            "ñ": false,
+            "á": false,
+            "ı": false,
+            "İ": false
+          }
+        },
+        {
+          "encoding": "utf-8-sig",
+          "special_chars": {
+            "ü": true,
+            "ö": true,
+            "é": true,
+            "ñ": true,
+            "á": true,
+            "ı": true,
+            "İ": true
+          }
+        }
+      ],
+      "encodings": {
+        "utf-8": "SUCCESS",
+        "latin-1": "SUCCESS",
+        "cp1252": "FAILED: 'charmap' codec can't decode byte 0x8d in position 7994: character maps to <undefined>",
+        "utf-8-sig": "SUCCESS"
+      },
+      "structure": {
+        "delimiter": "|",
+        "header_count": 22,
+        "headers": [
+          "PersonID",
+          "FirstName",
+          "LastName",
+          "LastActivityTimeStamp",
+          "WorkEmails"
+        ],
+        "total_lines": 1214,
+        "total_records": 1213
+      },
+      "malformed_rows": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    "upload_api": {
+      "status": "failed",
+      "upload_attempts": [
+        {
+          "encoding": "utf-8",
+          "timestamp": "2025-11-06T21:55:36.537985",
+          "status_code": 400,
+          "response": {
+            "detail": {
+              "error": {
+                "code": "INVALID_FILE_FORMAT",
+                "message": "Error parsing file: Error tokenizing data. C error: Expected 26 fields in line 4, saw 190\n",
+                "details": {
+                  "supported_formats": [
+                    ".csv",
+                    ".xlsx",
+                    ".xls"
+                  ]
+                }
+              },
+              "status": 400
+            }
+          }
+        },
+        {
+          "encoding": "latin-1",
+          "timestamp": "2025-11-06T21:55:39.654062",
+          "status_code": 400,
+          "response": {
+            "detail": {
+              "error": {
+                "code": "INVALID_FILE_FORMAT",
+                "message": "Error parsing file: Error tokenizing data. C error: Expected 26 fields in line 4, saw 190\n",
+                "details": {
+                  "supported_formats": [
+                    ".csv",
+                    ".xlsx",
+                    ".xls"
+                  ]
+                }
+              },
+              "status": 400
+            }
+          }
+        },
+        {
+          "encoding": "cp1252",
+          "timestamp": "2025-11-06T21:55:42.694516",
+          "status_code": 400,
+          "response": {
+            "detail": {
+              "error": {
+                "code": "INVALID_FILE_FORMAT",
+                "message": "Error parsing file: Error tokenizing data. C error: Expected 26 fields in line 4, saw 190\n",
+                "details": {
+                  "supported_formats": [
+                    ".csv",
+                    ".xlsx",
+                    ".xls"
+                  ]
+                }
+              },
+              "status": 400
+            }
+          }
+        }
+      ]
+    },
+    "schema_retrieval": {
+      "status": "passed",
+      "status_code": 200,
+      "schema": {
+        "entity_name": "candidate",
+        "display_name": "Candidate",
+        "description": "Candidate data for Eightfold integration",
+        "fields": [
+          {
+            "name": "CANDIDATE_ID",
+            "display_name": "Candidate ID",
+            "type": "string",
+            "required": true,
+            "max_length": 50,
+            "min_length": null,
+            "pattern": null,
+            "format": null,
+            "example": "CAND-001",
+            "description": "Unique candidate identifier",
+            "default_value": null
+          },
+          {
+            "name": "FIRST_NAME",
+            "display_name": "First Name",
+            "type": "string",
+            "required": true,
+            "max_length": 100,
+            "min_length": null,
+            "pattern": null,
+            "format": null,
+            "example": "Jane",
+            "description": "Candidate's first name",
+            "default_value": null
+          },
+          {
+            "name": "LAST_NAME",
+            "display_name": "Last Name",
+            "type": "string",
+            "required": true,
+            "max_length": 100,
+            "min_length": null,
+            "pattern": null,
+            "format": null,
+            "example": "Smith",
+            "description": "Candidate's last name",
+            "default_value": null
+          },
+          {
+            "name": "EMAIL",
+            "display_name": "Email Address",
+            "type": "email",
+            "required": true,
+            "max_length": null,
+            "min_length": null,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+            "format": null,
+            "example": "jane.smith@email.com",
+            "description": "Candidate's email address",
+            "default_value": null
+          },
+          {
+            "name": "PHONE",
+            "display_name": "Phone Number",
+            "type": "string",
+            "required": false,
+            "max_length": null,
+            "min_length": null,
+            "pattern": "^\\+?[0-9\\-\\s()]+$",
+            "format": null,
+            "example": "+1-555-0200",
+            "description": "Candidate's phone number",
+            "default_value": null
+          },
+          {
+            "name": "APPLICATION_DATE",
+            "display_name": "Application Date",
+            "type": "date",
+            "required": false,
+            "max_length": null,
+            "min_length": null,
+            "pattern": null,
+            "format": "YYYY-MM-DD",
+            "example": "2025-10-15",
+            "description": "Date candidate applied",
+            "default_value": null
+          },
+          {
+            "name": "POSITION_APPLIED",
+            "display_name": "Position Applied",
+            "type": "string",
+            "required": false,
+            "max_length": 200,
+            "min_length": null,
+            "pattern": null,
+            "format": null,
+            "example": "Software Engineer",
+            "description": "Position candidate applied for",
+            "default_value": null
+          },
+          {
+            "name": "STATUS",
+            "display_name": "Application Status",
+            "type": "string",
+            "required": false,
+            "max_length": 50,
+            "min_length": null,
+            "pattern": null,
+            "format": null,
+            "example": "interviewing",
+            "description": "Current application status",
+            "default_value": null
+          },
+          {
+            "name": "SOURCE",
+            "display_name": "Source",
+            "type": "string",
+            "required": false,
+            "max_length": 100,
+            "min_length": null,
+            "pattern": null,
+            "format": null,
+            "example": "LinkedIn",
+            "description": "Source of candidate application",
+            "default_value": null
+          },
+          {
+            "name": "RESUME_URL",
+            "display_name": "Resume URL",
+            "type": "string",
+            "required": false,
+            "max_length": 500,
+            "min_length": null,
+            "pattern": null,
+            "format": null,
+            "example": "https://storage.example.com/resumes/candidate_001.pdf",
+            "description": "URL to candidate's resume",
+            "default_value": null
+          },
+          {
+            "name": "LAST_ACTIVITY_TS",
+            "display_name": "Last Activity Timestamp",
+            "type": "datetime",
+            "required": true,
+            "max_length": null,
+            "min_length": null,
+            "pattern": null,
+            "format": "YYYY-MM-DDTHH:MM:SS",
+            "example": "2025-11-02T14:30:00",
+            "description": "Timestamp of last data update (auto-generated)",
+            "default_value": null
+          }
+        ]
+      },
+      "field_count": 11
+    },
+    "auto_mapping": {
+      "status": "skipped"
+    },
+    "character_validation": {
+      "status": "passed",
+      "character_tests": [
+        {
+          "line": 3,
+          "field": "HomeCountry",
+          "description": "Turkish ü",
+          "actual_value": "Türkiye",
+          "expected": "Türkiye",
+          "passed": true
+        },
+        {
+          "line": 8,
+          "field": "HomeLocation",
+          "description": "Spanish ó",
+          "actual_value": "'' Home street: %San Pablo #44% , Home state: %Coahuila%, Home city: %Torreón%, Home zip code: %27086%, Home country: %Mexico% ''",
+          "contains": "Torreón",
+          "passed": true
+        },
+        {
+          "line": 10,
+          "field": "LastName",
+          "description": "Turkish dotless i",
+          "actual_value": "Kayır",
+          "expected": "Kayır",
+          "passed": true
+        },
+        {
+          "line": 28,
+          "field": "FirstName",
+          "description": "Arabic/Italian name",
+          "actual_value": "Omar",
+          "expected": "Omar",
+          "passed": true
+        }
+      ]
+    },
+    "data_validation": {
+      "status": "skipped"
+    },
+    "xml_transformation": {
+      "status": "skipped"
+    },
+    "edge_cases": {
+      "status": "passed",
+      "edge_cases": [
+        {
+          "line": 15,
+          "type": "empty_fields",
+          "empty_field_count": 11,
+          "empty_fields": [
+            "HomeEmails",
+            "WorkPhones",
+            "HomePhones",
+            "Salutation",
+            "HomeLocation"
+          ]
+        },
+        {
+          "line": 41,
+          "type": "empty_fields",
+          "empty_field_count": 10,
+          "empty_fields": [
+            "HomeEmails",
+            "HomePhones",
+            "Salutation",
+            "HomeLocation",
+            "Summary"
+          ]
+        },
+        {
+          "line": 45,
+          "type": "empty_fields",
+          "empty_field_count": 11,
+          "empty_fields": [
+            "HomeEmails",
+            "WorkPhones",
+            "HomePhones",
+            "Salutation",
+            "HomeLocation"
+          ]
+        },
+        {
+          "line": 47,
+          "type": "empty_fields",
+          "empty_field_count": 11,
+          "empty_fields": [
+            "HomeEmails",
+            "WorkPhones",
+            "HomePhones",
+            "Salutation",
+            "HomeLocation"
+          ]
+        },
+        {
+          "line": 48,
+          "type": "empty_fields",
+          "empty_field_count": 11,
+          "empty_fields": [
+            "HomeEmails",
+            "WorkPhones",
+            "HomePhones",
+            "Salutation",
+            "HomeLocation"
+          ]
+        },
+        {
+          "line": 4,
+          "type": "long_field",
+          "field": "Skills",
+          "length": 3073,
+          "preview": "workday,data analysis,human resources management,talent management,executive search,coaching,ada,cal..."
+        }
+      ]
+    }
+  },
+  "issues": [],
+  "summary": {
+    "total_tests": 8,
+    "passed": 4,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 3,
+    "total_issues": 8,
+    "critical_issues": 0,
+    "high_issues": 3,
+    "medium_issues": 5,
+    "production_ready": false
+  }
+}

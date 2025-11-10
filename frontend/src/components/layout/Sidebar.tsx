@@ -1,7 +1,7 @@
 /**
- * Modern Sidebar Navigation Component
- * Inspired by Linear, Vercel, and Notion
- * With Dark Mode Support and Collapsible Functionality
+ * Eightfold Sidebar Navigation Component
+ * Navy gradient background with teal accents
+ * Eightfold brand styling throughout
  */
 
 import React, { useState } from 'react';
@@ -18,42 +18,48 @@ interface NavItem {
 const navItems: NavItem[] = [
   {
     id: 0,
+    name: 'Welcome',
+    icon: '👋',
+    description: 'Introduction to SnapMap'
+  },
+  {
+    id: 1,
     name: 'Upload',
     icon: '📁',
     description: 'Upload your HR data files'
   },
   {
-    id: 1,
+    id: 2,
+    name: 'File Review',
+    icon: '🔍',
+    description: 'Review data quality and issues'
+  },
+  {
+    id: 3,
     name: 'Map Fields',
     icon: '🔗',
     description: 'Auto-map and adjust field mappings'
   },
   {
-    id: 2,
-    name: 'Review & Validate',
-    icon: '🔍',
-    description: 'Schema validation'
-  },
-  {
-    id: 3,
+    id: 4,
     name: 'Preview CSV',
     icon: '👁️',
     description: 'Preview CSV transformations'
   },
   {
-    id: 4,
+    id: 5,
     name: 'Preview XML',
     icon: '📄',
     description: 'Preview XML format'
   },
   {
-    id: 5,
+    id: 6,
     name: 'SFTP Upload',
     icon: '📤',
     description: 'Upload files to SFTP server'
   },
   {
-    id: 6,
+    id: 7,
     name: 'Settings',
     icon: '⚙️',
     description: 'Configure API keys'
@@ -73,43 +79,57 @@ export const Sidebar: React.FC = () => {
   };
 
   const isStepAccessible = (stepId: number): boolean => {
-    if (stepId === 0) return true; // Upload
-    if (stepId === 1) return !!uploadedFile; // Map Fields - requires upload
-    if (stepId === 2) return !!uploadedFile; // Review & Validate - requires upload
-    if (stepId === 3) return !!uploadedFile && mappings.length > 0; // Preview CSV
-    if (stepId === 4) return !!uploadedFile && mappings.length > 0; // Preview XML
-    if (stepId === 5) return true; // SFTP Upload - always accessible
-    if (stepId === 6) return true; // Settings - always accessible
+    if (stepId === 0) return true; // Welcome - always accessible
+    if (stepId === 1) return true; // Upload - always accessible
+    if (stepId === 2) return !!uploadedFile; // File Review - requires upload
+    if (stepId === 3) return !!uploadedFile; // Map Fields - requires upload
+    if (stepId === 4) return !!uploadedFile && mappings.length > 0; // Preview CSV
+    if (stepId === 5) return !!uploadedFile && mappings.length > 0; // Preview XML
+    if (stepId === 6) return true; // SFTP Upload - always accessible
+    if (stepId === 7) return true; // Settings - always accessible
     return false;
   };
 
   return (
-    <aside className={`fixed left-0 top-0 bottom-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-64'}`}>
-      {/* Collapse Toggle Button */}
+    <aside className={`fixed left-0 top-0 bottom-0 bg-gradient-navy border-r border-eightfold-teal-300/20 flex flex-col transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-64'}`}>
+      {/* Collapse Toggle Button - Eightfold Styled */}
       <button
         onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-        className="absolute -right-3 top-6 z-10 w-6 h-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm"
+        className="absolute -right-3 top-6 z-10 w-6 h-6 bg-eightfold-teal-300 border border-eightfold-teal-400 rounded-full flex items-center justify-center hover:bg-eightfold-teal-400 transition-all hover:scale-110 shadow-eightfold-teal text-eightfold-navy-600"
         title={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
-        <span className="text-xs">{isSidebarCollapsed ? '→' : '←'}</span>
+        <span className="text-xs font-bold">{isSidebarCollapsed ? '→' : '←'}</span>
       </button>
 
-      {/* Logo/Brand */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-800">
+      {/* Logo/Brand - SnapMap */}
+      <div className="p-6 border-b border-eightfold-teal-300/20">
         {!isSidebarCollapsed ? (
           <>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">SnapMap</h1>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">HR Data Transformer</p>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 via-teal-400 to-emerald-500 flex items-center justify-center shadow-lg">
+                <span className="text-xl font-bold text-white">S</span>
+              </div>
+              <h1 className="text-3xl font-black bg-gradient-to-r from-cyan-300 via-teal-300 to-emerald-400 bg-clip-text text-transparent tracking-tight">
+                SnapMap
+              </h1>
+            </div>
+            <p className="text-xs text-cyan-200/90 mt-2 font-semibold tracking-wide" style={{ marginLeft: '52px' }}>
+              AI-Powered HR Data Transformation
+            </p>
           </>
         ) : (
-          <h1 className="text-2xl text-center">📊</h1>
+          <div className="flex justify-center">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 via-teal-400 to-emerald-500 flex items-center justify-center shadow-lg">
+              <span className="text-xl font-bold text-white">S</span>
+            </div>
+          </div>
         )}
       </div>
 
-      {/* Navigation */}
+      {/* Navigation - Eightfold Styled */}
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         {!isSidebarCollapsed && (
-          <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-3 mb-3">
+          <div className="text-caption text-eightfold-teal-300 uppercase tracking-wider px-3 mb-3 font-bold">
             Workflow
           </div>
         )}
@@ -129,16 +149,16 @@ export const Sidebar: React.FC = () => {
                 flex items-start group relative
                 ${isSidebarCollapsed ? 'px-3 py-3 justify-center' : 'px-3 py-2.5 gap-3'}
                 ${isActive
-                  ? 'bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 font-medium shadow-sm'
+                  ? 'bg-eightfold-teal-300/20 text-eightfold-teal-300 font-semibold border-l-3 border-eightfold-teal-300'
                   : isAccessible
-                  ? 'hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
-                  : 'text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                  ? 'hover:bg-white/5 text-white/90 hover:text-eightfold-teal-200'
+                  : 'text-white/30 cursor-not-allowed'
                 }
               `}
             >
               {/* Active Indicator */}
               {isActive && (
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-8 bg-primary-600 dark:bg-primary-500 rounded-r" />
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-eightfold-teal-300 rounded-r" />
               )}
 
               {/* Icon */}
@@ -150,14 +170,14 @@ export const Sidebar: React.FC = () => {
               {!isSidebarCollapsed && (
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">{item.name}</span>
+                    <span className="text-sm font-semibold">{item.name}</span>
                     {isCompleted && (
-                      <span className="text-xs bg-success-100 dark:bg-success-900/30 text-success-700 dark:text-success-400 px-1.5 py-0.5 rounded">
+                      <span className="text-xs bg-eightfold-teal-300/20 text-eightfold-teal-300 px-2 py-0.5 rounded-pill font-bold">
                         Done
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-1">
+                  <p className="text-xs text-white/60 mt-0.5 line-clamp-1">
                     {item.description}
                   </p>
                 </div>
@@ -167,12 +187,12 @@ export const Sidebar: React.FC = () => {
         })}
       </nav>
 
-      {/* Actions */}
-      <div className="p-4 border-t border-gray-200 dark:border-gray-800 space-y-2">
-        {/* Theme Toggle */}
+      {/* Actions - Eightfold Styled */}
+      <div className="p-4 border-t border-eightfold-teal-300/20 space-y-2">
+        {/* Theme Toggle - Eightfold Pill Button */}
         <button
           onClick={toggleTheme}
-          className={`w-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors flex items-center ${isSidebarCollapsed ? 'justify-center' : 'justify-center gap-2'}`}
+          className={`w-full px-4 py-2.5 text-sm font-semibold text-eightfold-navy-600 bg-eightfold-teal-300 hover:bg-eightfold-teal-400 rounded-pill transition-all hover:-translate-y-0.5 shadow-eightfold-teal flex items-center ${isSidebarCollapsed ? 'justify-center' : 'justify-center gap-2'}`}
           title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
         >
           {theme === 'light' ? '🌙' : '☀️'}
@@ -181,43 +201,13 @@ export const Sidebar: React.FC = () => {
 
         <button
           onClick={resetAll}
-          className={`w-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors ${isSidebarCollapsed ? 'flex justify-center' : ''}`}
+          className={`w-full px-4 py-2.5 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 rounded-pill transition-all ${isSidebarCollapsed ? 'flex justify-center' : ''}`}
           title={isSidebarCollapsed ? 'Start Over' : ''}
         >
           {isSidebarCollapsed ? '🔄' : '🔄 Start Over'}
         </button>
-
-        {/* Quick Stats - Only show when expanded */}
-        {!isSidebarCollapsed && (
-          <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-            <div className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Progress</div>
-            <div className="space-y-1.5 text-xs text-gray-600 dark:text-gray-400">
-              <div className="flex justify-between">
-                <span>File Uploaded:</span>
-                <span className={uploadedFile ? 'text-success-600 dark:text-success-400 font-medium' : 'text-gray-400 dark:text-gray-600'}>
-                  {uploadedFile ? '✓ Yes' : '✗ No'}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span>Fields Mapped:</span>
-                <span className={mappings.length > 0 ? 'text-success-600 dark:text-success-400 font-medium' : 'text-gray-400 dark:text-gray-600'}>
-                  {mappings.length > 0 ? `${mappings.length} fields` : '✗ None'}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* Footer */}
-      {!isSidebarCollapsed && (
-        <div className="p-4 border-t border-gray-200 dark:border-gray-800">
-          <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
-            <p className="font-medium">v1.0.0</p>
-            <p className="mt-1">Eightfold AI Hackathon 🚀</p>
-          </div>
-        </div>
-      )}
     </aside>
   );
 };

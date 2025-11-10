@@ -54,7 +54,7 @@ class APIClient {
   }
 
   /**
-   * Upload CSV/Excel file
+   * Upload CSV/XML file
    */
   async uploadFile(file: File): Promise<UploadResponse> {
     const formData = new FormData();

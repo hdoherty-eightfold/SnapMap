@@ -214,8 +214,14 @@ class XMLTransformer:
             # Find existing list element
             list_elem = parent.find(list_name)
 
-        # Handle multiple values (comma-separated)
-        values = [v.strip() for v in str(value).split(',')]
+        # Handle multiple values - check for || separator first (Siemens format), then comma
+        value_str = str(value)
+        if '||' in value_str:
+            # Siemens multi-value format with || separator
+            values = [v.strip() for v in value_str.split('||')]
+        else:
+            # Standard comma-separated format
+            values = [v.strip() for v in value_str.split(',')]
 
         for val in values:
             if val:  # Skip empty values
@@ -248,8 +254,10 @@ class XMLTransformer:
             field_name: Field name (for type detection)
 
         Returns:
-            Formatted string value
+            Formatted string value (XML-safe)
         """
+        from app.utils.sanitization import sanitize_xml_content
+
         # Handle dates
         if field_name.upper() in self.date_fields:
             try:
@@ -258,15 +266,15 @@ class XMLTransformer:
                     for fmt in ['%Y-%m-%d', '%m/%d/%Y', '%d/%m/%Y', '%Y/%m/%d']:
                         try:
                             dt = datetime.strptime(value, fmt)
-                            # Return in ISO format
+                            # Return in ISO format (dates don't need XML escaping)
                             if '_TS' in field_name.upper():
                                 return dt.strftime('%Y-%m-%dT%H:%M:%S')
                             else:
                                 return dt.strftime('%Y-%m-%d')
                         except ValueError:
                             continue
-                    # If no format matched, return as-is
-                    return str(value)
+                    # If no format matched, sanitize and return
+                    return sanitize_xml_content(str(value))
                 elif isinstance(value, (datetime, pd.Timestamp)):
                     if '_TS' in field_name.upper():
                         return value.strftime('%Y-%m-%dT%H:%M:%S')
@@ -279,8 +287,9 @@ class XMLTransformer:
         if isinstance(value, bool):
             return 'true' if value else 'false'
 
-        # Convert to string
-        return str(value).strip()
+        # Convert to string and sanitize for XML
+        # This escapes special characters: &, <, >, ", '
+        return sanitize_xml_content(value)
 
     def _prettify_xml(self, elem: Element) -> str:
         """

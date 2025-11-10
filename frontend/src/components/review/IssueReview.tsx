@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { AlertTriangle, CheckCircle, Info, XCircle, RefreshCw, FileSearch, ArrowRight, ArrowLeft } from 'lucide-react';
 import axios from 'axios';
 import { useApp } from '../../contexts/AppContext';
+import { useToast } from '../../contexts/ToastContext';
 
 interface Issue {
   type: string;
@@ -39,6 +40,7 @@ interface ReviewData {
 
 const IssueReview: React.FC = () => {
   const { uploadedFile, selectedEntityType, previousStep, nextStep } = useApp();
+  const toast = useToast();
   const [review, setReview] = useState<ReviewData | null>(null);
   const [loading, setLoading] = useState(false);
   const [applyingFixes, setApplyingFixes] = useState(false);
@@ -85,13 +87,13 @@ const IssueReview: React.FC = () => {
 
       if (response.data.success) {
         // Show success message
-        alert(`Successfully applied ${response.data.fixes_count} fixes!`);
+        toast.success('Auto-Fixes Applied', `Successfully applied ${response.data.fixes_count} fixes!`);
         // Re-analyze the fixed file
         analyzeFile();
       }
     } catch (err: any) {
       console.error('Error applying fixes:', err);
-      alert('Failed to apply fixes: ' + (err.response?.data?.error?.message || 'Unknown error'));
+      toast.error('Failed to Apply Fixes', err.response?.data?.error?.message || 'Unknown error');
     } finally {
       setApplyingFixes(false);
     }
@@ -312,9 +314,11 @@ const IssueReview: React.FC = () => {
                           {suggestion.field} → {suggestion.target_field}
                         </span>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-gray-600 dark:text-gray-400">
-                            {Math.round(suggestion.confidence * 100)}% confidence
-                          </span>
+                          {suggestion.confidence != null && !isNaN(suggestion.confidence) && (
+                            <span className="text-xs text-gray-600 dark:text-gray-400">
+                              {Math.round(suggestion.confidence * 100)}% confidence
+                            </span>
+                          )}
                           {suggestion.auto_fixable && (
                             <span className="px-2 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full">
                               Auto-fixable
@@ -332,7 +336,7 @@ const IssueReview: React.FC = () => {
         )}
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between items-center pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div className="flex justify-between items-center gap-6 pt-6 border-t border-gray-200 dark:border-gray-700">
           <button
             onClick={previousStep}
             className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 flex items-center gap-2 font-medium transition-colors"

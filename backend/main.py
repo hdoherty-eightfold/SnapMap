@@ -3,32 +3,57 @@ ETL UI Backend - Main Application
 FastAPI server for HR data transformation
 """
 
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+
+# Import security middleware
+from app.middleware import SecurityHeadersMiddleware, RateLimitMiddleware
+
+# Determine environment
+ENV = os.getenv("ENVIRONMENT", "development")
+IS_PRODUCTION = ENV == "production"
 
 # Create FastAPI app
 app = FastAPI(
     title="ETL UI Backend",
     description="HR Data Transformation API",
     version="1.0.0",
-    docs_url="/api/docs",
-    redoc_url="/api/redoc"
+    # Disable docs in production for security
+    docs_url="/api/docs" if not IS_PRODUCTION else None,
+    redoc_url="/api/redoc" if not IS_PRODUCTION else None
 )
 
-# Configure CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
+# Configure CORS based on environment
+if IS_PRODUCTION:
+    # Production: Use environment variable for allowed origins
+    allowed_origins = os.getenv("CORS_ORIGINS", "").split(",")
+    allowed_origins = [origin.strip() for origin in allowed_origins if origin.strip()]
+else:
+    # Development: Allow localhost origins
+    allowed_origins = [
         "http://localhost:5173",  # Vite dev server
         "http://localhost:5174",  # Vite dev server (alternative port)
         "http://localhost:5175",  # Vite dev server (alternative port)
         "http://localhost:3000",  # Alternative port
-    ],
+    ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    # Restrict methods to only what's needed
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    # Specify allowed headers explicitly
+    allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
 )
+
+# Add security headers middleware
+app.add_middleware(SecurityHeadersMiddleware)
+
+# Add rate limiting middleware
+app.add_middleware(RateLimitMiddleware)
 
 # Import routers
 from app.api.endpoints import schema, automapping, upload, transform, validate, ai_inference, sftp, config, review
@@ -93,4 +118,12 @@ async def internal_error_handler(request, exc):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+
+    # Security: Don't bind to 0.0.0.0 in development, use 127.0.0.1
+    # Only bind to 0.0.0.0 in production when behind reverse proxy
+    host = "0.0.0.0" if IS_PRODUCTION else "127.0.0.1"
+
+    # Security: Disable auto-reload in production
+    reload = not IS_PRODUCTION
+
+    uvicorn.run(app, host=host, port=8000, reload=reload)

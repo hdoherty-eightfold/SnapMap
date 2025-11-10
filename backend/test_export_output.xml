@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EF_Employee_List>
+  <EF_Employee>
+    <employee_id>EMP001</employee_id>
+    <first_name>John</first_name>
+    <last_name>Doe</last_name>
+    <email_list>
+      <email>john.doe@company.com</email>
+    </email_list>
+    <phone_list>
+      <phone>555-0100</phone>
+    </phone_list>
+    <title>Software Engineer</title>
+    <location>New York</location>
+    <hiring_date>2024-01-15</hiring_date>
+    <manager_email>jane.smith@company.com</manager_email>
+  </EF_Employee>
+  <EF_Employee>
+    <employee_id>EMP002</employee_id>
+    <first_name>Jane</first_name>
+    <last_name>Smith</last_name>
+    <email_list>
+      <email>jane.smith@company.com</email>
+    </email_list>
+    <phone_list>
+      <phone>555-0101</phone>
+    </phone_list>
+    <title>Engineering Manager</title>
+    <location>San Francisco</location>
+    <hiring_date>2023-06-20</hiring_date>
+    <manager_email>bob.jones@company.com</manager_email>
+  </EF_Employee>
+  <EF_Employee>
+    <employee_id>EMP003</employee_id>
+    <first_name>Bob</first_name>
+    <last_name>Jones</last_name>
+    <email_list>
+      <email>bob.jones@company.com</email>
+    </email_list>
+    <phone_list>
+      <phone>555-0102</phone>
+    </phone_list>
+    <title>VP Engineering</title>
+    <location>Boston</location>
+    <hiring_date>2022-03-10</hiring_date>
+    <manager_email>ceo@company.com</manager_email>
+  </EF_Employee>
+  <EF_Employee>
+    <employee_id>EMP004</employee_id>
+    <first_name>Alice</first_name>
+    <last_name>Williams</last_name>
+    <email_list>
+      <email>alice.williams@company.com</email>
+    </email_list>
+    <phone_list>
+      <phone>555-0103</phone>
+    </phone_list>
+    <title>Senior Engineer</title>
+    <location>New York</location>
+    <hiring_date>2023-09-05</hiring_date>
+    <manager_email>jane.smith@company.com</manager_email>
+  </EF_Employee>
+  <EF_Employee>
+    <employee_id>EMP005</employee_id>
+    <first_name>Charlie</first_name>
+    <last_name>Brown</last_name>
+    <email_list>
+      <email>charlie.brown@company.com</email>
+    </email_list>
+    <phone_list>
+      <phone>555-0104</phone>
+    </phone_list>
+    <title>Product Manager</title>
+    <location>Austin</location>
+    <hiring_date>2024-02-01</hiring_date>
+    <manager_email>bob.jones@company.com</manager_email>
+  </EF_Employee>
+</EF_Employee_List>

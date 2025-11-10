@@ -12,5 +12,24 @@ export default defineConfig({
         changeOrigin: true,
       }
     }
+  },
+  build: {
+    // Generate unique hashes for all assets to enable cache busting
+    rollupOptions: {
+      output: {
+        // Add hash to all chunk filenames
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
+      }
+    },
+    // Generate manifest for asset tracking
+    manifest: true,
+    // Ensure source maps are generated for debugging
+    sourcemap: true
+  },
+  // CSS configuration for cache busting
+  css: {
+    devSourcemap: true
   }
 })

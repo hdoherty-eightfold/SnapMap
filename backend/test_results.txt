@@ -1,0 +1,154 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.2, pytest-7.4.3, pluggy-1.6.0 -- C:\Program Files\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Code\SnapMap\backend
+configfile: pytest.ini
+plugins: anyio-4.11.0, langsmith-0.4.41, asyncio-0.21.1, typeguard-4.4.4
+asyncio: mode=Mode.STRICT
+collecting ... collected 117 items
+
+tests/test_character_encoding.py::TestCharacterEncoding::test_turkish_characters_in_csv PASSED [  0%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_spanish_characters_in_csv PASSED [  1%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_german_characters_in_csv PASSED [  2%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_french_characters_in_csv PASSED [  3%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_mixed_international_characters PASSED [  4%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_character_encoding_in_xml_output PASSED [  5%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_pipe_delimited_with_special_chars PASSED [  5%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_encoding_detection_utf8 PASSED [  6%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_special_characters_in_multi_value_fields FAILED [  7%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_end_to_end_character_preservation PASSED [  8%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_emoji_and_unicode_symbols FAILED [  9%]
+tests/test_character_encoding.py::TestCharacterEncoding::test_windows_1252_encoding PASSED [ 10%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_no_data_loss_same_row_count PASSED [ 11%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_data_loss_detection PASSED [ 11%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_large_file_1213_rows_preserved PASSED [ 12%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_xml_transformation_preserves_row_count PASSED [ 13%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_error_details_include_row_numbers PASSED [ 14%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_null_value_detection_in_error_details PASSED [ 15%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_duplicate_detection_in_error_details PASSED [ 16%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_allow_deduplication_flag PASSED [ 17%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_field_completeness_validation PASSED [ 17%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_missing_required_field PASSED [ 18%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_multi_value_field_validation PASSED [ 19%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_large_file_stress_test PASSED [ 20%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_percentage_calculation_accuracy PASSED [ 21%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_100_percent_data_loss PASSED [ 22%]
+tests/test_data_loss_validation.py::TestDataLossValidation::test_no_error_when_rows_increased PASSED [ 23%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_comma_delimited_csv PASSED [ 23%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_pipe_delimited_csv_siemens_format FAILED [ 24%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_tab_delimited_tsv PASSED [ 25%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_semicolon_delimited_csv PASSED [ 26%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_quoted_strings_with_delimiters PASSED [ 27%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_parse_with_auto_detected_delimiter PASSED [ 28%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_parse_with_manual_delimiter_override PASSED [ 29%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_multi_value_field_detection FAILED [ 29%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_special_character_detection PASSED [ 30%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_entity_suggestion_based_on_fields PASSED [ 31%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_excel_file_parsing PASSED [ 32%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_large_file_delimiter_detection_performance PASSED [ 33%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_empty_file_handling PASSED [ 34%]
+tests/test_delimiter_detection.py::TestDelimiterDetection::test_single_column_file PASSED [ 35%]
+tests/test_delimiter_encoding.py::TestDelimiterDetection::test_pipe_delimiter_detection PASSED [ 35%]
+tests/test_delimiter_encoding.py::TestDelimiterDetection::test_comma_delimiter_detection PASSED [ 36%]
+tests/test_delimiter_encoding.py::TestDelimiterDetection::test_tab_delimiter_detection PASSED [ 37%]
+tests/test_delimiter_encoding.py::TestDelimiterDetection::test_semicolon_delimiter_detection PASSED [ 38%]
+tests/test_delimiter_encoding.py::TestEncodingDetection::test_utf8_encoding PASSED [ 39%]
+tests/test_delimiter_encoding.py::TestEncodingDetection::test_utf8_sig_encoding PASSED [ 40%]
+tests/test_delimiter_encoding.py::TestEncodingDetection::test_latin1_encoding PASSED [ 41%]
+tests/test_delimiter_encoding.py::TestEncodingDetection::test_cp1252_encoding PASSED [ 41%]
+tests/test_delimiter_encoding.py::TestInternationalCharacters::test_turkish_characters PASSED [ 42%]
+tests/test_delimiter_encoding.py::TestInternationalCharacters::test_spanish_characters PASSED [ 43%]
+tests/test_delimiter_encoding.py::TestInternationalCharacters::test_german_characters PASSED [ 44%]
+tests/test_delimiter_encoding.py::TestInternationalCharacters::test_french_characters PASSED [ 45%]
+tests/test_delimiter_encoding.py::TestInternationalCharacters::test_mixed_international_characters PASSED [ 46%]
+tests/test_delimiter_encoding.py::TestDataIntegrity::test_no_data_loss_row_count PASSED [ 47%]
+tests/test_delimiter_encoding.py::TestDataIntegrity::test_no_data_loss_with_special_chars PASSED [ 47%]
+tests/test_delimiter_encoding.py::TestSiemensFileFormat::test_siemens_file_parsing PASSED [ 48%]
+tests/test_delimiter_encoding.py::TestSiemensFileFormat::test_siemens_file_character_preservation PASSED [ 49%]
+tests/test_delimiter_encoding.py::TestEdgeCases::test_empty_file PASSED  [ 50%]
+tests/test_delimiter_encoding.py::TestEdgeCases::test_single_column PASSED [ 51%]
+tests/test_delimiter_encoding.py::TestEdgeCases::test_malformed_csv PASSED [ 52%]
+tests/test_delimiter_encoding.py::TestEdgeCases::test_excel_file PASSED  [ 52%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_siemens_file_mapping_threshold FAILED [ 53%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_person_id_to_candidate_id_mapping FAILED [ 54%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_work_emails_to_email_mapping FAILED [ 55%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_work_phones_to_phone_mapping FAILED [ 56%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_confidence_scores_threshold FAILED [ 57%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_alternative_matches_provided PASSED [ 58%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_mapping_employee_vs_candidate PASSED [ 58%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_uncommon_field_names_fallback PASSED [ 59%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_case_insensitive_matching PASSED [ 60%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_underscore_and_camelcase_handling PASSED [ 61%]
+tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_batch_mapping_performance PASSED [ 62%]
+tests/test_multi_value_and_validation.py::TestMultiValueFields::test_multi_value_emails_with_pipe_separator PASSED [ 63%]
+tests/test_multi_value_and_validation.py::TestMultiValueFields::test_multi_value_phones_with_pipe_separator PASSED [ 64%]
+tests/test_multi_value_and_validation.py::TestMultiValueFields::test_comma_separated_fallback PASSED [ 64%]
+tests/test_multi_value_and_validation.py::TestMultiValueFields::test_single_value_no_separator PASSED [ 65%]
+tests/test_multi_value_and_validation.py::TestDataLossValidation::test_validate_row_count_success PASSED [ 66%]
+tests/test_multi_value_and_validation.py::TestDataLossValidation::test_validate_row_count_data_loss PASSED [ 67%]
+tests/test_multi_value_and_validation.py::TestDataLossValidation::test_validate_row_count_more_output_rows PASSED [ 68%]
+tests/test_multi_value_and_validation.py::TestDataLossValidation::test_validate_field_completeness_all_present PASSED [ 69%]
+tests/test_multi_value_and_validation.py::TestDataLossValidation::test_validate_field_completeness_missing_field PASSED [ 70%]
+tests/test_multi_value_and_validation.py::TestDataLossValidation::test_validate_field_completeness_null_values PASSED [ 70%]
+tests/test_multi_value_and_validation.py::TestDataLossValidation::test_validate_multi_value_fields_detection PASSED [ 71%]
+tests/test_multi_value_and_validation.py::TestDataLossValidation::test_transformation_with_data_loss_validation PASSED [ 72%]
+tests/test_multi_value_and_validation.py::TestErrorMessages::test_data_loss_error_details PASSED [ 73%]
+tests/test_multi_value_and_validation.py::TestErrorMessages::test_multi_value_detection_in_validator PASSED [ 74%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_parse_double_pipe_separator FAILED [ 75%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_detect_multi_value_fields FAILED [ 76%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_xml_generation_with_two_values PASSED [ 76%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_xml_generation_with_three_values PASSED [ 77%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_xml_generation_with_five_plus_values PASSED [ 78%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_empty_values_in_multi_value_field PASSED [ 79%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_special_characters_in_multi_value_fields PASSED [ 80%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_whitespace_trimming_in_multi_value_fields PASSED [ 81%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_single_value_not_split PASSED [ 82%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_multiple_multi_value_fields PASSED [ 82%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_comma_separated_values_fallback PASSED [ 83%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_mixed_single_and_multi_value_rows PASSED [ 84%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_url_multi_value_field PASSED [ 85%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_nan_in_multi_value_field PASSED [ 86%]
+tests/test_multi_value_fields.py::TestMultiValueFields::test_long_multi_value_list PASSED [ 87%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_siemens_file_exists PASSED [ 88%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step1_detect_pipe_delimiter SKIPPED [ 88%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step2_parse_file_completely SKIPPED [ 89%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step3_detect_field_names SKIPPED [ 90%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step4_map_fields_with_70_percent_threshold SKIPPED [ 91%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step5_verify_specific_field_mappings SKIPPED [ 92%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step6_detect_multi_value_fields SKIPPED [ 93%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step7_detect_special_characters SKIPPED [ 94%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step8_validate_no_data_loss SKIPPED [ 94%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step9_transform_to_xml SKIPPED [ 95%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step10_verify_xml_validity SKIPPED [ 96%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step11_verify_xml_row_count SKIPPED [ 97%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step12_verify_xml_character_encoding SKIPPED [ 98%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step13_verify_multi_value_fields_in_xml SKIPPED [ 99%]
+tests/test_siemens_end_to_end.py::TestSiemensEndToEnd::test_step14_end_to_end_summary SKIPPED [100%]
+
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_siemens_end_to_end.py:58: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:75: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:99: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:122: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:161: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:193: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:215: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:232: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:248: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:282: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:299: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:319: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:348: Siemens test file not available
+SKIPPED [1] tests\test_siemens_end_to_end.py:374: Siemens test file not available
+FAILED tests/test_character_encoding.py::TestCharacterEncoding::test_special_characters_in_multi_value_fields
+FAILED tests/test_character_encoding.py::TestCharacterEncoding::test_emoji_and_unicode_symbols
+FAILED tests/test_delimiter_detection.py::TestDelimiterDetection::test_pipe_delimited_csv_siemens_format
+FAILED tests/test_delimiter_detection.py::TestDelimiterDetection::test_multi_value_field_detection
+FAILED tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_siemens_file_mapping_threshold
+FAILED tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_person_id_to_candidate_id_mapping
+FAILED tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_work_emails_to_email_mapping
+FAILED tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_work_phones_to_phone_mapping
+FAILED tests/test_field_mapping_accuracy.py::TestFieldMappingAccuracy::test_confidence_scores_threshold
+FAILED tests/test_multi_value_fields.py::TestMultiValueFields::test_parse_double_pipe_separator
+FAILED tests/test_multi_value_fields.py::TestMultiValueFields::test_detect_multi_value_fields
+=========== 11 failed, 92 passed, 14 skipped, 11 warnings in 54.07s ===========

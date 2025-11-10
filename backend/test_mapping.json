@@ -1,0 +1,65 @@
+{
+  "mappings": [
+    {
+      "source": "FirstName",
+      "target": "FIRST_NAME",
+      "confidence": 1.0,
+      "method": "exact",
+      "alternatives": [
+        {
+          "target": "LAST_NAME",
+          "confidence": 0.7058823529411765
+        }
+      ]
+    },
+    {
+      "source": "LastName",
+      "target": "LAST_NAME",
+      "confidence": 1.0,
+      "method": "exact",
+      "alternatives": null
+    },
+    {
+      "source": "LastActivityTimeStamp",
+      "target": "LAST_ACTIVITY_TS",
+      "confidence": 0.8,
+      "method": "fuzzy",
+      "alternatives": null
+    }
+  ],
+  "total_mapped": 3,
+  "total_source": 22,
+  "total_target": 11,
+  "mapping_percentage": 13.64,
+  "unmapped_source": [
+    "PersonID",
+    "WorkEmails",
+    "HomeEmails",
+    "WorkPhones",
+    "HomePhones",
+    "Salutation",
+    "HomeLocation",
+    "IsInternal",
+    "Summary",
+    "Website",
+    "Skills",
+    "LinkedJobsID",
+    "AcceptedDPCS",
+    "VisibilityAsCandidate",
+    "CountryRegionOfCitizenship",
+    "NoticePeriodDateOfAvailability",
+    "AnonymizationNEW",
+    "DefaultAccountForReceivingEmails",
+    "HomeCountry"
+  ],
+  "unmapped_target": [
+    "CANDIDATE_ID",
+    "EMAIL",
+    "PHONE",
+    "APPLICATION_DATE",
+    "POSITION_APPLIED",
+    "STATUS",
+    "SOURCE",
+    "RESUME_URL"
+  ]
+}

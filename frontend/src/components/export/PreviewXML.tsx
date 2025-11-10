@@ -72,89 +72,95 @@ export const PreviewXML: React.FC = () => {
 
   if (isLoading) {
     return (
-      <Card padding="lg">
-        <LoadingSpinner size="lg" text="Loading XML preview..." />
-      </Card>
+      <div className="p-8">
+        <Card padding="lg">
+          <LoadingSpinner size="lg" text="Loading XML preview..." />
+        </Card>
+      </div>
     );
   }
 
   if (!xmlPreview) {
     return (
-      <Card padding="lg">
-        <p className="text-center text-gray-600">No XML preview data available</p>
-      </Card>
+      <div className="p-8">
+        <Card padding="lg">
+          <p className="text-center text-gray-600 dark:text-gray-400">No XML preview data available</p>
+        </Card>
+      </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">XML Preview</h2>
-        <p className="text-gray-600 dark:text-gray-400 mt-1">Review the XML format before downloading</p>
+    <div className="p-8">
+      {/* Sticky Header with fade effect */}
+      <div className="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm -mx-8 px-8 pt-6 pb-4 mb-6 border-b border-gray-200 dark:border-gray-700">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">XML Preview</h2>
+        <p className="text-gray-600 dark:text-gray-400">Review the XML format before downloading</p>
       </div>
 
-      {/* Row Count Info */}
-      <Card>
-        <CardContent>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                <Code className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+      <div className="space-y-6">
+        {/* Row Count Info */}
+        <Card>
+          <CardContent>
+            <div className="flex items-center justify-between py-4">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                  <Code className="w-7 h-7 text-purple-600 dark:text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Preview Sample</p>
+                  <p className="text-3xl font-bold text-gray-900 dark:text-white">
+                    {xmlPreview.preview_row_count} of {xmlPreview.total_row_count.toLocaleString()} records
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Preview Sample</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {xmlPreview.preview_row_count} of {xmlPreview.total_row_count.toLocaleString()} records
+              <div className="text-right">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Entity Type</p>
+                <p className="text-xl font-bold text-purple-600 dark:text-purple-400 uppercase">
+                  {selectedEntityType}
                 </p>
               </div>
             </div>
-            <div className="text-right">
-              <p className="text-sm text-gray-600 dark:text-gray-400">Entity Type</p>
-              <p className="text-lg font-semibold text-purple-600 dark:text-purple-400 uppercase">
-                {selectedEntityType}
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
 
-      {/* XML Preview */}
-      <Card>
-        <CardHeader>
-          <CardTitle>XML Structure Preview</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-auto max-h-[600px]">
-            <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap break-words">
-              {xmlPreview.xml_preview}
-            </pre>
-          </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-            Showing preview of {xmlPreview.preview_row_count} records. Full export will include all {xmlPreview.total_row_count.toLocaleString()} records.
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Info Card */}
-      <Card>
-        <CardContent>
-          <div className="flex items-start gap-3">
-            <span className="text-blue-600 dark:text-blue-400 text-lg">ℹ️</span>
-            <div>
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">About XML Export</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                The XML format contains the same data as CSV but in a structured XML format.
-                Each employee record is represented as an XML element with nested fields.
-                This format is useful for systems that require XML-based data interchange.
-              </p>
+        {/* XML Preview */}
+        <Card>
+          <CardHeader>
+            <CardTitle>XML Structure Preview</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-auto max-h-[600px]">
+              <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap break-words">
+                {xmlPreview.xml_preview}
+              </pre>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+              Showing preview of {xmlPreview.preview_row_count} records. Full export will include all {xmlPreview.total_row_count.toLocaleString()} records.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Info Card */}
+        <Card>
+          <CardContent>
+            <div className="flex items-start gap-3 py-3">
+              <span className="text-blue-600 dark:text-blue-400 text-lg">ℹ️</span>
+              <div>
+                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">About XML Export</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  The XML format contains the same data as CSV but in a structured XML format.
+                  Each employee record is represented as an XML element with nested fields.
+                  This format is useful for systems that require XML-based data interchange.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Action Buttons */}
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-6 pt-8 pb-8 border-t border-gray-200 dark:border-gray-700">
         <Button
           variant="outline"
           size="lg"
@@ -164,7 +170,7 @@ export const PreviewXML: React.FC = () => {
           Back to CSV
         </Button>
 
-        <div className="flex gap-4">
+        <div className="flex gap-6">
           <Button
             variant="primary"
             size="lg"

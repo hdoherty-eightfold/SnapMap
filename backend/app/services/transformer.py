@@ -1,6 +1,6 @@
 """
 Transformation Engine
-Transforms data according to field mappings
+Transforms data according to field mappings with data loss validation
 """
 
 import pandas as pd
@@ -10,6 +10,7 @@ import re
 
 from app.models.mapping import Mapping
 from app.models.schema import EntitySchema
+from app.services.data_validator import get_data_validator, DataLossError
 
 
 class TransformationEngine:
@@ -22,7 +23,7 @@ class TransformationEngine:
         schema: EntitySchema
     ) -> tuple[pd.DataFrame, List[str]]:
         """
-        Transform source data according to mappings
+        Transform source data according to mappings with data loss validation
 
         Args:
             source_data: Source data as list of dictionaries
@@ -31,9 +32,13 @@ class TransformationEngine:
 
         Returns:
             Tuple of (transformed DataFrame, list of transformations applied)
+
+        Raises:
+            DataLossError: If rows are lost during transformation
         """
         # Convert to DataFrame
         source_df = pd.DataFrame(source_data)
+        initial_row_count = len(source_df)
 
         # Create mapping dictionary
         mapping_dict = {m.source: m.target for m in mappings}
@@ -71,6 +76,27 @@ class TransformationEngine:
                     transformations.append(
                         f"{field.name}: Auto-generated with current timestamp"
                     )
+
+        # Validate no data loss during field mapping
+        validator = get_data_validator()
+        try:
+            validator.validate_row_count(
+                input_df=source_df,
+                output_df=output_df,
+                operation_name="field mapping"
+            )
+        except DataLossError as e:
+            # Re-raise with additional context
+            raise DataLossError(
+                message=f"Data loss during field mapping: {e.message}",
+                lost_rows=e.lost_rows,
+                total_rows=e.total_rows,
+                details={
+                    **e.details,
+                    "transformations_applied": transformations,
+                    "mapped_fields": list(mapping_dict.keys())
+                }
+            )
 
         return output_df, transformations
 

@@ -1,0 +1,27 @@
+# Security-Enhanced Requirements
+# Additional security packages for production deployment
+
+# Cryptography for proper encryption
+cryptography==42.0.5
+
+# Rate limiting (alternative: slowapi==0.1.9)
+# Note: Currently using custom rate limiter in middleware
+
+# Authentication & Authorization
+python-jose[cryptography]==3.3.0  # JWT tokens
+passlib[bcrypt]==1.7.4  # Password hashing
+
+# Security scanning
+bandit==1.8.1  # Security linting
+safety==3.2.11  # Dependency vulnerability scanning
+
+# Production server
+gunicorn==24.0.0  # Production WSGI server (Unix)
+# For Windows: waitress==3.0.0
+
+# Monitoring and logging
+python-json-logger==3.3.0  # Structured logging
+prometheus-fastapi-instrumentator==7.0.0  # Metrics
+
+# Additional security headers
+secure==1.0.1  # Additional security headers helper

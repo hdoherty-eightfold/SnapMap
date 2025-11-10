@@ -1,0 +1,70 @@
+{
+  "total_rows": 1169,
+  "total_fields": 22,
+  "issues": {
+    "encoding_issues": 2,
+    "quote_issues": 1114,
+    "delimiter_issues": 1114,
+    "phone_format_issues": 52,
+    "multiline_issues": 7,
+    "malformed_rows": 0
+  },
+  "encoding_details": {
+    "extended_ascii": 622,
+    "high_unicode": 293
+  },
+  "empty_fields": {
+    "WorkEmails": 1152,
+    "WorkPhones": 1163,
+    "HomePhones": 1034,
+    "Website": 686,
+    "NoticePeriodDateOfAvailability": 961,
+    "Salutation": 254,
+    "HomeEmails": 19,
+    "HomeLocation": 55,
+    "Summary": 896,
+    "Skills": 896,
+    "CountryRegionOfCitizenship": 70,
+    "HomeCountry": 55,
+    "LinkedJobsID": 54,
+    "AcceptedDPCS": 33,
+    "VisibilityAsCandidate": 33,
+    "DefaultAccountForReceivingEmails": 35
+  },
+  "special_chars": {
+    "U+00FC": 165,
+    "U+00E9": 72,
+    "U+00E1": 60,
+    "U+00F3": 55,
+    "U+00ED": 47,
+    "U+00DF": 44,
+    "U+0130": 34,
+    "U+00E7": 32,
+    "U+0131": 27,
+    "U+00E4": 22,
+    "U+00E3": 21,
+    "U+00F6": 21,
+    "U+015F": 21,
+    "U+00FA": 10,
+    "U+011F": 7,
+    "U+00FD": 7,
+    "U+00D3": 7,
+    "U+00F5": 6,
+    "U+064A": 6,
+    "U+0627": 6,
+    "U+0644": 6,
+    "U+0629": 6,
+    "U+0161": 6,
+    "U+00F1": 6,
+    "U+00C7": 5,
+    "U+017E": 5,
+    "U+00BA": 5,
+    "U+00E8": 5,
+    "U+00C1": 4,
+    "U+5DDE": 4
+  },
+  "problematic_fields": [
+    "HomeLocation",
+    "Summary"
+  ]
+}

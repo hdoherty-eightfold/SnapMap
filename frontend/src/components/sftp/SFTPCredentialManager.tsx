@@ -170,7 +170,7 @@ export const SFTPCredentialManager: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-4">
                     {credential.connection_status === 'connected' && (
                       <span className="flex items-center gap-1 text-sm text-success-600 dark:text-success-400">
                         <CheckCircle className="w-4 h-4" />
@@ -373,10 +373,11 @@ const SFTPCredentialModal: React.FC<SFTPCredentialModalProps> = ({
             </div>
           </div>
 
-          <div className="p-6 border-t border-gray-200 dark:border-gray-800 flex gap-3">
+          <div className="p-6 border-t border-gray-200 dark:border-gray-800 flex gap-6">
             <Button
               type="button"
               variant="outline"
+              size="lg"
               onClick={onClose}
               className="flex-1"
             >
@@ -385,6 +386,7 @@ const SFTPCredentialModal: React.FC<SFTPCredentialModalProps> = ({
             <Button
               type="submit"
               variant="primary"
+              size="lg"
               className="flex-1"
             >
               {credential ? 'Update' : 'Add'} Connection

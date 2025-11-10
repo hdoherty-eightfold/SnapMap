@@ -3,9 +3,10 @@
  * Preview CSV transformation and export
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Download, Check, FileDown, Loader2, Upload, Server, FileCode } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+import { useToast } from '../../contexts/ToastContext';
 import { previewTransform, exportCSV, downloadBlob } from '../../services/api';
 import { getSFTPCredentials, uploadToSFTP, type SFTPCredential } from '../../services/sftp-api';
 import { Button } from '../common/Button';
@@ -14,16 +15,44 @@ import { LoadingSpinner } from '../common/LoadingSpinner';
 import type { PreviewResponse } from '../../types';
 
 export const PreviewCSV: React.FC = () => {
-  const { uploadedFile, mappings, selectedEntityType, isLoading, setIsLoading, nextStep } = useApp();
+  const { uploadedFile, mappings, selectedEntityType, isLoading, setIsLoading, nextStep, setCurrentStep } = useApp();
+  const toast = useToast();
   const [previewData, setPreviewData] = useState<PreviewResponse | null>(null);
   const [exporting, setExporting] = useState(false);
   const [exportSuccess, setExportSuccess] = useState(false);
+  const tableRef = useRef<HTMLDivElement>(null);
 
   // SFTP state
   const [showSFTPModal, setShowSFTPModal] = useState(false);
   const [sftpCredentials, setSftpCredentials] = useState<SFTPCredential[]>([]);
   const [uploadingSFTP, setUploadingSFTP] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
+
+  // Calculate dynamic column widths based on content
+  const calculateColumnWidths = (data: any[]): Record<string, number> => {
+    if (!data || data.length === 0) return {};
+
+    const columns = Object.keys(data[0]);
+    const columnWidths: Record<string, number> = {};
+
+    columns.forEach((column) => {
+      // Start with header width (8px per character + padding)
+      let maxWidth = column.length * 8 + 32;
+
+      // Check data content widths (sample first 50 rows for performance)
+      data.slice(0, 50).forEach((row) => {
+        const value = row[column];
+        const valueStr = value !== null && value !== undefined ? String(value) : '—';
+        const contentWidth = valueStr.length * 7.5 + 32; // 7.5px per char (approximation for monospace) + padding
+        maxWidth = Math.max(maxWidth, contentWidth);
+      });
+
+      // Apply min/max constraints: min 100px, max 400px
+      columnWidths[column] = Math.min(Math.max(maxWidth, 100), 400);
+    });
+
+    return columnWidths;
+  };
 
   useEffect(() => {
     loadPreview();
@@ -34,14 +63,31 @@ export const PreviewCSV: React.FC = () => {
 
     try {
       setIsLoading(true);
+      console.log('[PreviewCSV] Loading preview with:', {
+        file_id: uploadedFile.file_id,
+        entity_name: selectedEntityType,
+        mappings_count: mappings.length,
+        sample_size: 50
+      });
+
       const response = await previewTransform({
         mappings,
-        source_data: uploadedFile.sample_data,
-        sample_size: 5,
+        file_id: uploadedFile.file_id,
+        entity_name: selectedEntityType, // CRITICAL FIX: Added missing entity_name parameter
+        sample_size: 50,
       });
+
+      console.log('[PreviewCSV] Received response:', {
+        transformed_data_length: response.transformed_data?.length || 0,
+        row_count: response.row_count,
+        transformations_count: response.transformations_applied?.length || 0
+      });
+
       setPreviewData(response);
-    } catch (error) {
-      console.error('Preview error:', error);
+    } catch (error: any) {
+      console.error('[PreviewCSV] Preview error:', error);
+      console.error('[PreviewCSV] Error details:', error.response?.data);
+      toast.error('Failed to load preview', error.response?.data?.error?.message || error.message);
     } finally {
       setIsLoading(false);
     }
@@ -107,11 +153,11 @@ export const PreviewCSV: React.FC = () => {
         alert(`Successfully uploaded to SFTP server!\nPath: ${result.path}`);
         setTimeout(() => setUploadSuccess(false), 5000);
       } else {
-        alert(`SFTP Upload failed: ${result.error}`);
+        toast.error('SFTP Upload Failed', result.error);
       }
     } catch (error: any) {
       console.error('SFTP upload error:', error);
-      alert(`SFTP Upload failed: ${error.message || 'Unknown error'}`);
+      toast.error('SFTP Upload Failed', error.message || 'Unknown error');
     } finally {
       setUploadingSFTP(false);
       setShowSFTPModal(false);
@@ -125,26 +171,30 @@ export const PreviewCSV: React.FC = () => {
 
   if (isLoading) {
     return (
-      <Card padding="lg">
-        <LoadingSpinner size="lg" text="Loading preview..." />
-      </Card>
+      <div className="p-6">
+        <Card padding="lg">
+          <LoadingSpinner size="lg" text="Loading preview..." />
+        </Card>
+      </div>
     );
   }
 
   if (!previewData) {
     return (
-      <Card padding="lg">
-        <p className="text-center text-gray-600">No preview data available</p>
-      </Card>
+      <div className="p-6">
+        <Card padding="lg">
+          <p className="text-center text-gray-600 dark:text-gray-400">No preview data available</p>
+        </Card>
+      </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900">Transformation Preview</h2>
-        <p className="text-gray-600 mt-1">Review the transformed data before exporting</p>
+    <div className="p-6 space-y-8">
+      {/* Sticky Header with fade effect */}
+      <div className="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm -mx-6 px-6 pt-6 pb-4 mb-6 border-b border-gray-200 dark:border-gray-700">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Transformation Preview</h2>
+        <p className="text-gray-600 dark:text-gray-400">Review the transformed data before exporting</p>
       </div>
 
       {/* Transformations Applied */}
@@ -156,8 +206,8 @@ export const PreviewCSV: React.FC = () => {
           <div className="space-y-2">
             {previewData.transformations_applied.map((transformation, index) => (
               <div key={index} className="flex items-start gap-2 text-sm">
-                <Check className="w-4 h-4 text-success-600 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-700">{transformation}</span>
+                <Check className="w-4 h-4 text-success-600 dark:text-success-400 mt-0.5 flex-shrink-0" />
+                <span className="text-gray-700 dark:text-gray-300">{transformation}</span>
               </div>
             ))}
           </div>
@@ -165,7 +215,7 @@ export const PreviewCSV: React.FC = () => {
       </Card>
 
       {/* Before & After Comparison */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Before */}
         <Card>
           <CardHeader>
@@ -173,16 +223,20 @@ export const PreviewCSV: React.FC = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {uploadedFile?.sample_data.slice(0, 2).map((row, index) => (
-                <div key={index} className="p-3 bg-gray-50 rounded-lg text-sm">
-                  {Object.entries(row).slice(0, 5).map(([key, value]) => (
-                    <div key={key} className="flex justify-between py-1">
-                      <span className="text-gray-600 font-medium">{key}:</span>
-                      <span className="text-gray-900">{String(value)}</span>
-                    </div>
-                  ))}
-                </div>
-              ))}
+              {uploadedFile?.sample_data && uploadedFile.sample_data.length > 0 ? (
+                uploadedFile.sample_data.slice(0, 2).map((row, index) => (
+                  <div key={index} className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm">
+                    {Object.entries(row).slice(0, 5).map(([key, value]) => (
+                      <div key={key} className="flex justify-between py-1">
+                        <span className="text-gray-600 dark:text-gray-400 font-medium">{key}:</span>
+                        <span className="text-gray-900 dark:text-white">{String(value)}</span>
+                      </div>
+                    ))}
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500 dark:text-gray-400 text-sm">No sample data available</p>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -194,94 +248,108 @@ export const PreviewCSV: React.FC = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {previewData.transformed_data.slice(0, 2).map((row, index) => (
-                <div key={index} className="p-3 bg-success-50 rounded-lg text-sm">
-                  {Object.entries(row).slice(0, 5).map(([key, value]) => (
-                    <div key={key} className="flex justify-between py-1">
-                      <span className="text-gray-600 font-medium">{key}:</span>
-                      <span className="text-gray-900 font-semibold">
-                        {value !== null && value !== undefined ? String(value) : '—'}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              ))}
+              {previewData.transformed_data && previewData.transformed_data.length > 0 ? (
+                previewData.transformed_data.slice(0, 2).map((row, index) => (
+                  <div key={index} className="p-3 bg-success-50 dark:bg-success-900/20 rounded-lg text-sm">
+                    {Object.entries(row).slice(0, 5).map(([key, value]) => (
+                      <div key={key} className="flex justify-between py-1">
+                        <span className="text-gray-600 dark:text-gray-400 font-medium">{key}:</span>
+                        <span className="text-gray-900 dark:text-white font-semibold">
+                          {value !== null && value !== undefined ? String(value) : '—'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ))
+              ) : (
+                <p className="text-red-600 dark:text-red-400 text-sm">No transformed data - check mappings</p>
+              )}
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Full Preview Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Transformed Data Preview</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-success-50 border-b-2 border-success-200">
-                  {previewData.transformed_data[0] && Object.keys(previewData.transformed_data[0]).map((column, index) => (
-                    <th
-                      key={index}
-                      className="px-4 py-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      {column}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {previewData.transformed_data.map((row, rowIndex) => (
-                  <tr
-                    key={rowIndex}
-                    className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
-                  >
-                    {Object.values(row).map((value, colIndex) => (
-                      <td
-                        key={colIndex}
-                        className="px-4 py-3 text-sm text-gray-700 border-b border-gray-200"
-                      >
-                        {value !== null && value !== undefined
-                          ? String(value)
-                          : <span className="text-gray-400 italic">—</span>
-                        }
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+      {previewData.transformed_data && previewData.transformed_data.length > 0 && (() => {
+        const columnWidths = calculateColumnWidths(previewData.transformed_data);
+        const columns = Object.keys(previewData.transformed_data[0]);
 
-          <p className="text-sm text-gray-500 mt-4">
-            Showing preview of {previewData.transformed_data.length} rows. Full export will include all {uploadedFile?.row_count.toLocaleString()} rows.
-          </p>
-        </CardContent>
-      </Card>
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>Transformed Data Preview</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div ref={tableRef} className="overflow-x-auto -mx-6 px-6">
+                <table className="border-collapse">
+                  <thead>
+                    <tr className="bg-success-50 dark:bg-success-900/20 border-b-2 border-success-200 dark:border-success-800">
+                      {columns.map((column, index) => (
+                        <th
+                          key={index}
+                          className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap"
+                          style={{ width: `${columnWidths[column]}px`, minWidth: `${columnWidths[column]}px` }}
+                        >
+                          {column}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {previewData.transformed_data.map((row, rowIndex) => (
+                      <tr
+                        key={rowIndex}
+                        className={rowIndex % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-800'}
+                      >
+                        {columns.map((column, colIndex) => {
+                          const value = row[column];
+                          return (
+                            <td
+                              key={colIndex}
+                              className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700"
+                              style={{ maxWidth: `${columnWidths[column]}px` }}
+                            >
+                              <div className="truncate" title={value !== null && value !== undefined ? String(value) : ''}>
+                                {value !== null && value !== undefined
+                                  ? String(value)
+                                  : <span className="text-gray-400 dark:text-gray-500 italic">—</span>
+                                }
+                              </div>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })()}
 
       {/* Summary */}
       <Card>
         <CardContent>
-          <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="grid grid-cols-3 gap-6 text-center py-4">
             <div>
-              <p className="text-sm text-gray-600">Input Rows</p>
-              <p className="text-2xl font-bold text-gray-900">{uploadedFile?.row_count.toLocaleString()}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Input Rows</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{uploadedFile?.row_count.toLocaleString()}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Fields Mapped</p>
-              <p className="text-2xl font-bold text-primary-600">{mappings.length}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Fields Mapped</p>
+              <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">{mappings.length}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Output Rows</p>
-              <p className="text-2xl font-bold text-success-600">{previewData.row_count.toLocaleString()}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Output Rows</p>
+              <p className="text-2xl font-bold text-success-600 dark:text-success-400">{previewData.row_count.toLocaleString()}</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Export Buttons */}
-      <div className="flex justify-center gap-4">
+      <div className="flex justify-center gap-6 pt-4">
         <Button
           variant="primary"
           size="lg"
@@ -316,16 +384,16 @@ export const PreviewCSV: React.FC = () => {
       </div>
 
       {exportSuccess && (
-        <div className="text-center">
-          <p className="text-success-700 font-medium">
+        <div className="text-center mt-4">
+          <p className="text-success-700 dark:text-success-400 font-medium">
             File downloaded! Check your Downloads folder for {selectedEntityType.toUpperCase()}-MAIN.csv
           </p>
         </div>
       )}
 
       {uploadSuccess && (
-        <div className="text-center">
-          <p className="text-success-700 font-medium">
+        <div className="text-center mt-4">
+          <p className="text-success-700 dark:text-success-400 font-medium">
             File uploaded to SFTP server successfully!
           </p>
         </div>
@@ -355,8 +423,7 @@ export const PreviewCSV: React.FC = () => {
                     variant="primary"
                     onClick={() => {
                       setShowSFTPModal(false);
-                      // Navigate to SFTP settings (step 5)
-                      window.location.hash = '#sftp';
+                      setCurrentStep(6);
                     }}
                   >
                     Configure SFTP

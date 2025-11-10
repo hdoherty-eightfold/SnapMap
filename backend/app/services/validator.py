@@ -116,13 +116,26 @@ class ValidationEngine:
 
             column = data[field.name]
 
+            # Validate required field is not empty
+            if field.required:
+                null_indices = column[column.isna()].index.tolist()
+                for idx in null_indices[:100]:  # Limit to first 100 errors
+                    messages.append(ValidationMessage(
+                        field=field.name,
+                        message=f"Required field '{field.display_name}' is empty",
+                        severity="error",
+                        row_number=idx + 1,
+                        suggestion=f"Provide a value for {field.display_name}"
+                    ))
+
             # Validate email format
             if field.type == "email":
                 invalid_emails = self._validate_email_column(column)
-                for idx in invalid_emails:
+                for idx in invalid_emails[:100]:  # Limit to first 100 errors
+                    invalid_value = str(column.iloc[idx])[:50]  # Truncate long values
                     messages.append(ValidationMessage(
                         field=field.name,
-                        message=f"Invalid email format",
+                        message=f"Invalid email format: '{invalid_value}'",
                         severity="error",
                         row_number=idx + 1,
                         suggestion="Ensure email is in format: name@domain.com"
@@ -131,13 +144,45 @@ class ValidationEngine:
             # Validate date format
             if field.type == "date":
                 invalid_dates = self._validate_date_column(column, field.format or "YYYY-MM-DD")
-                for idx in invalid_dates:
+                for idx in invalid_dates[:100]:  # Limit to first 100 errors
+                    invalid_value = str(column.iloc[idx])[:50]
                     messages.append(ValidationMessage(
                         field=field.name,
-                        message=f"Invalid date format",
+                        message=f"Invalid date format: '{invalid_value}'",
                         severity="warning",
                         row_number=idx + 1,
-                        suggestion=f"Date should be in format: {field.format}"
+                        suggestion=f"Date should be in format: {field.format or 'YYYY-MM-DD'}"
+                    ))
+
+            # Validate max length for string fields
+            if field.type == "string" and field.max_length:
+                long_values = column[column.astype(str).str.len() > field.max_length].index.tolist()
+                for idx in long_values[:100]:  # Limit to first 100 errors
+                    actual_length = len(str(column.iloc[idx]))
+                    messages.append(ValidationMessage(
+                        field=field.name,
+                        message=f"Value exceeds maximum length of {field.max_length} characters (actual: {actual_length})",
+                        severity="error",
+                        row_number=idx + 1,
+                        suggestion=f"Truncate or shorten the value to {field.max_length} characters"
+                    ))
+
+            # Validate pattern if specified
+            if field.pattern:
+                non_matching = []
+                for idx, value in column.items():
+                    if pd.notna(value):
+                        if not re.match(field.pattern, str(value)):
+                            non_matching.append(idx)
+
+                for idx in non_matching[:100]:  # Limit to first 100 errors
+                    invalid_value = str(column.iloc[idx])[:50]
+                    messages.append(ValidationMessage(
+                        field=field.name,
+                        message=f"Value '{invalid_value}' doesn't match required pattern",
+                        severity="error",
+                        row_number=idx + 1,
+                        suggestion=f"Value must match pattern: {field.pattern}"
                     ))
 
         return messages
@@ -149,7 +194,8 @@ class ValidationEngine:
 
         for idx, value in series.items():
             if pd.notna(value):
-                if not re.match(email_pattern, str(value)):
+                value_str = str(value).strip()
+                if value_str and not re.match(email_pattern, value_str):
                     invalid_indices.append(idx)
 
         return invalid_indices

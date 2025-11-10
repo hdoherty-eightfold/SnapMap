@@ -61,7 +61,13 @@
       "Bash(gh repo edit:*)",
       "Bash(cat:*)",
       "Bash(dir \"C:\\Code\\SnapMap\\backend\\app\\services\")",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(pkill:*)",
+      "Bash(test:*)",
+      "Bash(awk '{print $9, \"\"\"\"(\"\"\"\" $5 \"\"\"\")\"\"\"\"}')",
+      "Bash(awk:*)",
+      "Bash(cmd //c taskkill //F //PID 924)",
+      "Bash(cmd //c taskkill //F //PID 19780)"
     ],
     "deny": [],
     "ask": []

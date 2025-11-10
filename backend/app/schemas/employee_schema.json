@@ -36,8 +36,62 @@
       "type": "email",
       "required": true,
       "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-      "example": "john@company.com",
+      "example": "john.doe@company.com",
       "description": "Employee's work email address"
+    },
+    {
+      "name": "ROLE",
+      "display_name": "Role",
+      "type": "string",
+      "required": false,
+      "max_length": 200,
+      "example": "Software Engineer",
+      "description": "Employee's role or job function"
+    },
+    {
+      "name": "JOB_CODE",
+      "display_name": "Job Code",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "ENG-001",
+      "description": "Job classification code"
+    },
+    {
+      "name": "COMPANY_NAME",
+      "display_name": "Company Name",
+      "type": "string",
+      "required": false,
+      "max_length": 200,
+      "example": "Acme Corporation",
+      "description": "Name of the company or organization"
+    },
+    {
+      "name": "TITLE",
+      "display_name": "Job Title",
+      "type": "string",
+      "required": false,
+      "max_length": 200,
+      "example": "Senior Software Engineer",
+      "description": "Employee's job title"
+    },
+    {
+      "name": "DETAILED_TITLE",
+      "display_name": "Detailed Title",
+      "type": "string",
+      "required": false,
+      "max_length": 300,
+      "example": "Senior Software Engineer - Backend Systems",
+      "description": "Detailed or extended job title"
+    },
+    {
+      "name": "LEVEL",
+      "display_name": "Level",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "L5",
+      "description": "Employee level or grade"
     },
     {
       "name": "HIRING_DATE",
@@ -49,13 +103,40 @@
       "description": "Date employee was hired"
     },
     {
-      "name": "TITLE",
-      "display_name": "Job Title",
+      "name": "ROLE_CHANGE_DATE",
+      "display_name": "Role Change Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2023-03-15",
+      "description": "Date of last role or position change"
+    },
+    {
+      "name": "MANAGER_ID",
+      "display_name": "Manager ID",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "M001",
+      "description": "Unique identifier of employee's manager"
+    },
+    {
+      "name": "MANAGER_EMAIL",
+      "display_name": "Manager Email",
+      "type": "email",
+      "required": false,
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "example": "manager@company.com",
+      "description": "Manager's email address"
+    },
+    {
+      "name": "MANAGER_FULLNAME",
+      "display_name": "Manager Full Name",
       "type": "string",
       "required": false,
       "max_length": 200,
-      "example": "Software Engineer",
-      "description": "Employee's job title or position"
+      "example": "Jane Smith",
+      "description": "Full name of employee's direct manager"
     },
     {
       "name": "BUSINESS_UNIT",
@@ -67,6 +148,24 @@
       "description": "Department or business unit"
     },
     {
+      "name": "DIVISION",
+      "display_name": "Division",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "Technology",
+      "description": "Company division"
+    },
+    {
+      "name": "TERMINATION_DATE",
+      "display_name": "Termination Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2025-12-31",
+      "description": "Employee termination or separation date"
+    },
+    {
       "name": "PHONE",
       "display_name": "Phone Number",
       "type": "string",
@@ -76,22 +175,67 @@
       "description": "Employee's work phone number"
     },
     {
+      "name": "URL",
+      "display_name": "URL",
+      "type": "string",
+      "required": false,
+      "max_length": 500,
+      "example": "https://www.linkedin.com/in/johndoe",
+      "description": "Employee's profile URL or website"
+    },
+    {
       "name": "LOCATION",
       "display_name": "Work Location",
       "type": "string",
       "required": false,
       "max_length": 100,
-      "example": "San Francisco",
+      "example": "San Francisco, CA",
       "description": "Employee's primary work location"
     },
     {
-      "name": "MANAGER",
-      "display_name": "Manager Name",
+      "name": "PLAN_NAME",
+      "display_name": "Plan Name",
       "type": "string",
       "required": false,
       "max_length": 200,
-      "example": "Jane Smith",
-      "description": "Employee's direct manager"
+      "example": "Career Development Plan 2025",
+      "description": "Name of career or development plan"
+    },
+    {
+      "name": "PLAN_DATE",
+      "display_name": "Plan Date",
+      "type": "date",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "example": "2025-01-15",
+      "description": "Date of plan creation or review"
+    },
+    {
+      "name": "PLAN_COMMENTS",
+      "display_name": "Plan Comments",
+      "type": "string",
+      "required": false,
+      "max_length": 2000,
+      "example": "Promotion track to Senior Engineer",
+      "description": "Comments or notes about the plan"
+    },
+    {
+      "name": "GENDER",
+      "display_name": "Gender",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "Male",
+      "description": "Employee's gender"
+    },
+    {
+      "name": "RACE",
+      "display_name": "Race/Ethnicity",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "Asian",
+      "description": "Employee's race or ethnicity"
     },
     {
       "name": "LAST_ACTIVITY_TS",
@@ -99,8 +243,168 @@
       "type": "datetime",
       "required": true,
       "format": "YYYY-MM-DDTHH:MM:SS",
-      "example": "2025-11-02T14:30:00",
-      "description": "Timestamp of last data update (auto-generated)"
+      "example": "2025-11-09T14:30:00",
+      "description": "Timestamp of last data update"
+    },
+    {
+      "name": "USER_ID",
+      "display_name": "User ID",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "U12345",
+      "description": "System user ID"
+    },
+    {
+      "name": "PERSONAL_EMAIL",
+      "display_name": "Personal Email",
+      "type": "email",
+      "required": false,
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "example": "john.doe@gmail.com",
+      "description": "Employee's personal email address"
+    },
+    {
+      "name": "EXTERNAL_JOB_ID",
+      "display_name": "External Job ID",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "EXT-JOB-123",
+      "description": "External job posting or requisition ID"
+    },
+    {
+      "name": "RM_USER_GROUP_LIST",
+      "display_name": "User Group List",
+      "type": "string",
+      "required": false,
+      "max_length": 500,
+      "example": "Engineering,Leadership,Innovation",
+      "description": "Comma-separated list of user groups"
+    },
+    {
+      "name": "PREFERRED_FIRST_NAME",
+      "display_name": "Preferred First Name",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "Johnny",
+      "description": "Employee's preferred first name"
+    },
+    {
+      "name": "PREFERRED_LAST_NAME",
+      "display_name": "Preferred Last Name",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "Doe",
+      "description": "Employee's preferred last name"
+    },
+    {
+      "name": "EMPLOYEE_TYPE",
+      "display_name": "Employee Type",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "Full-time",
+      "description": "Type of employment (Full-time, Part-time, Contractor, etc.)"
+    },
+    {
+      "name": "LOCATION_COUNTRY",
+      "display_name": "Location Country",
+      "type": "string",
+      "required": false,
+      "max_length": 100,
+      "example": "United States",
+      "description": "Country of employee's work location"
+    },
+    {
+      "name": "BONUS_AMOUNT",
+      "display_name": "Bonus Amount",
+      "type": "number",
+      "required": false,
+      "example": "10000",
+      "description": "Bonus amount"
+    },
+    {
+      "name": "BONUS_CURRENCY",
+      "display_name": "Bonus Currency",
+      "type": "string",
+      "required": false,
+      "max_length": 10,
+      "example": "USD",
+      "description": "Currency code for bonus"
+    },
+    {
+      "name": "BONUS_FREQUENCY",
+      "display_name": "Bonus Frequency",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "Annual",
+      "description": "Frequency of bonus payment"
+    },
+    {
+      "name": "BASE_PAY_AMOUNT",
+      "display_name": "Base Pay Amount",
+      "type": "number",
+      "required": false,
+      "example": "100000",
+      "description": "Base salary or pay amount"
+    },
+    {
+      "name": "BASE_PAY_CURRENCY",
+      "display_name": "Base Pay Currency",
+      "type": "string",
+      "required": false,
+      "max_length": 10,
+      "example": "USD",
+      "description": "Currency code for base pay"
+    },
+    {
+      "name": "BASE_PAY_FREQUENCY",
+      "display_name": "Base Pay Frequency",
+      "type": "string",
+      "required": false,
+      "max_length": 50,
+      "example": "Annual",
+      "description": "Frequency of base pay (Annual, Monthly, etc.)"
+    },
+    {
+      "name": "SUMMARY",
+      "display_name": "Summary",
+      "type": "string",
+      "required": false,
+      "max_length": 2000,
+      "example": "Experienced software engineer with 10+ years in backend systems",
+      "description": "Employee summary or bio"
+    },
+    {
+      "name": "SPECIALISED_SKILLS_LIST",
+      "display_name": "Specialized Skills List",
+      "type": "string",
+      "required": false,
+      "max_length": 1000,
+      "example": "Python,Java,Kubernetes,AWS,Microservices",
+      "description": "Comma-separated list of specialized skills"
+    },
+    {
+      "name": "POSITION_CRITICALITY_LIST",
+      "display_name": "Position Criticality List",
+      "type": "string",
+      "required": false,
+      "max_length": 500,
+      "example": "High,Strategic",
+      "description": "Comma-separated list of position criticality tags"
+    },
+    {
+      "name": "ORG_UNIT_LIST",
+      "display_name": "Organizational Unit List",
+      "type": "string",
+      "required": false,
+      "max_length": 500,
+      "example": "Engineering,R&D,Innovation Lab",
+      "description": "Comma-separated list of organizational units"
     }
   ]
 }
