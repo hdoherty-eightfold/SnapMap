@@ -28,7 +28,7 @@ class FieldMapper:
     """
 
     def __init__(self):
-        self.schemas_dir = Path(__file__).parent.parent / "schemas"
+        self.schemas_dir = Path(__file__).parent.parent.parent.parent / "docs" / "schemas" / "backend_schemas"
         self.alias_dictionary = self._load_aliases()
         self.min_confidence = 0.70  # Only suggest if 70%+ confidence
 

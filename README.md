@@ -11,6 +11,27 @@ Upload CSV/Excel files → Auto-map fields → Validate data → Export as CSV o
 - Schema validation for data quality
 - No AI/LLMs - just fast, local vector similarity matching
 
+## 📁 Project Structure
+
+### Feature-Based Architecture
+```
+.claude/features/          # Feature specifications and agents
+├── MAIN_ORCHESTRATOR.md   # Main coordination agent
+├── upload/SPEC.md         # File upload feature
+├── review/SPEC.md         # Data quality analysis
+├── mapping/SPEC.md        # AI-powered field mapping
+├── export/SPEC.md         # Multi-format export
+├── sftp/SPEC.md          # Secure file upload
+├── settings/SPEC.md       # App configuration
+└── layout/SPEC.md         # UI navigation framework
+```
+
+### Development Guidelines
+- **Each feature has its own SPEC.md** defining functionality, APIs, and dependencies
+- **Main Orchestrator** coordinates feature interactions and prevents breaking changes
+- **Isolated testing** per feature with integration test coverage
+- **Safe updates** following change management protocol
+
 ---
 
 ## Features

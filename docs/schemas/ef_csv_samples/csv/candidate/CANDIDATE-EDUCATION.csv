@@ -1,3 +1,0 @@
-CANDIDATE_ID,SCHOOL,DEGREE,MAJOR,GRADUATION_YEAR,START_DATE,END_DATE,LOCATION_STATE,LOCATION_COUNTRY,STATUS,COMMENTS,DESCRIPTION,LOCATION,IS_CURRENT
-1,University of California,Bachelor's,Computer Science,2020,2016-01-01,2020-01-01,California,USA,active,comments1,description1,location1,true
-2,University of Texas,Master's,Computer Science,2022,2020-01-01,2022-01-01,Texas,USA,active,comments2,description2,location2,false

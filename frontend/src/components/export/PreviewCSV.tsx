@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState, useRef } from 'react';
-import { Download, Check, FileDown, Loader2, Upload, Server, FileCode } from 'lucide-react';
+import { Download, Check, FileDown, Loader2, Upload, Server, FileCode, Eye, EyeOff } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { useToast } from '../../contexts/ToastContext';
 import { previewTransform, exportCSV, downloadBlob } from '../../services/api';
@@ -28,14 +28,37 @@ export const PreviewCSV: React.FC = () => {
   const [uploadingSFTP, setUploadingSFTP] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
+  // Hide empty columns toggle (default to true)
+  const [hideEmptyColumns, setHideEmptyColumns] = useState(true);
+
+  // Check if a column has any populated values
+  const isColumnPopulated = (data: any[], column: string): boolean => {
+    return data.some(row => {
+      const value = row[column];
+      return value !== null && value !== undefined && value !== '' && String(value).trim() !== '';
+    });
+  };
+
+  // Filter out empty columns based on toggle
+  const getVisibleColumns = (data: any[]): string[] => {
+    if (!data || data.length === 0) return [];
+
+    const allColumns = Object.keys(data[0]);
+
+    if (!hideEmptyColumns) {
+      return allColumns;
+    }
+
+    return allColumns.filter(column => isColumnPopulated(data, column));
+  };
+
   // Calculate dynamic column widths based on content
-  const calculateColumnWidths = (data: any[]): Record<string, number> => {
+  const calculateColumnWidths = (data: any[], visibleColumns: string[]): Record<string, number> => {
     if (!data || data.length === 0) return {};
 
-    const columns = Object.keys(data[0]);
     const columnWidths: Record<string, number> = {};
 
-    columns.forEach((column) => {
+    visibleColumns.forEach((column) => {
       // Start with header width (8px per character + padding)
       let maxWidth = column.length * 8 + 32;
 
@@ -271,20 +294,54 @@ export const PreviewCSV: React.FC = () => {
 
       {/* Full Preview Table */}
       {previewData.transformed_data && previewData.transformed_data.length > 0 && (() => {
-        const columnWidths = calculateColumnWidths(previewData.transformed_data);
-        const columns = Object.keys(previewData.transformed_data[0]);
+        const visibleColumns = getVisibleColumns(previewData.transformed_data);
+        const columnWidths = calculateColumnWidths(previewData.transformed_data, visibleColumns);
+        const allColumns = Object.keys(previewData.transformed_data[0]);
+        const hiddenCount = allColumns.length - visibleColumns.length;
 
         return (
           <Card>
             <CardHeader>
-              <CardTitle>Transformed Data Preview</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>Transformed Data Preview</CardTitle>
+                <div className="flex items-center gap-4">
+                  {hiddenCount > 0 && hideEmptyColumns && (
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {hiddenCount} empty column{hiddenCount !== 1 ? 's' : ''} hidden
+                    </span>
+                  )}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setHideEmptyColumns(!hideEmptyColumns)}
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                        hideEmptyColumns
+                          ? 'bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
+                          : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      }`}
+                      title={hideEmptyColumns ? 'Show empty columns' : 'Hide empty columns'}
+                    >
+                      {hideEmptyColumns ? (
+                        <>
+                          <EyeOff className="w-4 h-4" />
+                          <span>Hide Empty Columns</span>
+                        </>
+                      ) : (
+                        <>
+                          <Eye className="w-4 h-4" />
+                          <span>Show All Columns</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
               <div ref={tableRef} className="overflow-x-auto -mx-6 px-6">
                 <table className="border-collapse">
                   <thead>
                     <tr className="bg-success-50 dark:bg-success-900/20 border-b-2 border-success-200 dark:border-success-800">
-                      {columns.map((column, index) => (
+                      {visibleColumns.map((column, index) => (
                         <th
                           key={index}
                           className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap"
@@ -301,7 +358,7 @@ export const PreviewCSV: React.FC = () => {
                         key={rowIndex}
                         className={rowIndex % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-800'}
                       >
-                        {columns.map((column, colIndex) => {
+                        {visibleColumns.map((column, colIndex) => {
                           const value = row[column];
                           return (
                             <td

@@ -1,6 +1,0 @@
-EMPLOYEE_ID,PERIOD_START_DATE,PERIOD_END_DATE,RATING,RATING_LABEL,RATING_TYPE,REVIEW_COMMENTS,REVIEWED_BY,REVIEWED_BY_EMAIL
-W00001,2021-01-01,2021-12-31,4,4 - Exceeded Expectations,Performance Review > Year-End Review,,Manager_name_5,manager_5@eightfold.com
-W00002,2021-01-01,2021-12-31,3,3 - Met Expectations,Performance Review > Year-End Review,,Manager_name_5,manager_5@eightfold.com
-W00003,2021-01-01,2021-12-31,3,3 - Met Expectations,Performance Review > Year-End Review,,Manager_name_5,manager_5@eightfold.com
-W00004,2021-01-01,2021-12-31,4,4 - Exceeded Expectations,Performance Review > Year-End Review,,Manager_name_5,manager_5@eightfold.com
-W00005,2021-01-01,2021-12-31,3,3 - Met Expectations,Performance Review > Year-End Review,,Manager_name_5,manager_5@eightfold.com

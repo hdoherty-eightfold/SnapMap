@@ -1,3 +1,0 @@
-CANDIDATE_ID,CREATOR_EMAIL,CREATOR_TS,BODY,VISIBILITY,NOTE_TYPE,TO,SENDER,CC,SUBJECT
-1,john.doe@test.com,2022-11-11T22:22:22,note1,public,note,john.doe@test.com,john.doe@test.com,john.doe@test.com,subject1
-2,jane.smith@test.com,2022-11-12T10:30:00,note2,private,note,jane.smith@test.com,jane.smith@test.com,jane.smith@test.com,subject2

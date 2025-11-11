@@ -1,5 +1,0 @@
-EXTERNAL_ID,VARIABLE_NAME,FILE_NAME,BASE64_ENCODED_DATA,S3_FILE_PATH
-OFFER_001,contract,contract.pdf,VGVzdCBjb250cmFjdCBmaWxl,,
-OFFER_001,benefits_package,benefits.pdf,,s3://bucket/benefits.pdf
-OFFER_002,offer_letter,offer_letter.pdf,VGVzdCBvZmZlciBsZXR0ZXI=,
-OFFER_002,compensation_details,compensation.pdf,,s3://bucket/compensation.pdf

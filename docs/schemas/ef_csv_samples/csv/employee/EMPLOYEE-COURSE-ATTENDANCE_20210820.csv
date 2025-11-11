@@ -1,3 +1,0 @@
-EMPLOYEE_ID,COURSE_ID,COURSE_TITLE,START_DATE,COMPLETED_DATE,POINTS_EARNED,VERIFIED,URL,TYPE,MEDIUM,MANDATORY,ASSIGNED_BY,PERCENTAGE_COMPLETION,DURATION_HOURS,DUE_TS,DESCRIPTION,PROVIDER,IS_INTERNAL,LANGUAGE,DIFFICULTY,STATUS
-W00001,2428602,10 Mistakes Leaders Should Avoid,2022-01-12,2023-01-12,85.5,true,user1.com,self-paced,online,true,user1,97.5,10,5641945700.1,"course 1 description",provider1,true,English,Easy,Completed
-W00002,n8O9KWK,10 Steps to Creating a Data-Driven Culture,2022-01-12,2023-01-12,92.0,false,user2.com,self-paced,online,true,user2,100,9.5,5641945700,"course 2 description",provider2,false,English,Easy,Completed

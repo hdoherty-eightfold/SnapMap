@@ -1,4 +1,0 @@
-EMPLOYEE_ID,COMPANY,TITLE,DESCRIPTION,START_DATE,END_DATE,LINK,CONTRIBUTOR,SKILL
-W00001,Example Corp,Developer,desc,2020-01-01,2020-01-01,"https://example.com,https://example2.com","John Cam,Mike David","Java,Python"
-W00002,Example Corp,Developer,desc,2020-01-01,2020-01-01,"https://example.com,https://example2.com","John Cam,Mike David","Java,Python"
-W00003,Example Corp,Developer,desc,2020-01-01,2020-01-01,"https://example.com,https://example2.com","John Cam,Mike David","Java,Python"

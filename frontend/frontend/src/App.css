@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  /* Add custom component styles here if needed */
+}
+
+@layer utilities {
+  /* Add custom utility classes here if needed */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Toast animations */
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+  }
+
+  /* Eightfold Gradient Text Animation - "The future works here" style */
+  .text-gradient-animated {
+    background: linear-gradient(
+      90deg,
+      #FF6B6B 0%,
+      #F06595 16.67%,
+      #CC5DE8 33.33%,
+      #5C7CFA 50%,
+      #4DABF7 66.67%,
+      #88E2D2 83.33%,
+      #FF6B6B 100%
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-flow 6s linear infinite;
+  }
+
+  @keyframes gradient-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 300% 50%;
+    }
+  }
+
+  /* SVG Gradient Shift Animation */
+  .animate-gradient-shift {
+    animation: subtle-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes subtle-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.95;
+    }
+  }
+}

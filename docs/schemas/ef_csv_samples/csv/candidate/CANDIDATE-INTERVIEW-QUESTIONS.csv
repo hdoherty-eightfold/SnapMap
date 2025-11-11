@@ -1,3 +1,0 @@
-CANDIDATE_ID,APPLICATION_ID,JOB_ID,SUBMITTED_BY_EMAIL,INTERVIEWED_AT,SUBMITTED_AT,QUESTION,ANSWER,NOTE,RATING
-1,1,1,ritik@test.com,2022-11-11,2022-11-11,question,answer,note,rating
-2,2,2,james.w@test.com,2022-11-12,2022-11-12,Describe your most challenging project,Led a team of 5 to rebuild the authentication system,Shows leadership,4

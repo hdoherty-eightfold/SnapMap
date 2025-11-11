@@ -1,5 +1,0 @@
-EXTERNAL_ID,ROLE,EMAIL
-common,headOfUnit,common.lead@company.com
-common,watchers,common.team@company.com
-finance,headOfUnit,finance.lead@company.com
-finance,watchers,finance.team@company.com

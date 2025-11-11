@@ -1,3 +1,0 @@
-ext_event_id,name,event_type,start_timestamp,end_timestamp,description,selected_timezone,event_location_type,institution,venue,complete_venue,address,location,event_category,event_team
-123,event 123,OPEN,2023-10-12T11:11:11,2023-12-12T11:11:11,descriptionTest,Asia/Calcutta,in_person,institutionTest,venueTest,test venue,test address,BLR,test category,"demo@eightfolddemo-ritik-kumar.com,demo@eightfolddemo-ritik-kumar.com"
-456,event 456,CAMPUS_SCHEDULING,2024-01-12T11:11:11,2024-03-12T11:11:11,description for testing,Asia/Calcutta,virtual_event,institutionTest,venueTest,test complete venue,test address,Noida,test category,"demo@eightfolddemo-ritik-kumar.com,demo@eightfolddemo-ritik-kumar.com"

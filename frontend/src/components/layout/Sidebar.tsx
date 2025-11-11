@@ -92,7 +92,6 @@ export const Sidebar: React.FC = () => {
 
   return (
     <aside className={`fixed left-0 top-0 bottom-0 bg-gradient-navy border-r border-eightfold-teal-300/20 flex flex-col transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-64'}`}>
-      {/* Collapse Toggle Button - Eightfold Styled */}
       <button
         onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         className="absolute -right-3 top-6 z-10 w-6 h-6 bg-eightfold-teal-300 border border-eightfold-teal-400 rounded-full flex items-center justify-center hover:bg-eightfold-teal-400 transition-all hover:scale-110 shadow-eightfold-teal text-eightfold-navy-600"
@@ -101,7 +100,6 @@ export const Sidebar: React.FC = () => {
         <span className="text-xs font-bold">{isSidebarCollapsed ? '→' : '←'}</span>
       </button>
 
-      {/* Logo/Brand - SnapMap */}
       <div className="p-6 border-b border-eightfold-teal-300/20">
         {!isSidebarCollapsed ? (
           <>
@@ -126,7 +124,6 @@ export const Sidebar: React.FC = () => {
         )}
       </div>
 
-      {/* Navigation - Eightfold Styled */}
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         {!isSidebarCollapsed && (
           <div className="text-caption text-eightfold-teal-300 uppercase tracking-wider px-3 mb-3 font-bold">
@@ -156,17 +153,14 @@ export const Sidebar: React.FC = () => {
                 }
               `}
             >
-              {/* Active Indicator */}
               {isActive && (
                 <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-eightfold-teal-300 rounded-r" />
               )}
 
-              {/* Icon */}
               <span className={`text-xl flex-shrink-0 ${isSidebarCollapsed ? '' : 'mt-0.5'}`}>
                 {isCompleted ? '✓' : item.icon}
               </span>
 
-              {/* Content - Only show when expanded */}
               {!isSidebarCollapsed && (
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
@@ -187,18 +181,7 @@ export const Sidebar: React.FC = () => {
         })}
       </nav>
 
-      {/* Actions - Eightfold Styled */}
       <div className="p-4 border-t border-eightfold-teal-300/20 space-y-2">
-        {/* Theme Toggle - Eightfold Pill Button */}
-        <button
-          onClick={toggleTheme}
-          className={`w-full px-4 py-2.5 text-sm font-semibold text-eightfold-navy-600 bg-eightfold-teal-300 hover:bg-eightfold-teal-400 rounded-pill transition-all hover:-translate-y-0.5 shadow-eightfold-teal flex items-center ${isSidebarCollapsed ? 'justify-center' : 'justify-center gap-2'}`}
-          title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙' : '☀️'}
-          {!isSidebarCollapsed && <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>}
-        </button>
-
         <button
           onClick={resetAll}
           className={`w-full px-4 py-2.5 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 rounded-pill transition-all ${isSidebarCollapsed ? 'flex justify-center' : ''}`}
@@ -207,7 +190,6 @@ export const Sidebar: React.FC = () => {
           {isSidebarCollapsed ? '🔄' : '🔄 Start Over'}
         </button>
       </div>
-
     </aside>
   );
 };

@@ -6,7 +6,7 @@ Uses Fernet symmetric encryption (AES-128 in CBC mode with HMAC-SHA256)
 
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import base64
 import os
 
@@ -61,7 +61,7 @@ class CredentialEncryption:
         if salt is None:
             salt = os.urandom(16)
 
-        kdf = PBKDF2(
+        kdf = PBKDF2HMAC(
             algorithm=hashes.SHA256(),
             length=32,
             salt=salt,

@@ -20,16 +20,13 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  // Initialize theme from localStorage or system preference
+  // Initialize theme from localStorage or default to light mode
   const [theme, setThemeState] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme) {
       return savedTheme;
     }
-    // Check system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
+    // Default to light mode regardless of system preference
     return 'light';
   });
 

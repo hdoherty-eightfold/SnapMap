@@ -16,7 +16,7 @@ class SchemaManager:
     """Manages entity schemas for all Eightfold entity types"""
 
     def __init__(self):
-        self.schemas_dir = Path(__file__).parent.parent / "schemas"
+        self.schemas_dir = Path(__file__).parent.parent.parent.parent / "docs" / "schemas" / "backend_schemas"
         self._entity_registry = None
 
     @lru_cache(maxsize=10)

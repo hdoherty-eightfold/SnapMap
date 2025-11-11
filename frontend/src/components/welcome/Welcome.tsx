@@ -19,24 +19,24 @@ export const Welcome: React.FC = () => {
       description: 'Support for CSV and XML files up to 100MB. Automatically detects entity type from your data.',
     },
     {
-      icon: <FileSearch className="w-6 h-6" />,
-      title: 'AI-Powered Review',
-      description: 'Intelligent file analysis detects data quality issues, missing fields, and column name problems.',
+      icon: <Sparkles className="w-6 h-6" />,
+      title: 'AI Mapping',
+      description: 'Semantic field matching with 80-90% accuracy. Our AI understands the meaning behind your field names.',
     },
     {
-      icon: <Sparkles className="w-6 h-6" />,
-      title: 'Semantic Mapping',
-      description: 'AI auto-maps 80-90% of fields correctly using semantic understanding and embeddings.',
+      icon: <FileSearch className="w-6 h-6" />,
+      title: 'Quality Review',
+      description: 'Built-in validation detects data issues, missing fields, and suggests improvements.',
     },
     {
       icon: <Eye className="w-6 h-6" />,
-      title: 'Preview & Validate',
-      description: 'Review transformations in CSV and XML formats before exporting or uploading.',
+      title: 'Preview & Edit',
+      description: 'Review transformations before export. Make manual adjustments with our intuitive interface.',
     },
     {
       icon: <Cloud className="w-6 h-6" />,
-      title: 'SFTP Integration',
-      description: 'Upload transformed files directly to your SFTP server with real-time progress tracking.',
+      title: 'Export & Upload',
+      description: 'Download XML files or upload directly to your SFTP server. Track progress in real-time.',
     },
   ];
 
@@ -44,17 +44,17 @@ export const Welcome: React.FC = () => {
     {
       number: 1,
       title: 'Upload',
-      description: 'Upload your source HR data file',
+      description: 'Choose your data file',
     },
     {
       number: 2,
       title: 'Review',
-      description: 'Check for data quality issues',
+      description: 'Check data quality',
     },
     {
       number: 3,
       title: 'Map',
-      description: 'Auto-map fields to Eightfold schema',
+      description: 'AI field matching',
     },
     {
       number: 4,
@@ -70,20 +70,18 @@ export const Welcome: React.FC = () => {
 
   return (
     <div className="p-8">
-      {/* Sticky Hero Section with transparent background on scroll */}
-      <div className="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm -mx-8 px-8 pt-8 pb-6 mb-6 border-b border-gray-200 dark:border-gray-700 text-center">
+      <div className="bg-white dark:bg-gray-900 -mx-8 px-8 pt-8 pb-6 mb-6 border-b border-gray-200 dark:border-gray-700 text-center">
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 mb-4">
           <Map className="w-10 h-10 text-white" />
         </div>
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
           Welcome to SnapMap
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          Transform customer HR data into Eightfold format in minutes with AI-powered field mapping
+        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-4">
+          AI powered HR transformation
         </p>
       </div>
 
-      {/* What is SnapMap */}
       <Card className="mb-8">
         <CardHeader>
           <CardTitle className="text-2xl">What is SnapMap?</CardTitle>
@@ -98,7 +96,6 @@ export const Welcome: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* How It Works */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
           How It Works
@@ -129,56 +126,50 @@ export const Welcome: React.FC = () => {
         </div>
       </div>
 
-      {/* Key Features */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
           Key Features
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature) => (
-            <Card key={feature.title} className="hover:shadow-lg transition-shadow">
+          {features.map((feature, index) => (
+            <Card key={index} className="h-full">
               <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 flex items-center justify-center">
-                    {feature.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {feature.description}
-                    </p>
-                  </div>
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 mb-4">
+                  {feature.icon}
                 </div>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {feature.description}
+                </p>
               </CardContent>
             </Card>
           ))}
         </div>
       </div>
 
-      {/* Benefits */}
       <Card className="mb-8">
         <CardHeader>
           <CardTitle className="text-2xl">Why Choose SnapMap?</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex items-start gap-3">
               <CheckCircle className="w-5 h-5 text-success-600 flex-shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Save Time</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Reduce manual mapping from hours to minutes with AI-powered automation
+                  Reduce manual data mapping from hours to minutes with AI automation
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle className="w-5 h-5 text-success-600 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Improve Accuracy</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Increase Accuracy</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Semantic matching ensures 80-90% field mapping accuracy
+                  Semantic understanding ensures better field matching than keyword-based tools
                 </p>
               </div>
             </div>
@@ -204,7 +195,6 @@ export const Welcome: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Get Started Button */}
       <div className="flex justify-center">
         <Button
           variant="primary"

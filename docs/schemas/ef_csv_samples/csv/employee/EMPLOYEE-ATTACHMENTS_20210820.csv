@@ -1,8 +1,0 @@
-EMPLOYEE_ID,ATTACHMENT_TYPE,CONTENT,CONTENT_IS_BASE64_ENCODED,FILEPATH,S3_FILE_PATH,LAST_MODIFIED_TS,URL,ATTACHMENT_ID
-W00001,resume,example.pdf,true,/path/to/example.pdf,s3://ef-sftp/test/test_resume.txt,2021-04-03T10:00:00,https://www.linkedin.com/in/first_name_1-last_name_1,1
-W00002,others,YWRpdHlhaXNnb29kYm95,true,,,2021-04-03T10:00:00,https://www.linkedin.com/in/first_name_2-last_name_2,2
-W00003,others,adityaisgoodboy,false,,,2021-04-03T10:00:00,https://www.linkedin.com/in/first_name_3-last_name_3,3
-W00003,resume,RGF0YSBhbmFseGlzZWQgdG8gdGVjaG5vbG9neS4uLg==,true,/path/to/W00003_resume.pdf,s3://ats-attachments/W00003/resume.pdf,2020-04-13T11:35:55,"https://www.linkedin.com,https://business.linkedin.com/",5
-W00004,resume,UmVhZCB0aGUgbGV0dGVyIHJpbmcuLg==,true,/path/to/W00004_resume.pdf,s3://ats-attachments/W00004/resume.pdf,2019-04-11T11:35:55,https://www.linkedin.com/in/first_name_4-last_name_4,6
-W00005,resume,SG9sZSB0aGlzIGlzIGEgc2FtcGxlIHZlcnNpb24gb2YgaHR0cHM6Ly93d3cuc2FtcGxlLmNvbS8=,true,/path/to/W00005_resume.pdf,s3://ats-attachments/W00005/resume.pdf,2021-04-10T11:35:55,https://www.linkedin.com/in/first_name_5-last_name_5,7
-W00006,resume,TWFuYWdlciByZXN1bWUgY29udGVudCBmb3IgbWFuYWdlciByb2xl,true,/path/to/W00006_resume.pdf,s3://ats-attachments/W00006/resume.pdf,2021-04-10T11:35:55,https://www.linkedin.com/in/manager_first_name_5-manager_last_name_5,9

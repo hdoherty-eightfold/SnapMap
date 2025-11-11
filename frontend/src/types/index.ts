@@ -5,7 +5,7 @@
 
 // Common types
 export type DataType = "string" | "number" | "date" | "email" | "datetime" | "boolean";
-export type MatchMethod = "exact" | "alias" | "fuzzy";
+export type MatchMethod = "exact" | "alias" | "partial" | "alias_partial" | "fuzzy" | "manual" | "semantic";
 export type Severity = "error" | "warning" | "info";
 
 // Field Definition

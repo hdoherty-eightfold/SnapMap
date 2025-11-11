@@ -33,6 +33,8 @@ export const FileUpload: React.FC = () => {
   const [detectedEntity, setDetectedEntity] = useState<string | null>(null);
   const [detectionConfidence, setDetectionConfidence] = useState<number>(0);
   const [showSampleDropdown, setShowSampleDropdown] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'processing' | 'complete' | 'error'>('idle');
 
   const sampleFiles = [
     { name: 'Employee Sample 1 (10 records)', path: '/samples/employee_sample_1.csv' },
@@ -83,9 +85,25 @@ export const FileUpload: React.FC = () => {
     try {
       setIsLoading(true);
       setError(null);
+      setUploadStatus('uploading');
+      setUploadProgress(0);
+
+      // Simulate upload progress
+      const progressInterval = setInterval(() => {
+        setUploadProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval);
+            return 90;
+          }
+          return prev + 10;
+        });
+      }, 100);
 
       // Upload file
       const response = await uploadFile(file);
+      clearInterval(progressInterval);
+      setUploadProgress(100);
+      setUploadStatus('processing');
       setUploadedFile(response);
 
       // Try to auto-detect entity type from columns

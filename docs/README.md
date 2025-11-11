@@ -1,27 +1,28 @@
 # SnapMap Documentation
 
-**Version:** 2.0.0 - PRODUCTION READY
-**Last Updated:** November 7, 2025
+## Feature Specifications
+All feature documentation is located in `.claude/features/`:
 
----
+- **[Main Orchestrator](../.claude/features/MAIN_ORCHESTRATOR.md)** - Central coordination
+- **[Upload](../.claude/features/upload/SPEC.md)** - File upload and processing
+- **[Review](../.claude/features/review/SPEC.md)** - Data quality analysis
+- **[Mapping](../.claude/features/mapping/SPEC.md)** - AI field mapping
+- **[Export](../.claude/features/export/SPEC.md)** - Multi-format export
+- **[SFTP](../.claude/features/sftp/SPEC.md)** - Secure file upload
+- **[Settings](../.claude/features/settings/SPEC.md)** - App configuration
+- **[Layout](../.claude/features/layout/SPEC.md)** - UI navigation
 
-## Welcome to SnapMap Documentation
+## Development
+- Each feature spec contains complete functionality, API, testing, and dependency information
+- Follow the safe change management protocol in MAIN_ORCHESTRATOR.md
+- Test files are organized by feature in `backend/tests/features/`
 
-Complete technical documentation for the SnapMap HR data transformation platform. This documentation package covers everything from end-user guides to deep technical implementation details.
-
----
-
-## Quick Links
-
-### Getting Started
-- **NEW USERS**: Start with [User Guide](USER_GUIDE.md) - Learn how to use SnapMap
-- **DEVELOPERS**: Start with [Developer Guide](DEVELOPER_GUIDE.md) - Understand the architecture
-- **DEVOPS**: Start with [Deployment Guide](DEPLOYMENT_GUIDE.md) - Deploy to production
-
-### Essential Documentation
-- [Implementation Complete](IMPLEMENTATION_COMPLETE.md) - Executive summary and project overview
-- [API Reference](API_REFERENCE.md) - Complete API specifications
-- [Changelog](CHANGELOG.md) - Version history and release notes
+## Quick Start
+1. Read the feature spec for your area of work
+2. Check MAIN_ORCHESTRATOR.md for dependencies
+3. Make changes following feature guidelines
+4. Run feature-specific tests
+5. Update spec if behavior changes
 
 ---
 

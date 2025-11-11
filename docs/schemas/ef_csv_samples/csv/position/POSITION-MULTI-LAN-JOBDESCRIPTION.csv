@@ -1,6 +1,0 @@
-JOB_ID,POSTING_TITLE,POSTING_ID,POSTING_STATUS,POSTED_FOR,JOB_DESCRIPTION,LOCALE,IS_PRIMARY_POST,PUBLISHED_TS,EXPIRATION_TS
-A1B2C3,Software Engineer Opening,POST-001,Active,internal,Develop and maintain software applications,en_US,True,2024-01-01T10:00:00,2025-01-01T10:00:00
-D4E5F6,Marketing Specialist Role,POST-002,Active,external,Drive marketing campaigns and strategies,en_US,True,2024-01-05T11:00:00,2025-01-05T11:00:00
-G7H8I9,Data Analyst Position,POST-003,Active,all,Analyze data and generate reports,en_US,True,2024-01-10T09:30:00,2025-01-10T09:30:00
-J1K2L3,Product Manager Vacancy,POST-004,Active,external,Oversee product development lifecycle,en_US,True,2024-01-15T08:45:00,2025-01-15T08:45:00
-M4N5O6,UX Designer Opportunity,POST-005,Active,internal,Design user-friendly interfaces,en_US,True,2024-01-20T14:00:00,2025-01-20T14:00:00

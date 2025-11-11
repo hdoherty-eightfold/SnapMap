@@ -1,9 +1,0 @@
-<EF_Employee_List>
-
-  <EF_Employee>
-    <employee_id>EM00033</employee_id>
-    <email_list>
-      <email>fileingest@eightfolddemo-unittest.com</email>
-    </email_list>
-</EF_Employee>
-</EF_Employee_List>

@@ -1,8 +1,0 @@
-<EF_Holiday_List>
-  <EF_Holiday>
-    <holiday_id>1234</holiday_id>
-    <holiday_date>2015-07-15</holiday_date>
-    <last_modified_ts>2015-05-07T00:00:00</last_modified_ts>
-    <last_modifier_email>demo.user.2@example.com</last_modifier_email>
-  </EF_Holiday>
-</EF_Holiday_List>
