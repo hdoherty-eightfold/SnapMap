@@ -88,13 +88,16 @@ class APIClient {
   /**
    * Auto-detect entity type from source fields
    */
-  async detectEntityType(sourceFields: string[]): Promise<{
+  async detectEntityType(sourceFields: string[], filename?: string): Promise<{
     detected_entity: string;
+    detected_variant?: string;
+    variant_display_name?: string;
     confidence: number;
     all_scores: Record<string, number>;
   }> {
     const response = await this.client.post('/ai/detect-entity', {
       source_fields: sourceFields,
+      filename: filename,
     });
     return response.data;
   }

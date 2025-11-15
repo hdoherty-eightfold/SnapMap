@@ -3,7 +3,7 @@
  * Map source fields to target fields with auto-mapping
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Sparkles, ArrowRight, CheckCircle, XCircle, AlertCircle, Info, Search, Plus, Wand2, X } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { useToast } from '../../contexts/ToastContext';
@@ -321,7 +321,7 @@ export const FieldMapping: React.FC = () => {
     if (uploadedFile && schema && mappings.length === 0) {
       handleAutoMap();
     }
-  }, [uploadedFile, schema]);
+  }, [uploadedFile, schema, mappings.length, handleAutoMap]);
 
   // Close tooltip when clicking outside
   useEffect(() => {
@@ -335,11 +335,15 @@ export const FieldMapping: React.FC = () => {
     }
   }, [showTooltip]);
 
-  const handleAutoMap = async () => {
+  const handleAutoMap = useCallback(async () => {
     if (!uploadedFile || !schema) return;
 
     try {
       setAutoMapping(true);
+
+      // Small delay to prevent rapid state changes that could cause scroll flickering
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       const response = await autoMap({
         source_fields: uploadedFile.columns,
         target_schema: 'employee',
@@ -348,14 +352,18 @@ export const FieldMapping: React.FC = () => {
 
       setMappings(response.mappings);
 
-      // Validate after auto-mapping
+      // Validate after auto-mapping with small delay
+      await new Promise(resolve => setTimeout(resolve, 50));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       await handleValidate(response.mappings);
     } catch (error) {
       console.error('Auto-map error:', error);
     } finally {
+      // Delay before removing loading state to prevent rapid UI changes
+      await new Promise(resolve => setTimeout(resolve, 100));
       setAutoMapping(false);
     }
-  };
+  }, [uploadedFile, schema, setMappings]);
 
   const handleValidate = async (currentMappings?: Mapping[]) => {
     const mappingsToValidate = currentMappings || mappings;

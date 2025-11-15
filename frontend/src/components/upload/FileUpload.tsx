@@ -4,13 +4,16 @@
  */
 
 import React, { useState, useCallback, useEffect } from 'react';
-import { Upload, File, Check, X, AlertCircle, Sparkles } from 'lucide-react';
+import { Upload, File, Check, X, AlertCircle, Sparkles, ChevronDown, FileText } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { uploadFile, getSchema, getAvailableEntities, detectEntityType } from '../../services/api';
 import { Button } from '../common/Button';
 import { Card } from '../common/Card';
 import { LoadingSpinner } from '../common/LoadingSpinner';
+import { CustomDropdown } from '../common/CustomDropdown';
+import { SchemaViewer } from '../common/SchemaViewer';
 import { cn } from '../../utils/cn';
+import type { EntitySchema } from '../../types';
 
 export const FileUpload: React.FC = () => {
   const {
@@ -31,10 +34,17 @@ export const FileUpload: React.FC = () => {
   const [entitiesLoading, setEntitiesLoading] = useState(true);
   const [showAutoDetect, setShowAutoDetect] = useState(false);
   const [detectedEntity, setDetectedEntity] = useState<string | null>(null);
+  const [detectedVariant, setDetectedVariant] = useState<string | null>(null);
+  const [variantDisplayName, setVariantDisplayName] = useState<string | null>(null);
   const [detectionConfidence, setDetectionConfidence] = useState<number>(0);
   const [showSampleDropdown, setShowSampleDropdown] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'processing' | 'complete' | 'error'>('idle');
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [pendingFileData, setPendingFileData] = useState<any>(null);
+  const [isManualSelection, setIsManualSelection] = useState(false);
+  const [showSchemaViewer, setShowSchemaViewer] = useState(false);
+  const [schemaToView, setSchemaToView] = useState<EntitySchema | null>(null);
 
   const sampleFiles = [
     { name: 'Employee Sample 1 (10 records)', path: '/samples/employee_sample_1.csv' },
@@ -47,11 +57,8 @@ export const FileUpload: React.FC = () => {
       try {
         setEntitiesLoading(true);
         const response = await getAvailableEntities();
-        // Filter to only show employee entity
-        const employeeOnly = response.entities.filter((e: any) => e.id === 'employee');
-        setAvailableEntities(employeeOnly.length > 0 ? employeeOnly : [
-          { id: 'employee', name: 'Employee', description: 'Employee master data' }
-        ]);
+        // Show all available entities
+        setAvailableEntities(response.entities || []);
       } catch (err) {
         console.error('Error loading entities:', err);
         // Set fallback to employee only if API fails
@@ -109,31 +116,30 @@ export const FileUpload: React.FC = () => {
       // Try to auto-detect entity type from columns
       if (response.columns && response.columns.length > 0) {
         try {
-          const detection = await detectEntityType(response.columns);
+          const detection = await detectEntityType(response.columns, file.name);
           if (detection.confidence > 0.5) {
             setDetectedEntity(detection.detected_entity);
+            setDetectedVariant(detection.detected_variant || null);
+            setVariantDisplayName(detection.variant_display_name || null);
             setDetectionConfidence(detection.confidence);
             setShowAutoDetect(true);
-            // Auto-select if confidence is high
-            if (detection.confidence > 0.7) {
-              setSelectedEntityType(detection.detected_entity);
-            }
+
+            // Store pending data and show confirmation instead of auto-proceeding
+            setPendingFileData(response);
+            setUploadStatus('complete');
+            setShowConfirmation(true);
+
+            // Auto-select detected entity but require confirmation
+            setSelectedEntityType(detection.detected_entity);
+            return; // Don't proceed automatically
           }
         } catch (err) {
           console.warn('Entity detection failed, using manual selection');
         }
       }
 
-      // Load schema for selected entity type
-      const schemaData = await getSchema(selectedEntityType);
-      setSchema(schemaData);
-
-      setUploadSuccess(true);
-
-      // Auto-advance to next step after 1 second
-      setTimeout(() => {
-        nextStep();
-      }, 1000);
+      // If no detection or low confidence, proceed with manual flow
+      await proceedWithUpload(response);
 
     } catch (err: any) {
       setError(err.response?.data?.error?.message || 'Error uploading file. Please try again.');
@@ -203,6 +209,80 @@ export const FileUpload: React.FC = () => {
     }
   }, [handleFileSelect, setIsLoading, setError]);
 
+  const proceedWithUpload = useCallback(async (response: any) => {
+    try {
+      // Load schema for selected entity type
+      const schemaData = await getSchema(selectedEntityType);
+      setSchema(schemaData);
+      setUploadedFile(response);
+      setUploadSuccess(true);
+
+      // Auto-advance to next step after 1 second
+      setTimeout(() => {
+        nextStep();
+      }, 1000);
+    } catch (err: any) {
+      setError(err.response?.data?.error?.message || 'Error loading schema. Please try again.');
+      setIsLoading(false);
+    }
+  }, [selectedEntityType, setSchema, setUploadedFile, nextStep, setError]);
+
+  const handleConfirmDetection = useCallback(async (confirmed: boolean) => {
+    setShowConfirmation(false);
+
+    if (confirmed && pendingFileData) {
+      // User confirmed the detection, proceed with detected entity
+      await proceedWithUpload(pendingFileData);
+      setPendingFileData(null);
+    } else {
+      // User wants to manually select, show entity selector and reset to upload state
+      setShowAutoDetect(false);
+      setDetectedEntity(null);
+      setDetectedVariant(null);
+      setVariantDisplayName(null);
+      setUploadStatus('complete');
+      setIsManualSelection(true);
+      // Don't proceed with upload yet - wait for manual entity selection
+      // pendingFileData stays available for when user makes manual selection
+    }
+  }, [pendingFileData, proceedWithUpload]);
+
+  const handleManualProceed = useCallback(async () => {
+    if (pendingFileData && selectedEntityType) {
+      setIsManualSelection(false);
+      await proceedWithUpload(pendingFileData);
+      setPendingFileData(null);
+    }
+  }, [pendingFileData, selectedEntityType, proceedWithUpload]);
+
+  const handleViewSchema = useCallback(async (entityType: string) => {
+    try {
+      const schemaData = await getSchema(entityType);
+      setSchemaToView(schemaData);
+      setShowSchemaViewer(true);
+    } catch (err: any) {
+      console.error('Error loading schema:', err);
+      setError(err.response?.data?.error?.message || 'Error loading schema');
+    }
+  }, [setError]);
+
+  const resetUploadState = useCallback(() => {
+    setShowConfirmation(false);
+    setUploadSuccess(false);
+    setShowAutoDetect(false);
+    setDetectedEntity(null);
+    setDetectedVariant(null);
+    setVariantDisplayName(null);
+    setDetectionConfidence(0);
+    setPendingFileData(null);
+    setUploadProgress(0);
+    setUploadStatus('idle');
+    setIsManualSelection(false);
+    setShowSchemaViewer(false);
+    setSchemaToView(null);
+    setError(null);
+  }, [setError]);
+
   return (
     <div className="max-w-2xl mx-auto">
       <Card padding="lg">
@@ -215,47 +295,83 @@ export const FileUpload: React.FC = () => {
           </p>
         </div>
 
+        {/* Manual Selection Message */}
+        {isManualSelection && (
+          <div className="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
+                <File className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-100">
+                  File Uploaded Successfully
+                </h3>
+                <p className="text-sm text-blue-700 dark:text-blue-300">
+                  Please select the correct entity type and click continue to proceed.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Entity Type Selector */}
-        {!uploadSuccess && (
-          <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-2 border-gray-200 dark:border-gray-700">
+        {!uploadSuccess && !showConfirmation && (
+          <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
             <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-3">
               📋 Select Entity Type
             </label>
-            <select
+            <CustomDropdown
               value={selectedEntityType}
-              onChange={(e) => setSelectedEntityType(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-medium shadow-sm hover:border-primary-400 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              onChange={setSelectedEntityType}
+              options={entitiesLoading ?
+                [{ value: "", label: "Loading entity types..." }] :
+                availableEntities.length === 0 ?
+                  [{ value: "employee", label: "Employee (default)" }] :
+                  availableEntities.map(entity => ({
+                    value: entity.id,
+                    label: `${entity.name} - ${entity.description}`
+                  }))
+              }
               disabled={isLoading || entitiesLoading}
-            >
-              {entitiesLoading ? (
-                <option value="">Loading entity types...</option>
-              ) : availableEntities.length === 0 ? (
-                <option value="employee">Employee (default)</option>
-              ) : (
-                availableEntities.map((entity) => (
-                  <option key={entity.id} value={entity.id}>
-                    {entity.name} - {entity.description}
-                  </option>
-                ))
-              )}
-            </select>
+              placeholder="Select Entity Type"
+            />
             <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
               <Sparkles className="w-3 h-3" />
-              AI will auto-detect the entity type after you upload your file
+              {isManualSelection ?
+                "Please select the correct entity type for your file" :
+                "AI will auto-detect the entity type after you upload your file"
+              }
             </p>
             {showAutoDetect && detectedEntity && (
               <div className="mt-2 flex items-center gap-2 text-sm">
                 <Sparkles className="w-4 h-4 text-primary-600" />
                 <span className="text-gray-700 dark:text-gray-300">
-                  AI detected: <strong>{detectedEntity}</strong> ({Math.round(detectionConfidence * 100)}% confidence)
+                  AI detected: <strong>{variantDisplayName || detectedEntity}</strong> ({Math.round(detectionConfidence * 100)}% confidence)
                 </span>
+              </div>
+            )}
+
+            {/* Manual Selection Continue Button */}
+            {isManualSelection && selectedEntityType && uploadStatus === 'complete' && (
+              <div className="mt-4">
+                <Button
+                  onClick={handleManualProceed}
+                  variant="primary"
+                  size="md"
+                  className="w-full"
+                >
+                  Continue with {availableEntities.find(e => e.id === selectedEntityType)?.name || selectedEntityType}
+                </Button>
+                <p className="mt-2 text-xs text-gray-600 dark:text-gray-400">
+                  Your file is ready. Click continue to proceed with the selected entity type.
+                </p>
               </div>
             )}
           </div>
         )}
 
         {/* Sample Files Loader */}
-        {!uploadSuccess && (
+        {!uploadSuccess && !showConfirmation && !isManualSelection && (
           <div className="mb-6 relative">
             <Button
               variant="outline"
@@ -285,18 +401,19 @@ export const FileUpload: React.FC = () => {
         )}
 
         {/* Upload Area */}
-        <div
-          className={cn(
-            'relative border-2 border-dashed rounded-lg p-12 text-center transition-all duration-200',
-            isDragging && 'border-primary-500 bg-primary-50',
-            !isDragging && 'border-gray-300 dark:border-gray-600 hover:border-primary-400',
-            uploadSuccess && 'border-success-500 bg-success-50',
-            error && 'border-error-500 bg-error-50'
-          )}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-        >
+        {!showConfirmation && !isManualSelection && (
+          <div
+            className={cn(
+              'relative border-2 border-dashed rounded-lg p-12 text-center transition-all duration-200',
+              isDragging && 'border-primary-500 bg-primary-50',
+              !isDragging && 'border-gray-300 dark:border-gray-600 hover:border-primary-400',
+              uploadSuccess && 'border-success-500 bg-success-50',
+              error && 'border-error-500 bg-error-50'
+            )}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+          >
           {isLoading ? (
             <LoadingSpinner size="lg" text="Uploading and parsing file..." />
           ) : uploadSuccess ? (
@@ -351,7 +468,99 @@ export const FileUpload: React.FC = () => {
               </label>
             </>
           )}
-        </div>
+          </div>
+        )}
+
+        {/* Confirmation Dialog for AI Detection */}
+        {showConfirmation && detectedEntity && (
+          <div className="mt-4">
+            <Card padding="md">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    Please Confirm File Detection
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                    I detected this is a <strong className="text-blue-600 dark:text-blue-400">
+                      {variantDisplayName || detectedEntity}
+                    </strong> file with <strong>{Math.round(detectionConfidence * 100)}% confidence</strong>.
+                  </p>
+                  {variantDisplayName && (
+                    <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mb-4">
+                      <p className="text-sm text-blue-800 dark:text-blue-200 font-medium mb-1">
+                        Specific Format Detected
+                      </p>
+                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                        This appears to be <strong>{variantDisplayName}</strong> based on the field patterns found in your file.
+                      </p>
+                    </div>
+                  )}
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      <strong>What this means:</strong>
+                    </p>
+                    <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                      <li>• Your file will be processed as <strong>{variantDisplayName || detectedEntity}</strong> data</li>
+                      <li>• Field mapping will be optimized for {variantDisplayName ? 'this specific' : detectedEntity} schema{variantDisplayName ? '' : 's'}</li>
+                      <li>• You can change this selection if it's incorrect</li>
+                    </ul>
+                  </div>
+                  <div className="flex gap-3 flex-wrap">
+                    <Button
+                      onClick={() => handleConfirmDetection(true)}
+                      variant="primary"
+                      size="md"
+                      className="flex items-center gap-2"
+                    >
+                      <Check className="w-4 h-4" />
+                      Yes, this is {variantDisplayName || detectedEntity} data
+                    </Button>
+                    <Button
+                      onClick={() => handleViewSchema(detectedEntity!)}
+                      variant="ghost"
+                      size="md"
+                      className="flex items-center gap-2"
+                    >
+                      <FileText className="w-4 h-4" />
+                      View Schema
+                    </Button>
+                    <Button
+                      onClick={() => handleConfirmDetection(false)}
+                      variant="outline"
+                      size="md"
+                      className="flex items-center gap-2"
+                    >
+                      <X className="w-4 h-4" />
+                      No, let me choose manually
+                    </Button>
+                    <Button
+                      onClick={resetUploadState}
+                      variant="ghost"
+                      size="sm"
+                      className="flex items-center gap-2 text-gray-500"
+                    >
+                      <Upload className="w-4 h-4" />
+                      Start Over
+                    </Button>
+                  </div>
+                  {detectionConfidence < 0.7 && (
+                    <div className="mt-3 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-sm">
+                      <div className="flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 text-yellow-600 dark:text-yellow-500" />
+                        <span className="text-yellow-800 dark:text-yellow-300">
+                          Low confidence detection - please verify this is correct
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Card>
+          </div>
+        )}
 
         {/* Error Message */}
         {error && (
@@ -380,6 +589,17 @@ export const FileUpload: React.FC = () => {
           </ul>
         </div>
       </Card>
+
+      {/* Schema Viewer Modal */}
+      {showSchemaViewer && schemaToView && (
+        <SchemaViewer
+          schema={schemaToView}
+          onClose={() => {
+            setShowSchemaViewer(false);
+            setSchemaToView(null);
+          }}
+        />
+      )}
     </div>
   );
 };

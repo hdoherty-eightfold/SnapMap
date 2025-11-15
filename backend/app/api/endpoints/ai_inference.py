@@ -14,11 +14,14 @@ router = APIRouter()
 class DetectEntityRequest(BaseModel):
     """Request model for entity type detection"""
     source_fields: List[str]
+    filename: str = None  # Optional filename for better detection
 
 
 class DetectEntityResponse(BaseModel):
     """Response model for entity type detection"""
     detected_entity: str
+    detected_variant: str = None
+    variant_display_name: str = None
     confidence: float
     all_scores: Dict[str, float]
 
@@ -67,34 +70,14 @@ async def detect_entity_type(request: DetectEntityRequest):
 
     try:
         ai_service = get_ai_inference_service()
-        entity_name, confidence = ai_service.detect_entity_type(request.source_fields)
-
-        # Get scores for all entities for transparency
-        from app.services.schema_manager import get_schema_manager
-        schema_manager = get_schema_manager()
-        entities = schema_manager.get_available_entities()
-
-        all_scores = {}
-        for entity in entities:
-            if schema_manager.entity_exists(entity["id"]):
-                try:
-                    schema = schema_manager.get_schema(entity["id"])
-                    target_fields = [f.name for f in schema.fields]
-                    normalized_source = [ai_service._normalize_field(f) for f in request.source_fields]
-                    normalized_target = [ai_service._normalize_field(f) for f in target_fields]
-                    score = ai_service._calculate_entity_match_score(
-                        normalized_source,
-                        normalized_target,
-                        entity["id"]
-                    )
-                    all_scores[entity["id"]] = round(score, 3)
-                except:
-                    continue
+        detection_result = ai_service.detect_entity_type(request.source_fields, request.filename)
 
         return DetectEntityResponse(
-            detected_entity=entity_name,
-            confidence=round(confidence, 3),
-            all_scores=all_scores
+            detected_entity=detection_result["detected_entity"],
+            detected_variant=detection_result.get("detected_variant"),
+            variant_display_name=detection_result.get("variant_display_name"),
+            confidence=round(detection_result["confidence"], 3),
+            all_scores=detection_result["all_scores"]
         )
 
     except Exception as e:
