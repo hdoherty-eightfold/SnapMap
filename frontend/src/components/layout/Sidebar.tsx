@@ -20,54 +20,66 @@ const navItems: NavItem[] = [
     id: 0,
     name: 'Welcome',
     icon: '👋',
-    description: 'Introduction to SnapMap'
+    description: 'Introduction to Proficiency Studio'
   },
   {
     id: 1,
-    name: 'Upload',
-    icon: '📁',
-    description: 'Upload your HR data files'
+    name: 'Integration',
+    icon: '🔌',
+    description: 'Choose data source (CSV/API/SFTP)'
   },
   {
     id: 2,
-    name: 'File Review',
-    icon: '🔍',
-    description: 'Review data quality and issues'
+    name: 'Extract Skills',
+    icon: '📥',
+    description: 'Pull skills from your source'
   },
   {
     id: 3,
-    name: 'Map Fields',
-    icon: '🔗',
-    description: 'Auto-map and adjust field mappings'
+    name: 'Configure',
+    icon: '⚙️',
+    description: 'Set proficiency levels, LLM & prompts'
   },
   {
     id: 4,
-    name: 'Preview CSV',
+    name: 'Review',
     icon: '👁️',
-    description: 'Preview CSV transformations'
+    description: 'Review configuration issues'
   },
   {
     id: 5,
-    name: 'Preview XML',
-    icon: '📄',
-    description: 'Preview XML format'
+    name: 'Map Fields',
+    icon: '🗺️',
+    description: 'Map data fields'
   },
   {
     id: 6,
-    name: 'SFTP Upload',
-    icon: '📤',
-    description: 'Upload files to SFTP server'
+    name: 'Preview CSV',
+    icon: '📄',
+    description: 'Preview CSV output'
   },
   {
     id: 7,
+    name: 'Preview XML',
+    icon: '📋',
+    description: 'Preview XML output'
+  },
+  {
+    id: 8,
+    name: 'SFTP Upload',
+    icon: '📤',
+    description: 'Upload via SFTP'
+  },
+  {
+    id: 9,
     name: 'Settings',
     icon: '⚙️',
-    description: 'Configure API keys'
+    description: 'Manage all configurations'
   },
 ];
 
 export const Sidebar: React.FC = () => {
-  const { currentStep, setCurrentStep, uploadedFile, mappings, resetAll, isSidebarCollapsed, setIsSidebarCollapsed } = useApp();
+  const { currentStep, setCurrentStep, uploadedFile, mappings, skillsState, resetAll, isSidebarCollapsed, setIsSidebarCollapsed } = useApp();
   const { theme, toggleTheme } = useTheme();
   
 
@@ -79,14 +91,19 @@ export const Sidebar: React.FC = () => {
   };
 
   const isStepAccessible = (stepId: number): boolean => {
+    // Check if integration source is selected
+    const integrationSource = localStorage.getItem('profstudio_integration_type');
+
     if (stepId === 0) return true; // Welcome - always accessible
-    if (stepId === 1) return true; // Upload - always accessible
-    if (stepId === 2) return !!uploadedFile; // File Review - requires upload
-    if (stepId === 3) return !!uploadedFile; // Map Fields - requires upload
-    if (stepId === 4) return !!uploadedFile && mappings.length > 0; // Preview CSV
-    if (stepId === 5) return !!uploadedFile && mappings.length > 0; // Preview XML
-    if (stepId === 6) return true; // SFTP Upload - always accessible
-    if (stepId === 7) return true; // Settings - always accessible
+    if (stepId === 1) return true; // Integration - always accessible
+    if (stepId === 2) return !!integrationSource; // Extract Skills - requires integration source
+    if (stepId === 3) return skillsState.extractionStatus === 'success'; // Configure - requires extracted skills
+    if (stepId === 4) return !!uploadedFile; // Review - requires upload (keeping original logic)
+    if (stepId === 5) return !!uploadedFile; // Map Fields - requires upload
+    if (stepId === 6) return !!uploadedFile && mappings.length > 0; // Preview CSV
+    if (stepId === 7) return !!uploadedFile && mappings.length > 0; // Preview XML
+    if (stepId === 8) return true; // SFTP Upload - always accessible
+    if (stepId === 9) return true; // Settings - always accessible
     return false;
   };
 
@@ -104,21 +121,21 @@ export const Sidebar: React.FC = () => {
         {!isSidebarCollapsed ? (
           <>
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 via-teal-400 to-emerald-500 flex items-center justify-center shadow-lg">
-                <span className="text-xl font-bold text-white">S</span>
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 flex items-center justify-center shadow-lg">
+                <span className="text-xl font-bold text-white">PS</span>
               </div>
-              <h1 className="text-3xl font-black bg-gradient-to-r from-cyan-300 via-teal-300 to-emerald-400 bg-clip-text text-transparent tracking-tight">
-                SnapMap
+              <h1 className="text-2xl font-black bg-gradient-to-r from-purple-300 via-pink-300 to-rose-400 bg-clip-text text-transparent tracking-tight">
+                Proficiency Studio
               </h1>
             </div>
-            <p className="text-xs text-cyan-200/90 mt-2 font-semibold tracking-wide" style={{ marginLeft: '52px' }}>
-              AI-Powered HR Data Transformation
+            <p className="text-xs text-purple-200/90 mt-2 font-semibold tracking-wide" style={{ marginLeft: '52px' }}>
+              AI-Powered Skills Assessment
             </p>
           </>
         ) : (
           <div className="flex justify-center">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 via-teal-400 to-emerald-500 flex items-center justify-center shadow-lg">
-              <span className="text-xl font-bold text-white">S</span>
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 flex items-center justify-center shadow-lg">
+              <span className="text-xl font-bold text-white">P</span>
             </div>
           </div>
         )}
@@ -181,7 +198,64 @@ export const Sidebar: React.FC = () => {
         })}
       </nav>
 
-      <div className="p-4 border-t border-eightfold-teal-300/20 space-y-2">
+      <div className="p-4 border-t border-eightfold-teal-300/20 space-y-3">
+        {/* Connection Status Indicator */}
+        {(() => {
+          const integrationType = localStorage.getItem('profstudio_integration_type');
+          const envId = localStorage.getItem('profstudio_env_id');
+          const envName = localStorage.getItem('profstudio_env_name');
+
+          if (integrationType) {
+            return (
+              <div className={`${isSidebarCollapsed ? 'px-2' : 'px-3'} py-2 bg-eightfold-teal-300/10 border border-eightfold-teal-300/20 rounded-lg`}>
+                {!isSidebarCollapsed ? (
+                  <div className="text-xs">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-eightfold-teal-200 font-semibold uppercase tracking-wide">Connected</span>
+                    </div>
+                    <div className="text-white/80">
+                      {integrationType === 'csv' ? (
+                        <span className="flex items-center gap-1">
+                          <span>📄</span>
+                          <span>CSV Upload</span>
+                        </span>
+                      ) : integrationType === 'api' ? (
+                        <div>
+                          <div className="flex items-center gap-1 mb-1">
+                            <span>🔌</span>
+                            <span>API Connection</span>
+                          </div>
+                          <div className="text-xs text-purple-200 bg-purple-500/20 px-2 py-1 rounded">
+                            {envName || envId || 'Environment'}
+                          </div>
+                        </div>
+                      ) : integrationType === 'sftp' ? (
+                        <span className="flex items-center gap-1">
+                          <span>📡</span>
+                          <span>SFTP Connection</span>
+                        </span>
+                      ) : (
+                        <span>{integrationType}</span>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center text-xs">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse mb-1"></div>
+                    <span className="text-lg">
+                      {integrationType === 'csv' ? '📄' :
+                       integrationType === 'api' ? '🔌' :
+                       integrationType === 'sftp' ? '📡' : '🔗'}
+                    </span>
+                  </div>
+                )}
+              </div>
+            );
+          }
+          return null;
+        })()}
+
         <button
           onClick={resetAll}
           className={`w-full px-4 py-2.5 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 rounded-pill transition-all ${isSidebarCollapsed ? 'flex justify-center' : ''}`}
