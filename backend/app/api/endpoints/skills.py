@@ -35,6 +35,12 @@ class Skill(BaseModel):
     sourceId: Optional[str] = None
 
 
+class RoleInfo(BaseModel):
+    """Role information model - accepts any fields for flexibility"""
+    class Config:
+        extra = "allow"  # Allow additional fields not defined in the model
+
+
 class SourceInfo(BaseModel):
     """Source information model"""
     filename: Optional[str] = None
@@ -51,6 +57,7 @@ class ExtractSkillsResponse(BaseModel):
     extraction_source: str
     extraction_time: str
     source_info: SourceInfo
+    roles: Optional[List[Dict[str, Any]]] = None  # Accept full role objects with any fields
 
 
 class CSVExtractRequest(BaseModel):
@@ -212,6 +219,12 @@ async def extract_skills_from_api(request: APIExtractRequest):
                         data = response.json()
                         roles = data.get('data', [])
 
+                        # Extract roles information - store complete role data for export
+                        roles_list = []
+                        for role in roles:
+                            # Store the complete role object so we have skillProficiencies for export
+                            roles_list.append(role)
+
                         # Extract skills from roles
                         skills_set = set()
                         skills_list = []
@@ -249,7 +262,8 @@ async def extract_skills_from_api(request: APIExtractRequest):
                                     environment='ADoherty Demo',
                                     total_roles=len(roles),
                                     unique_skills=len(skills_list)
-                                )
+                                ),
+                                roles=roles_list
                             )
 
             except Exception as api_error:
